@@ -1,20 +1,13 @@
 {
-  "version": 8,
-  "name": "Grow the Island - Build 2",
+  "version": 9,
+  "name": "Grow the Island - Build 3",
   "changes": [
     {
       "action": "create",
-      "class": "LocalScript",
-      "parent": "StarterPlayer.StarterPlayerScripts",
-      "name": "EnergyPickupFeedback",
-      "source": "local Players=game:GetService(\"Players\")\nlocal TweenService=game:GetService(\"TweenService\")\nlocal player=Players.LocalPlayer\nlocal gui=player:WaitForChild(\"PlayerGui\"):WaitForChild(\"EnergyUI\")\nlocal stats=player:WaitForChild(\"leaderstats\")\nlocal energy=stats:WaitForChild(\"Energy\")\nlocal last=energy.Value\n\nlocal function popup(delta)\n\tif delta<=0 then return end\n\tlocal t=Instance.new(\"TextLabel\")\n\tt.AnchorPoint=Vector2.new(.5,.5)\n\tt.Position=UDim2.new(.5,0,.5,35)\n\tt.Size=UDim2.new(0,190,0,55)\n\tt.BackgroundTransparency=1\n\tt.Text=\"+\"..delta..\" ENERGY\"\n\tt.TextColor3=Color3.fromRGB(255,225,85)\n\tt.TextStrokeTransparency=.35\n\tt.Font=Enum.Font.GothamBold\n\tt.TextSize=27\n\tt.Parent=gui\n\tlocal tw=TweenService:Create(t,TweenInfo.new(.7,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),{\n\t\tPosition=UDim2.new(.5,0,.5,-25),TextTransparency=1,TextStrokeTransparency=1\n\t})\n\ttw:Play()\n\ttw.Completed:Connect(function() t:Destroy() end)\nend\n\nenergy:GetPropertyChangedSignal(\"Value\"):Connect(function()\n\tlocal now=energy.Value\n\tpopup(now-last)\n\tlast=now\nend)"
-    },
-    {
-      "action": "create",
-      "class": "LocalScript",
-      "parent": "StarterPlayer.StarterPlayerScripts",
-      "name": "EnergyOrbEffects",
-      "source": "local TweenService=game:GetService(\"TweenService\")\nlocal world=workspace:WaitForChild(\"GrowIslandWorld\")\n\nlocal function animate(orb)\n\tif not orb:IsA(\"BasePart\") or orb.Name~=\"EnergyOrb\" then return end\n\tlocal start=orb.Position\n\tlocal phase=math.random()*math.pi*2\n\ttask.spawn(function()\n\t\twhile orb.Parent do\n\t\t\tlocal y=math.sin(os.clock()*2.4+phase)*.7\n\t\t\torb.Position=Vector3.new(start.X,start.Y+y,start.Z)\n\t\t\torb.Orientation+=Vector3.new(0,2.5,0)\n\t\t\ttask.wait(.03)\n\t\tend\n\tend)\nend\n\nfor _,v in ipairs(world:GetChildren()) do animate(v) end\nworld.ChildAdded:Connect(function(v)\n\ttask.wait()\n\tanimate(v)\nend)"
+      "class": "Script",
+      "parent": "ServerScriptService",
+      "name": "IslandVisuals",
+      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\n\nlocal decor=Instance.new(\"Folder\")\ndecor.Name=\"IslandDecor\"\ndecor.Parent=world\n\nlocal function part(name,size,pos,color,material,parent)\n\tlocal p=Instance.new(\"Part\")\n\tp.Name=name\n\tp.Size=size\n\tp.Position=pos\n\tp.Anchored=true\n\tp.Color=color\n\tp.Material=material\n\tp.Parent=parent or decor\n\treturn p\nend\n\nlocal function tree(x,z,s)\n\ts=s or 1\n\tlocal trunk=part(\"TreeTrunk\",Vector3.new(2*s,7*s,2*s),Vector3.new(x,24+2.5*s,z),Color3.fromRGB(92,62,39),Enum.Material.Wood)\n\tlocal crown=part(\"TreeCrown\",Vector3.new(7*s,7*s,7*s),Vector3.new(x,29+3*s,z),Color3.fromRGB(64,126,65),Enum.Material.Grass)\n\tcrown.Shape=Enum.PartType.Ball\nend\n\nlocal function rock(x,z,s)\n\tlocal r=part(\"Rock\",Vector3.new(4*s,3*s,4*s),Vector3.new(x,21.5+1.5*s,z),Color3.fromRGB(92,98,104),Enum.Material.Rock)\n\tr.Orientation=Vector3.new(math.random(-12,12),math.random(0,180),math.random(-12,12))\nend\n\ntree(-18,-15,.9)\ntree(18,-12,1.05)\ntree(-19,14,.75)\ntree(19,15,.8)\nrock(-11,-20,.8)\nrock(14,18,.65)\nrock(20,3,.55)\nrock(-20,1,.7)\n\nlocal ring=part(\"CoreRing\",Vector3.new(11,.6,11),Vector3.new(0,21.3,0),Color3.fromRGB(75,165,255),Enum.Material.Neon)\nring.Shape=Enum.PartType.Cylinder\nring.Orientation=Vector3.new(0,0,90)\nring.CanCollide=false\n\nlocal pedestal=part(\"CorePedestal\",Vector3.new(10,2,10),Vector3.new(0,21.5,0),Color3.fromRGB(62,69,82),Enum.Material.Slate)\n\nlocal sign=part(\"WelcomeSign\",Vector3.new(12,5,.7),Vector3.new(0,24,-22),Color3.fromRGB(93,66,43),Enum.Material.WoodPlanks)\nlocal surface=Instance.new(\"SurfaceGui\")\nsurface.Face=Enum.NormalId.Front\nsurface.Parent=sign\nlocal text=Instance.new(\"TextLabel\")\ntext.Size=UDim2.fromScale(1,1)\ntext.BackgroundTransparency=1\ntext.Text=\"GROW THE ISLAND\\nCollect Energy • Upgrade the Core\"\ntext.TextWrapped=true\ntext.TextScaled=true\ntext.Font=Enum.Font.GothamBold\ntext.TextColor3=Color3.fromRGB(255,244,210)\ntext.Parent=surface\n\nlocal clouds=Instance.new(\"Folder\")\nclouds.Name=\"Clouds\"\nclouds.Parent=decor\nfor i=1,7 do\n\tlocal angle=(i/7)*math.pi*2\n\tlocal radius=math.random(65,100)\n\tlocal c=part(\"Cloud\",Vector3.new(math.random(16,30),math.random(3,6),math.random(10,18)),Vector3.new(math.cos(angle)*radius,math.random(35,55),math.sin(angle)*radius),Color3.fromRGB(235,240,245),Enum.Material.SmoothPlastic,clouds)\n\tc.Shape=Enum.PartType.Ball\n\tc.CanCollide=false\n\tc.Transparency=.18\nend\n\nprint(\"Grow the Island Build 3 visuals loaded\")"
     }
   ]
 }
