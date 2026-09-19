@@ -1,25 +1,16 @@
 {
-  "version": 11,
-  "name": "Energy Sound Feedback",
+  "version": 12,
+  "name": "Legendary Energy Pickup Sound",
   "changes": [
     {
-      "action": "create",
-      "class": "LocalScript",
-      "parent": "StarterPlayer.StarterPlayerScripts",
-      "name": "EnergySounds",
-      "source": "local Players=game:GetService(\"Players\")\nlocal SoundService=game:GetService(\"SoundService\")\nlocal player=Players.LocalPlayer\nlocal energy=player:WaitForChild(\"leaderstats\"):WaitForChild(\"Energy\")\nlocal last=energy.Value\n\nlocal pickup=Instance.new(\"Sound\")\npickup.Name=\"EnergyPickupSound\"\npickup.SoundId=\"rbxasset://sounds/electronicpingshort.wav\"\npickup.Volume=.7\npickup.PlaybackSpeed=1.35\npickup.Parent=SoundService\n\nenergy:GetPropertyChangedSignal(\"Value\"):Connect(function()\n local now=energy.Value\n if now>last then\n  pickup.PlaybackSpeed=1.25+math.random()*0.2\n  pickup:Play()\n end\n last=now\nend)"
+      "action": "replaceScript",
+      "path": "StarterPlayer.StarterPlayerScripts.EnergySounds",
+      "source": "local Players=game:GetService(\"Players\")\nlocal SoundService=game:GetService(\"SoundService\")\nlocal player=Players.LocalPlayer\nlocal energy=player:WaitForChild(\"leaderstats\"):WaitForChild(\"Energy\")\nlocal last=energy.Value\n\nlocal chime1=Instance.new(\"Sound\")\nchime1.Name=\"LegendaryEnergyChime\"\nchime1.SoundId=\"rbxasset://sounds/electronicpingshort.wav\"\nchime1.Volume=.75\nchime1.PlaybackSpeed=.72\nchime1.Parent=SoundService\n\nlocal chime2=Instance.new(\"Sound\")\nchime2.Name=\"LegendaryEnergySparkle\"\nchime2.SoundId=\"rbxasset://sounds/electronicpingshort.wav\"\nchime2.Volume=.55\nchime2.PlaybackSpeed=1.45\nchime2.Parent=SoundService\n\nlocal chime3=Instance.new(\"Sound\")\nchime3.Name=\"LegendaryEnergyFinish\"\nchime3.SoundId=\"rbxasset://sounds/electronicpingshort.wav\"\nchime3.Volume=.45\nchime3.PlaybackSpeed=1.9\nchime3.Parent=SoundService\n\nlocal token=0\nlocal function legendaryPickup()\n token+=1\n local mine=token\n chime1:Play()\n task.delay(.07,function()\n  if mine==token then chime2:Play() end\n end)\n task.delay(.15,function()\n  if mine==token then chime3:Play() end\n end)\nend\n\nenergy:GetPropertyChangedSignal(\"Value\"):Connect(function()\n local now=energy.Value\n if now>last then legendaryPickup() end\n last=now\nend)"
     },
     {
       "action": "replaceScript",
-      "path": "ServerScriptService.CoreInteractionFix",
-      "source": "local Players=game:GetService(\"Players\")\nlocal ReplicatedStorage=game:GetService(\"ReplicatedStorage\")\nlocal world=workspace:WaitForChild(\"GrowIslandWorld\")\nlocal core=world:WaitForChild(\"EnergyCore\")\nlocal old=core:FindFirstChild(\"ProximityPrompt\")\nif old then old:Destroy() end\nlocal prompt=Instance.new(\"ProximityPrompt\")\nprompt.Name=\"GrowPrompt\";prompt.ObjectText=\"Energy Core\";prompt.ActionText=\"Grow Island\";prompt.KeyboardKeyCode=Enum.KeyCode.E;prompt.HoldDuration=.25;prompt.MaxActivationDistance=14;prompt.RequiresLineOfSight=false;prompt.Parent=core\n\nlocal event=ReplicatedStorage:FindFirstChild(\"GrowIslandFeedback\")\nif not event then event=Instance.new(\"RemoteEvent\");event.Name=\"GrowIslandFeedback\";event.Parent=ReplicatedStorage end\nlocal costs={10,30,70,140}\nlocal names={\"Expansion1\",\"Expansion2\",\"Bridge\",\"TreasureIsland\"}\nlocal function showStage(n) local p=world:FindFirstChild(names[n]);if p then p.Transparency=0;p.CanCollide=true end end\nlocal busy={}\nprompt.Triggered:Connect(function(player)\n if busy[player] then return end;busy[player]=true\n local stats=player:FindFirstChild(\"leaderstats\");local energy=stats and stats:FindFirstChild(\"Energy\");local stage=player:FindFirstChild(\"IslandStage\")\n if energy and stage then\n  if stage.Value>=#costs then prompt.ActionText=\"Island Complete!\" else\n   local cost=costs[stage.Value+1]\n   if energy.Value>=cost then\n    energy.Value-=cost;stage.Value+=1;showStage(stage.Value)\n   else\n    event:FireClient(player,\"NotEnough\",cost-energy.Value)\n   end\n   if stage.Value<#costs then prompt.ActionText=\"Grow Island - \"..costs[stage.Value+1]..\" Energy\" else prompt.ActionText=\"Island Complete!\" end\n  end\n end\n task.wait(.3);busy[player]=nil\nend)"
-    },
-    {
-      "action": "create",
-      "class": "LocalScript",
-      "parent": "StarterPlayer.StarterPlayerScripts",
-      "name": "CoreFeedback",
-      "source": "local ReplicatedStorage=game:GetService(\"ReplicatedStorage\")\nlocal SoundService=game:GetService(\"SoundService\")\nlocal event=ReplicatedStorage:WaitForChild(\"GrowIslandFeedback\")\nlocal fail=Instance.new(\"Sound\")\nfail.Name=\"NotEnoughEnergySound\"\nfail.SoundId=\"rbxasset://sounds/uuhhh.mp3\"\nfail.Volume=.65\nfail.PlaybackSpeed=1.1\nfail.Parent=SoundService\nevent.OnClientEvent:Connect(function(kind)\n if kind==\"NotEnough\" then fail:Play() end\nend)"
+      "path": "StarterPlayer.StarterPlayerScripts.CoreFeedback",
+      "source": "local ReplicatedStorage=game:GetService(\"ReplicatedStorage\")\nlocal event=ReplicatedStorage:WaitForChild(\"GrowIslandFeedback\")\nevent.OnClientEvent:Connect(function(kind)\n if kind==\"NotEnough\" then\n  -- Intentionally silent. The Core simply does not expand.\n end\nend)"
     }
   ]
 }
