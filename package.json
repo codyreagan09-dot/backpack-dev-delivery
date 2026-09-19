@@ -1,11 +1,7 @@
 {
-  "version": 3,
+  "version": 4,
   "name": "Backpack Expansion #1",
   "changes": [
-    {
-      "action": "delete",
-      "path": "Workspace.AutomaticBridgeTest"
-    },
     {
       "action": "create",
       "class": "Script",
