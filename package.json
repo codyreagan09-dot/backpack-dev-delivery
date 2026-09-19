@@ -1,10 +1,11 @@
 {
-  "version": 22,
-  "name": "Undo Rounded Visual Style",
+  "version": 23,
+  "name": "Named Upgrade Signs",
   "changes": [
     {
-      "action": "delete",
-      "path": "ServerScriptService.RoundedVisuals"
+      "action": "replaceScript",
+      "path": "ServerScriptService.UpgradeSigns",
+      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\nlocal old=world:FindFirstChild(\"UpgradeSigns\")\nif old then old:Destroy() end\nlocal folder=Instance.new(\"Folder\");folder.Name=\"UpgradeSigns\";folder.Parent=world\n\nlocal upgrades={\n {title=\"SPEED\",sub=\"Move Faster\"},\n {title=\"ENERGY WORTH\",sub=\"Orbs Give More\"},\n {title=\"ENERGY AMOUNT\",sub=\"More Orbs Spawn\"}\n}\n\nlocal function makeSign(number,z,data)\n local x=-21\n local post=Instance.new(\"Part\");post.Name=\"Upgrade\"..number..\"Post\";post.Size=Vector3.new(1,5,1);post.Position=Vector3.new(x,22.5,z);post.Anchored=true;post.Color=Color3.fromRGB(93,66,43);post.Material=Enum.Material.Wood;post.Parent=folder\n local board=Instance.new(\"Part\");board.Name=\"Upgrade\"..number..\"Sign\";board.Size=Vector3.new(.7,5,9);board.Position=Vector3.new(x,26,z);board.Anchored=true;board.Color=Color3.fromRGB(48,54,66);board.Material=Enum.Material.Slate;board.Parent=folder\n local gui=Instance.new(\"SurfaceGui\");gui.Face=Enum.NormalId.Right;gui.Parent=board\n local text=Instance.new(\"TextLabel\");text.Size=UDim2.fromScale(1,1);text.BackgroundTransparency=1;text.Text=data.title..\"\\n\"..data.sub;text.TextWrapped=true;text.TextScaled=true;text.Font=Enum.Font.GothamBold;text.TextColor3=Color3.fromRGB(255,230,120);text.Parent=gui\nend\n\nmakeSign(1,-11,upgrades[1])\nmakeSign(2,0,upgrades[2])\nmakeSign(3,11,upgrades[3])\nprint(\"Named upgrade signs loaded\")"
     }
   ]
 }
