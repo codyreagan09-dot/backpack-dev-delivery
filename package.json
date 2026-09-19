@@ -1,5 +1,31 @@
 {
-  "version": 1,
-  "name": "Automatic Delivery Test",
-  "changes": []
+  "version": 2,
+  "name": "Automatic Bridge Test",
+  "changes": [
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace",
+      "name": "AutomaticBridgeTest",
+      "properties": {
+        "Position": {
+          "x": 0,
+          "y": 60,
+          "z": 0
+        },
+        "Size": {
+          "x": 8,
+          "y": 8,
+          "z": 8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 70,
+          "g": 220,
+          "b": 140
+        }
+      }
+    }
+  ]
 }
