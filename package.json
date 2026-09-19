@@ -1,16 +1,11 @@
 {
-  "version": 12,
-  "name": "Legendary Energy Pickup Sound",
+  "version": 13,
+  "name": "Shorter Legendary Energy Sound",
   "changes": [
     {
       "action": "replaceScript",
       "path": "StarterPlayer.StarterPlayerScripts.EnergySounds",
-      "source": "local Players=game:GetService(\"Players\")\nlocal SoundService=game:GetService(\"SoundService\")\nlocal player=Players.LocalPlayer\nlocal energy=player:WaitForChild(\"leaderstats\"):WaitForChild(\"Energy\")\nlocal last=energy.Value\n\nlocal chime1=Instance.new(\"Sound\")\nchime1.Name=\"LegendaryEnergyChime\"\nchime1.SoundId=\"rbxasset://sounds/electronicpingshort.wav\"\nchime1.Volume=.75\nchime1.PlaybackSpeed=.72\nchime1.Parent=SoundService\n\nlocal chime2=Instance.new(\"Sound\")\nchime2.Name=\"LegendaryEnergySparkle\"\nchime2.SoundId=\"rbxasset://sounds/electronicpingshort.wav\"\nchime2.Volume=.55\nchime2.PlaybackSpeed=1.45\nchime2.Parent=SoundService\n\nlocal chime3=Instance.new(\"Sound\")\nchime3.Name=\"LegendaryEnergyFinish\"\nchime3.SoundId=\"rbxasset://sounds/electronicpingshort.wav\"\nchime3.Volume=.45\nchime3.PlaybackSpeed=1.9\nchime3.Parent=SoundService\n\nlocal token=0\nlocal function legendaryPickup()\n token+=1\n local mine=token\n chime1:Play()\n task.delay(.07,function()\n  if mine==token then chime2:Play() end\n end)\n task.delay(.15,function()\n  if mine==token then chime3:Play() end\n end)\nend\n\nenergy:GetPropertyChangedSignal(\"Value\"):Connect(function()\n local now=energy.Value\n if now>last then legendaryPickup() end\n last=now\nend)"
-    },
-    {
-      "action": "replaceScript",
-      "path": "StarterPlayer.StarterPlayerScripts.CoreFeedback",
-      "source": "local ReplicatedStorage=game:GetService(\"ReplicatedStorage\")\nlocal event=ReplicatedStorage:WaitForChild(\"GrowIslandFeedback\")\nevent.OnClientEvent:Connect(function(kind)\n if kind==\"NotEnough\" then\n  -- Intentionally silent. The Core simply does not expand.\n end\nend)"
+      "source": "local Players=game:GetService(\"Players\")\nlocal SoundService=game:GetService(\"SoundService\")\nlocal player=Players.LocalPlayer\nlocal energy=player:WaitForChild(\"leaderstats\"):WaitForChild(\"Energy\")\nlocal last=energy.Value\n\nlocal sparkle=Instance.new(\"Sound\")\nsparkle.Name=\"LegendaryEnergySparkle\"\nsparkle.SoundId=\"rbxasset://sounds/electronicpingshort.wav\"\nsparkle.Volume=.55\nsparkle.PlaybackSpeed=1.45\nsparkle.Parent=SoundService\n\nlocal finish=Instance.new(\"Sound\")\nfinish.Name=\"LegendaryEnergyFinish\"\nfinish.SoundId=\"rbxasset://sounds/electronicpingshort.wav\"\nfinish.Volume=.45\nfinish.PlaybackSpeed=1.9\nfinish.Parent=SoundService\n\nlocal token=0\nlocal function legendaryPickup()\n token+=1\n local mine=token\n sparkle:Play()\n task.delay(.08,function()\n  if mine==token then finish:Play() end\n end)\nend\n\nenergy:GetPropertyChangedSignal(\"Value\"):Connect(function()\n local now=energy.Value\n if now>last then legendaryPickup() end\n last=now\nend)"
     }
   ]
 }
