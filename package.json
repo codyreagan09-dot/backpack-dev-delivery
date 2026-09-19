@@ -1,13 +1,20 @@
 {
-  "version": 28,
-  "name": "Floating Upgrade Boards",
+  "version": 29,
+  "name": "Satisfying Upgrade Effects",
   "changes": [
+    {
+      "action": "create",
+      "class": "LocalScript",
+      "parent": "StarterPlayer.StarterPlayerScripts",
+      "name": "UpgradePurchaseEffects",
+      "source": "local Players=game:GetService(\"Players\")\nlocal TweenService=game:GetService(\"TweenService\")\nlocal player=Players.LocalPlayer\nlocal gui=player:WaitForChild(\"PlayerGui\"):WaitForChild(\"EnergyUI\")\n\nlocal function popup(name)\n local p=Instance.new(\"TextLabel\")\n p.AnchorPoint=Vector2.new(.5,.5)\n p.Position=UDim2.new(.5,0,.42,0)\n p.Size=UDim2.new(0,360,0,80)\n p.BackgroundTransparency=1\n p.Text=\"UPGRADED!\\n\"..name\n p.TextColor3=Color3.fromRGB(255,225,80)\n p.TextStrokeTransparency=.25\n p.Font=Enum.Font.GothamBlack\n p.TextSize=30\n p.Parent=gui\n p.TextTransparency=1\n p.Size=UDim2.new(0,250,0,55)\n TweenService:Create(p,TweenInfo.new(.18,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{TextTransparency=0,Size=UDim2.new(0,360,0,80)}):Play()\n task.delay(.65,function()\n  if not p.Parent then return end\n  local t=TweenService:Create(p,TweenInfo.new(.35),{TextTransparency=1,TextStrokeTransparency=1,Position=UDim2.new(.5,0,.37,0)})\n  t:Play();t.Completed:Connect(function() p:Destroy() end)\n end)\nend\n\nlocal function pulseStat(search)\n for _,v in ipairs(gui:GetDescendants()) do\n  if v:IsA(\"TextLabel\") and string.find(string.lower(v.Text),string.lower(search),1,true) then\n   local old=v.TextSize\n   TweenService:Create(v,TweenInfo.new(.12,Enum.EasingStyle.Back),{TextSize=old+5}):Play()\n   task.delay(.16,function() if v.Parent then TweenService:Create(v,TweenInfo.new(.18),{TextSize=old}):Play() end end)\n   break\n  end\n end\nend\n\nlocal watched={\n SpeedLevel={\"SPEED\",\"Speed:\"},\n WorthLevel={\"ENERGY WORTH\",\"Energy per Orb:\"},\n AmountLevel={\"ENERGY AMOUNT\",\"Maximum Orbs:\"}\n}\nfor valueName,data in pairs(watched) do\n local value=player:WaitForChild(valueName)\n local last=value.Value\n value:GetPropertyChangedSignal(\"Value\"):Connect(function()\n  if value.Value>last then popup(data[1]);pulseStat(data[2]) end\n  last=value.Value\n end)\nend"
+    },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "FloatingUpgradeBoards",
-      "source": "local TweenService=game:GetService(\"TweenService\")\nlocal world=workspace:WaitForChild(\"GrowIslandWorld\")\nlocal signs=world:WaitForChild(\"UpgradeSigns\")\n\nfor _,obj in ipairs(signs:GetChildren()) do\n if obj:IsA(\"BasePart\") and (obj.Name:find(\"Post\") or obj.Name:find(\"Stand\")) then\n  obj.Transparency=1\n  obj.CanCollide=false\n end\nend\n\nfor _,board in ipairs(signs:GetChildren()) do\n if board:IsA(\"BasePart\") and board.Name:find(\"Sign\") then\n  board.CanCollide=false\n  local base=board.Position\n  local tween=TweenService:Create(\n   board,\n   TweenInfo.new(1.8,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut,-1,true),\n   {Position=base+Vector3.new(0,1,0)}\n  )\n  tween:Play()\n end\nend\n\nprint(\"Floating upgrade boards enabled\")"
+      "name": "UpgradeBoardEffects",
+      "source": "local TweenService=game:GetService(\"TweenService\")\nlocal Players=game:GetService(\"Players\")\nlocal world=workspace:WaitForChild(\"GrowIslandWorld\")\nlocal signs=world:WaitForChild(\"UpgradeSigns\")\nlocal mapping={SpeedLevel=\"SpeedLevelSign\",WorthLevel=\"WorthLevelSign\",AmountLevel=\"AmountLevelSign\"}\n\nlocal function flash(board)\n if not board then return end\n local light=board:FindFirstChildOfClass(\"PointLight\")\n if light then\n  local old=light.Brightness\n  light.Brightness=4\n  TweenService:Create(light,TweenInfo.new(.45),{Brightness=old}):Play()\n end\n local oldSize=board.Size\n TweenService:Create(board,TweenInfo.new(.12,Enum.EasingStyle.Back),{Size=oldSize+Vector3.new(.15,.7,.7)}):Play()\n task.delay(.14,function() if board.Parent then TweenService:Create(board,TweenInfo.new(.2),{Size=oldSize}):Play() end end)\nend\n\nlocal function hook(player)\n for valueName,boardName in pairs(mapping) do\n  local value=player:WaitForChild(valueName)\n  local last=value.Value\n  value:GetPropertyChangedSignal(\"Value\"):Connect(function()\n   if value.Value>last then flash(signs:FindFirstChild(boardName)) end\n   last=value.Value\n  end)\n end\nend\nfor _,p in ipairs(Players:GetPlayers()) do task.spawn(hook,p) end\nPlayers.PlayerAdded:Connect(hook)"
     }
   ]
 }
