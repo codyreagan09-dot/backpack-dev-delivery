@@ -1,13 +1,11 @@
 {
-  "version": 18,
-  "name": "Three Upgrade Signs",
+  "version": 19,
+  "name": "Left-Side Upgrade Area",
   "changes": [
     {
-      "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "UpgradeSigns",
-      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\n\nlocal old=world:FindFirstChild(\"UpgradeSigns\")\nif old then old:Destroy() end\n\nlocal folder=Instance.new(\"Folder\")\nfolder.Name=\"UpgradeSigns\"\nfolder.Parent=world\n\nlocal function makeSign(number,x)\n local post=Instance.new(\"Part\")\n post.Name=\"Upgrade\"..number..\"Post\"\n post.Size=Vector3.new(1,5,1)\n post.Position=Vector3.new(x,22.5,-16)\n post.Anchored=true\n post.Color=Color3.fromRGB(93,66,43)\n post.Material=Enum.Material.Wood\n post.Parent=folder\n\n local board=Instance.new(\"Part\")\n board.Name=\"Upgrade\"..number..\"Sign\"\n board.Size=Vector3.new(9,5,.7)\n board.Position=Vector3.new(x,26,-16)\n board.Anchored=true\n board.Color=Color3.fromRGB(48,54,66)\n board.Material=Enum.Material.Slate\n board.Parent=folder\n\n local gui=Instance.new(\"SurfaceGui\")\n gui.Face=Enum.NormalId.Back\n gui.Parent=board\n\n local text=Instance.new(\"TextLabel\")\n text.Size=UDim2.fromScale(1,1)\n text.BackgroundTransparency=1\n text.Text=\"UPGRADE \"..number..\"\\nCOMING SOON\"\n text.TextWrapped=true\n text.TextScaled=true\n text.Font=Enum.Font.GothamBold\n text.TextColor3=Color3.fromRGB(255,230,120)\n text.Parent=gui\nend\n\nmakeSign(1,-11)\nmakeSign(2,0)\nmakeSign(3,11)\n\nprint(\"Three upgrade signs loaded\")"
+      "action": "replaceScript",
+      "path": "ServerScriptService.UpgradeSigns",
+      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\nlocal old=world:FindFirstChild(\"UpgradeSigns\")\nif old then old:Destroy() end\nlocal folder=Instance.new(\"Folder\");folder.Name=\"UpgradeSigns\";folder.Parent=world\n\nlocal function makeSign(number,z)\n local x=-21\n local post=Instance.new(\"Part\");post.Name=\"Upgrade\"..number..\"Post\";post.Size=Vector3.new(1,5,1);post.Position=Vector3.new(x,22.5,z);post.Anchored=true;post.Color=Color3.fromRGB(93,66,43);post.Material=Enum.Material.Wood;post.Parent=folder\n local board=Instance.new(\"Part\");board.Name=\"Upgrade\"..number..\"Sign\";board.Size=Vector3.new(.7,5,9);board.Position=Vector3.new(x,26,z);board.Anchored=true;board.Color=Color3.fromRGB(48,54,66);board.Material=Enum.Material.Slate;board.Parent=folder\n local gui=Instance.new(\"SurfaceGui\");gui.Face=Enum.NormalId.Right;gui.Parent=board\n local text=Instance.new(\"TextLabel\");text.Size=UDim2.fromScale(1,1);text.BackgroundTransparency=1;text.Text=\"UPGRADE \"..number..\"\\nCOMING SOON\";text.TextWrapped=true;text.TextScaled=true;text.Font=Enum.Font.GothamBold;text.TextColor3=Color3.fromRGB(255,230,120);text.Parent=gui\nend\nmakeSign(1,-11);makeSign(2,0);makeSign(3,11)\nprint(\"Upgrade signs moved to far left side\")"
     }
   ]
 }
