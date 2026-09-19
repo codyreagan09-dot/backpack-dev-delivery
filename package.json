@@ -1,13 +1,13 @@
 {
-  "version": 27,
-  "name": "Orb Spawn Collision Guard",
+  "version": 28,
+  "name": "Floating Upgrade Boards",
   "changes": [
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "OrbSpawnGuard",
-      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\nlocal RunService=game:GetService(\"RunService\")\n\nlocal function blocked(orb)\n local params=OverlapParams.new()\n params.FilterType=Enum.RaycastFilterType.Exclude\n params.FilterDescendantsInstances={orb}\n local hits=workspace:GetPartBoundsInBox(orb.CFrame,Vector3.new(5,7,5),params)\n for _,hit in ipairs(hits) do\n  if hit:IsA(\"BasePart\") and hit.CanCollide then\n   local n=hit.Name\n   if n~=\"StarterIsland\" and n~=\"IslandEarth\" and n~=\"Expansion1\" and n~=\"Expansion2\" and n~=\"TreasureIsland\" and n~=\"Bridge\" then\n    return true\n   end\n  end\n end\n return false\nend\n\nlocal function safePosition()\n for _=1,80 do\n  local pos=Vector3.new(math.random(-20,20),22,math.random(-20,20))\n  local probe=Instance.new(\"Part\")\n  probe.Name=\"OrbSpawnProbe\";probe.Size=Vector3.new(2.2,2.2,2.2);probe.Position=pos;probe.Anchored=true;probe.CanCollide=false;probe.Transparency=1;probe.Parent=world\n  local bad=blocked(probe)\n  probe:Destroy()\n  if not bad then return pos end\n end\n return nil\nend\n\nlocal function protect(orb)\n if not orb:IsA(\"BasePart\") or orb.Name~=\"EnergyOrb\" then return end\n task.defer(function()\n  if not orb.Parent then return end\n  if blocked(orb) then\n   local pos=safePosition()\n   if pos then orb.Position=pos else orb:Destroy() end\n  end\n end)\nend\n\nfor _,v in ipairs(world:GetChildren()) do protect(v) end\nworld.ChildAdded:Connect(protect)\n\ntask.spawn(function()\n while world.Parent do\n  for _,v in ipairs(world:GetChildren()) do\n   if v:IsA(\"BasePart\") and v.Name==\"EnergyOrb\" and blocked(v) then\n    local pos=safePosition()\n    if pos then v.Position=pos else v:Destroy() end\n   end\n  end\n  task.wait(.5)\n end\nend)\n\nprint(\"Orb spawn collision guard loaded\")"
+      "name": "FloatingUpgradeBoards",
+      "source": "local TweenService=game:GetService(\"TweenService\")\nlocal world=workspace:WaitForChild(\"GrowIslandWorld\")\nlocal signs=world:WaitForChild(\"UpgradeSigns\")\n\nfor _,obj in ipairs(signs:GetChildren()) do\n if obj:IsA(\"BasePart\") and (obj.Name:find(\"Post\") or obj.Name:find(\"Stand\")) then\n  obj.Transparency=1\n  obj.CanCollide=false\n end\nend\n\nfor _,board in ipairs(signs:GetChildren()) do\n if board:IsA(\"BasePart\") and board.Name:find(\"Sign\") then\n  board.CanCollide=false\n  local base=board.Position\n  local tween=TweenService:Create(\n   board,\n   TweenInfo.new(1.8,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut,-1,true),\n   {Position=base+Vector3.new(0,1,0)}\n  )\n  tween:Play()\n end\nend\n\nprint(\"Floating upgrade boards enabled\")"
     }
   ]
 }
