@@ -1,17 +1,82 @@
 {
-  "version": 19,
-  "name": "Restore Grasslands Coin Value",
+  "version": 20,
+  "name": "Skybound Complete Reset",
   "changes": [
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.SkyCoinSystem"
+    },
     {
       "action": "delete",
       "path": "ServerScriptService.SkyCoinSystem100M"
     },
     {
-      "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "SkyCoinSystem",
-      "source": "local Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal folder=map:WaitForChild(\"SkyCoinPickups\")\nlocal busy={}\n\nlocal function hook(coin)\n coin.Touched:Connect(function(hit)\n  local player=Players:GetPlayerFromCharacter(hit.Parent)\n  if not player or busy[coin] then return end\n  local stats=player:FindFirstChild(\"leaderstats\")\n  local sky=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not sky then return end\n  busy[coin]=true\n  sky.Value+=1\n  coin.Transparency=1\n  coin.CanTouch=false\n  local light=coin:FindFirstChildOfClass(\"PointLight\")\n  if light then light.Enabled=false end\n  task.delay(8,function()\n   if coin.Parent then\n    coin.Transparency=0\n    coin.CanTouch=true\n    if light then light.Enabled=true end\n    busy[coin]=nil\n   end\n  end)\n end)\nend\n\nfor _,coin in ipairs(folder:GetChildren()) do\n if coin:IsA(\"BasePart\") then hook(coin) end\nend"
+      "action": "delete",
+      "path": "ServerScriptService.WaterfallCoinSystem"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.WaterfallCoinSystem100M"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.SkyboundPetBoosts"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.SkyboundPetBoostsFixed"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.SkyboundPetSystem"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.GrasslandsEggGameplay"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.WaterfallProgression"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.WaterfallIslesPortal"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.RemoveSkyboundUI"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.SkyboundServer"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.SkyboundMain"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.SkyboundGame"
+    },
+    {
+      "action": "delete",
+      "path": "StarterPlayer.StarterPlayerScripts.SkyCurrencyUI"
+    },
+    {
+      "action": "delete",
+      "path": "StarterPlayer.StarterPlayerScripts.SkyboundHUD"
+    },
+    {
+      "action": "delete",
+      "path": "StarterPlayer.StarterPlayerScripts.SkyboundUI"
+    },
+    {
+      "action": "delete",
+      "path": "StarterPlayer.StarterPlayerScripts.SkyboundClient"
     }
   ]
 }
