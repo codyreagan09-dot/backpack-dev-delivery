@@ -1,69 +1,86 @@
 {
-  "version": 39,
-  "name": "Player Saving and Desert Return Portal",
+  "version": 40,
+  "name": "Desert Temple Egg and Pets",
   "changes": [
-    {
-      "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "SkyboundDataSave",
-      "source": "local DSS=game:GetService(\"DataStoreService\")\nlocal Players=game:GetService(\"Players\")\nlocal store=DSS:GetDataStore(\"SkyboundPlayerData_v1\")\nlocal function save(p)\n local stats=p:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n if not coins then return end\n local pets={};local folder=p:FindFirstChild(\"Pets\")\n if folder then for _,v in ipairs(folder:GetChildren()) do if v:IsA(\"StringValue\") then table.insert(pets,v.Value) end end end\n local data={coins=coins.Value,pets=pets,waterfall=p:GetAttribute(\"WaterfallUnlocked\")==true,desert=p:GetAttribute(\"DesertUnlocked\")==true}\n local ok,err=pcall(function() store:SetAsync(\"Player_\"..p.UserId,data) end)\n if not ok then warn(\"Skybound save failed for \"..p.Name..\": \"..tostring(err)) end\nend\nlocal function load(p)\n local ok,data=pcall(function() return store:GetAsync(\"Player_\"..p.UserId) end)\n if not ok or type(data)~=\"table\" then return end\n local stats=p:WaitForChild(\"leaderstats\",10);local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n if coins and type(data.coins)==\"number\" then coins.Value=data.coins end\n p:SetAttribute(\"WaterfallUnlocked\",data.waterfall==true);p:SetAttribute(\"DesertUnlocked\",data.desert==true)\n local pets=p:FindFirstChild(\"Pets\") or Instance.new(\"Folder\");pets.Name=\"Pets\";pets.Parent=p\n for _,name in ipairs(data.pets or {}) do local v=Instance.new(\"StringValue\");v.Name=name;v.Value=name;v.Parent=pets end\nend\nPlayers.PlayerAdded:Connect(function(p) task.spawn(load,p) end)\nPlayers.PlayerRemoving:Connect(save)\ntask.spawn(function() while true do task.wait(60);for _,p in ipairs(Players:GetPlayers()) do task.spawn(save,p) end end end)\ngame:BindToClose(function() for _,p in ipairs(Players:GetPlayers()) do task.spawn(save,p) end task.wait(3) end)"
-    },
     {
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "ReturnPortal",
+      "name": "DesertEgg",
       "properties": {
         "Size": {
-          "x": 12,
-          "y": 15,
-          "z": 2
+          "x": 10,
+          "y": 2,
+          "z": 10
         },
         "Position": {
-          "x": -28,
-          "y": 122,
-          "z": 6020
+          "x": 26,
+          "y": 115,
+          "z": 6022
         },
         "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Transparency": 0.15,
+        "Material": "Sandstone",
         "Color": {
-          "r": 90,
-          "g": 210,
-          "b": 255
+          "r": 180,
+          "g": 130,
+          "b": 70
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.DesertTemple.DesertEgg",
+      "name": "Egg",
+      "properties": {
+        "Size": {
+          "x": 5,
+          "y": 7,
+          "z": 5
+        },
+        "Position": {
+          "x": 26,
+          "y": 120,
+          "z": 6022
+        },
+        "Anchored": true,
+        "Material": "SmoothPlastic",
+        "Shape": "Ball",
+        "Color": {
+          "r": 255,
+          "g": 202,
+          "b": 65
         }
       }
     },
     {
       "action": "create",
       "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.ReturnPortal",
-      "name": "Glow",
+      "parent": "Workspace.SkyboundMap.DesertTemple.DesertEgg.Egg",
+      "name": "EggGlow",
       "properties": {
         "Brightness": 3,
-        "Range": 20
+        "Range": 15
       }
     },
     {
       "action": "create",
       "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.DesertTemple.ReturnPortal",
-      "name": "TravelPrompt",
+      "parent": "Workspace.SkyboundMap.DesertTemple.DesertEgg.Egg",
+      "name": "HatchPrompt",
       "properties": {
-        "ActionText": "RETURN",
-        "ObjectText": "WATERFALL ISLES",
+        "ActionText": "HATCH - 10 SKY COINS",
+        "ObjectText": "DESERT EGG",
         "HoldDuration": 0.4,
-        "MaxActivationDistance": 12
+        "MaxActivationDistance": 10
       }
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "DesertReturnPortalSystem",
-      "source": "local portal=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"DesertTemple\"):WaitForChild(\"ReturnPortal\")\nlocal prompt=portal:WaitForChild(\"TravelPrompt\")\nlocal destination=workspace.SkyboundMap.WaterfallIsles:WaitForChild(\"IslandTop\")\nprompt.Triggered:Connect(function(player)\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\")\n if root then root.CFrame=CFrame.new(destination.Position+Vector3.new(0,7,0)) end\nend)"
+      "name": "DesertEggSystem",
+      "source": "local egg=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"DesertTemple\"):WaitForChild(\"DesertEgg\"):WaitForChild(\"Egg\")\nlocal prompt=egg:WaitForChild(\"HatchPrompt\")\nlocal pets={{name=\"Sand Bunny\",chance=60,color=Color3.fromRGB(238,207,135)},{name=\"Dune Fox\",chance=30,color=Color3.fromRGB(224,151,67)},{name=\"Sun Lion\",chance=9,color=Color3.fromRGB(255,202,55)},{name=\"Pharaoh Dragon\",chance=1,color=Color3.fromRGB(150,90,255)}}\nlocal function roll() local r=math.random(1,100);local t=0;for _,p in ipairs(pets) do t+=p.chance;if r<=t then return p end end return pets[1] end\nlocal function show(player,pet)\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\");if not root then return end\n local old=workspace:FindFirstChild(player.Name..\"_EquippedPet\");if old then old:Destroy() end\n local oldAtt=root:FindFirstChild(\"PetFollowPoint\");if oldAtt then oldAtt:Destroy() end\n local part=Instance.new(\"Part\");part.Name=player.Name..\"_EquippedPet\";part.Shape=Enum.PartType.Ball;part.Size=Vector3.new(4,4,4);part.Color=pet.color;part.Material=Enum.Material.SmoothPlastic;part.CanCollide=false;part.Massless=true;part.CFrame=root.CFrame*CFrame.new(4,1,3);part.Parent=workspace\n local gui=Instance.new(\"BillboardGui\");gui.Size=UDim2.fromOffset(170,40);gui.StudsOffset=Vector3.new(0,3,0);gui.AlwaysOnTop=true;gui.Parent=part\n local label=Instance.new(\"TextLabel\");label.Size=UDim2.fromScale(1,1);label.BackgroundTransparency=1;label.Text=pet.name;label.TextColor3=Color3.new(1,1,1);label.TextStrokeTransparency=.25;label.Font=Enum.Font.GothamBold;label.TextScaled=true;label.Parent=gui\n local a=Instance.new(\"Attachment\");a.Name=\"PetFollowPoint\";a.Position=Vector3.new(4,1,3);a.Parent=root\n local b=Instance.new(\"Attachment\");b.Parent=part\n local align=Instance.new(\"AlignPosition\");align.Attachment0=b;align.Attachment1=a;align.MaxForce=50000;align.Responsiveness=12;align.Parent=part\nend\nprompt.Triggered:Connect(function(player)\n local stats=player:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\");if not coins or coins.Value<10 then return end\n coins.Value-=10;local pet=roll();local inv=player:FindFirstChild(\"Pets\") or Instance.new(\"Folder\");inv.Name=\"Pets\";inv.Parent=player\n local owned=Instance.new(\"StringValue\");owned.Name=pet.name;owned.Value=pet.name;owned.Parent=inv;show(player,pet)\n prompt.ObjectText=\"HATCHED: \"..pet.name;task.delay(2,function() if prompt.Parent then prompt.ObjectText=\"DESERT EGG\" end end)\nend)"
     }
   ]
 }
