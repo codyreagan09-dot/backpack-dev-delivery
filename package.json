@@ -1,20 +1,26 @@
 {
-  "version": 50,
-  "name": "Pet Collection Index",
+  "version": 51,
+  "name": "Shiny Pet Crafting",
   "changes": [
+    {
+      "action": "create",
+      "class": "RemoteEvent",
+      "parent": "ReplicatedStorage",
+      "name": "SkyboundCraftPet"
+    },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "SkyboundPetIndex",
-      "source": "local Players=game:GetService(\"Players\")\nlocal function hook(p)\n local pets=p:WaitForChild(\"Pets\",15);if not pets then return end\n local function count()\n  local n=#pets:GetChildren();p:SetAttribute(\"PetCount\",n);p:SetAttribute(\"PetIndexPercent\",math.min(100,math.floor(n/24*100)))\n end\n pets.ChildAdded:Connect(count);pets.ChildRemoved:Connect(count);count()\nend\nPlayers.PlayerAdded:Connect(function(p) task.spawn(hook,p) end)"
+      "name": "SkyboundPetCrafting",
+      "source": "local RS=game:GetService(\"ReplicatedStorage\")\nlocal Players=game:GetService(\"Players\")\nlocal remote=RS:WaitForChild(\"SkyboundCraftPet\")\nlocal function samePets(inv,name)\n local out={};for _,v in ipairs(inv:GetChildren()) do if v:IsA(\"StringValue\") and v.Value==name then table.insert(out,v) end end;return out\nend\nremote.OnServerEvent:Connect(function(p,name)\n if type(name)~=\"string\" then return end\n local inv=p:FindFirstChild(\"Pets\");if not inv then return end\n local matches=samePets(inv,name);if #matches<3 then return end\n for i=1,3 do matches[i]:Destroy() end\n local shiny=Instance.new(\"StringValue\");shiny.Name=\"Shiny \"..name;shiny.Value=\"Shiny \"..name;shiny:SetAttribute(\"Shiny\",true);shiny.Parent=inv\nend)\nPlayers.PlayerAdded:Connect(function(p)\n local inv=p:FindFirstChild(\"Pets\");if inv then inv.ChildAdded:Connect(function(v) if v:GetAttribute(\"Shiny\") then v:SetAttribute(\"PowerBonus\",2) end end) end\nend)"
     },
     {
       "action": "create",
       "class": "LocalScript",
       "parent": "StarterPlayer.StarterPlayerScripts",
-      "name": "SkyboundPetIndexUI",
-      "source": "local Players=game:GetService(\"Players\");local p=Players.LocalPlayer\nlocal gui=Instance.new(\"ScreenGui\");gui.Name=\"PetIndexUI\";gui.ResetOnSpawn=false;gui.Parent=p:WaitForChild(\"PlayerGui\")\nlocal b=Instance.new(\"TextButton\");b.Size=UDim2.fromOffset(130,46);b.Position=UDim2.new(0,158,1,-70);b.Text=\"PET INDEX\";b.TextScaled=true;b.Font=Enum.Font.GothamBold;b.Parent=gui\nlocal f=Instance.new(\"Frame\");f.Size=UDim2.fromOffset(420,360);f.Position=UDim2.new(.5,-210,.5,-180);f.Visible=false;f.Parent=gui\nlocal t=Instance.new(\"TextLabel\");t.Size=UDim2.new(1,0,0,60);t.BackgroundTransparency=1;t.TextScaled=true;t.Font=Enum.Font.GothamBlack;t.Parent=f\nlocal list=Instance.new(\"TextLabel\");list.Position=UDim2.fromOffset(20,70);list.Size=UDim2.new(1,-40,1,-90);list.BackgroundTransparency=1;list.TextWrapped=true;list.TextYAlignment=Enum.TextYAlignment.Top;list.TextScaled=false;list.TextSize=18;list.Font=Enum.Font.Gotham;list.Parent=f\nlocal known={\"Cloud Bunny\",\"Sky Fox\",\"Sun Cub\",\"Storm Dragon\",\"Bubble Bunny\",\"River Fox\",\"Aqua Cub\",\"Tide Dragon\",\"Sand Bunny\",\"Dune Fox\",\"Sun Lion\",\"Pharaoh Dragon\",\"VolcanoRealm Pet\",\"CelestialCity Pet\",\"VoidRealm Pet\"}\nlocal function update()\n t.Text=\"PET INDEX  •  \"..tostring(p:GetAttribute(\"PetCount\") or 0)..\" OWNED\"\n local inv=p:FindFirstChild(\"Pets\");local owned={}\n if inv then for _,v in ipairs(inv:GetChildren()) do owned[v.Value]=true end end\n local lines={};for _,n in ipairs(known) do table.insert(lines,(owned[n] and \"✓  \" or \"???  \")..(owned[n] and n or \"UNDISCOVERED PET\")) end\n list.Text=table.concat(lines,\"\\n\")\nend\nb.Activated:Connect(function() f.Visible=not f.Visible;if f.Visible then update() end end)\np:GetAttributeChangedSignal(\"PetCount\"):Connect(function() if f.Visible then update() end end)"
+      "name": "SkyboundPetCraftUI",
+      "source": "local Players=game:GetService(\"Players\");local RS=game:GetService(\"ReplicatedStorage\");local p=Players.LocalPlayer\nlocal gui=Instance.new(\"ScreenGui\");gui.Name=\"PetCraftUI\";gui.ResetOnSpawn=false;gui.Parent=p:WaitForChild(\"PlayerGui\")\nlocal b=Instance.new(\"TextButton\");b.Size=UDim2.fromOffset(130,46);b.Position=UDim2.new(0,298,1,-70);b.Text=\"CRAFT\";b.TextScaled=true;b.Font=Enum.Font.GothamBold;b.Parent=gui\nlocal f=Instance.new(\"Frame\");f.Size=UDim2.fromOffset(430,380);f.Position=UDim2.new(.5,-215,.5,-190);f.Visible=false;f.Parent=gui\nlocal title=Instance.new(\"TextLabel\");title.Size=UDim2.new(1,0,0,60);title.BackgroundTransparency=1;title.Text=\"CRAFT 3 DUPLICATES → SHINY\";title.TextScaled=true;title.Font=Enum.Font.GothamBlack;title.Parent=f\nlocal list=Instance.new(\"ScrollingFrame\");list.Position=UDim2.fromOffset(15,70);list.Size=UDim2.new(1,-30,1,-85);list.AutomaticCanvasSize=Enum.AutomaticSize.Y;list.CanvasSize=UDim2.new();list.Parent=f\nlocal layout=Instance.new(\"UIListLayout\");layout.Padding=UDim.new(0,6);layout.Parent=list\nlocal function rebuild()\n for _,x in ipairs(list:GetChildren()) do if x:IsA(\"TextButton\") then x:Destroy() end end\n local inv=p:FindFirstChild(\"Pets\");if not inv then return end;local counts={}\n for _,v in ipairs(inv:GetChildren()) do counts[v.Value]=(counts[v.Value] or 0)+1 end\n for name,count in pairs(counts) do local x=Instance.new(\"TextButton\");x.Size=UDim2.new(1,-8,0,48);x.Text=name..\"  x\"..count..(count>=3 and \"   → CRAFT SHINY\" or \"   (NEED 3)\");x.TextScaled=true;x.Font=Enum.Font.GothamBold;x.Parent=list;x.Activated:Connect(function() if count>=3 then RS.SkyboundCraftPet:FireServer(name);task.wait(.3);rebuild() end end) end\nend\nb.Activated:Connect(function() f.Visible=not f.Visible;if f.Visible then rebuild() end end)"
     }
   ]
 }
