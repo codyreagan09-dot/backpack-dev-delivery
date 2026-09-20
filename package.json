@@ -1,24 +1,25 @@
 {
-  "version": 26,
-  "name": "One Million Sky Coin Orbs",
+  "version": 27,
+  "name": "Sky Power Upgrade Shrine",
   "changes": [
     {
-      "action": "delete",
-      "path": "ServerScriptService.SkyboundCore"
+      "action": "create",
+      "class": "ProximityPrompt",
+      "parent": "Workspace.SkyboundMap.GrasslandsDecor.CentralShrineCrystal",
+      "name": "UpgradePrompt",
+      "properties": {
+        "ActionText": "UPGRADE - 5,000,000 COINS",
+        "ObjectText": "SKY POWER x1 → x2",
+        "HoldDuration": 0.5,
+        "MaxActivationDistance": 12
+      }
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "SkyboundCoreMillion",
-      "source": "local Players=game:GetService(\"Players\")\nlocal function setup(p)\n local stats=p:FindFirstChild(\"leaderstats\") or Instance.new(\"Folder\");stats.Name=\"leaderstats\";stats.Parent=p\n local coins=stats:FindFirstChild(\"SkyCoins\") or Instance.new(\"IntValue\");coins.Name=\"SkyCoins\";coins.Parent=stats\nend\nPlayers.PlayerAdded:Connect(setup)\nfor _,p in ipairs(Players:GetPlayers()) do setup(p) end\n"
-    },
-    {
-      "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "MillionOrbSystem",
-      "source": "local Players=game:GetService(\"Players\")\nlocal folder=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"SkyCoins\")\nlocal busy={}\nfor _,coin in ipairs(folder:GetChildren()) do\n if coin:IsA(\"BasePart\") then\n  coin.Touched:Connect(function(hit)\n   local player=Players:GetPlayerFromCharacter(hit.Parent)\n   if not player or busy[coin] then return end\n   local stats=player:FindFirstChild(\"leaderstats\")\n   local c=stats and stats:FindFirstChild(\"SkyCoins\")\n   if not c then return end\n   busy[coin]=true\n   c.Value+=1000000\n   coin.Transparency=1\n   coin.CanTouch=false\n   local l=coin:FindFirstChildOfClass(\"PointLight\")\n   if l then l.Enabled=false end\n   task.delay(7,function()\n    if coin.Parent then\n     coin.Transparency=0\n     coin.CanTouch=true\n     if l then l.Enabled=true end\n     busy[coin]=nil\n    end\n   end)\n  end)\n end\nend"
+      "name": "SkyPowerShrine",
+      "source": "local Players=game:GetService(\"Players\")\nlocal shrine=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"GrasslandsDecor\"):WaitForChild(\"CentralShrineCrystal\")\nlocal prompt=shrine:WaitForChild(\"UpgradePrompt\")\nlocal levels={0,1,2,3,5}\nlocal costs={0,5000000,25000000,100000000,500000000}\nlocal function update(player)\n local level=player:GetAttribute(\"SkyPowerLevel\") or 0\n if level>=4 then prompt.ActionText=\"MAX LEVEL\";prompt.ObjectText=\"SKY POWER x5\";return end\n prompt.ActionText=\"UPGRADE - \"..costs[level+2]..\" COINS\"\n prompt.ObjectText=\"SKY POWER x\"..levels[level+1]..\" → x\"..levels[level+2]\nend\nprompt.Triggered:Connect(function(player)\n local level=player:GetAttribute(\"SkyPowerLevel\") or 0\n if level>=4 then return end\n local stats=player:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n local cost=costs[level+2]\n if not coins or coins.Value<cost then return end\n coins.Value-=cost\n player:SetAttribute(\"SkyPowerLevel\",level+1)\n update(player)\nend)\nPlayers.PlayerAdded:Connect(function(p) p:SetAttribute(\"SkyPowerLevel\",0) end)"
     }
   ]
 }
