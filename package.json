@@ -1,1717 +1,610 @@
 {
-  "version": 43,
-  "name": "Complete Skybound World",
+  "version": 44,
+  "name": "Major Pet Systems and World Polish",
   "changes": [
     {
       "action": "create",
-      "class": "Folder",
-      "parent": "Workspace.SkyboundMap",
-      "name": "VolcanoRealm"
+      "class": "RemoteEvent",
+      "parent": "ReplicatedStorage",
+      "name": "SkyboundEquipPet"
+    },
+    {
+      "action": "create",
+      "class": "Script",
+      "parent": "ServerScriptService",
+      "name": "SkyboundPetManager",
+      "source": "local RS=game:GetService(\"ReplicatedStorage\")\nlocal Players=game:GetService(\"Players\")\nlocal equip=RS:WaitForChild(\"SkyboundEquipPet\")\nlocal rarity={[\"Cloud Bunny\"]=\"Common\",[\"Sky Fox\"]=\"Uncommon\",[\"Sun Cub\"]=\"Epic\",[\"Storm Dragon\"]=\"Legendary\",[\"Bubble Bunny\"]=\"Common\",[\"River Fox\"]=\"Uncommon\",[\"Aqua Cub\"]=\"Epic\",[\"Tide Dragon\"]=\"Legendary\",[\"Sand Bunny\"]=\"Common\",[\"Dune Fox\"]=\"Uncommon\",[\"Sun Lion\"]=\"Epic\",[\"Pharaoh Dragon\"]=\"Legendary\"}\nlocal power={Common=1,Uncommon=2,Rare=3,Epic=5,Legendary=8,Mythic=12,Secret=20}\nlocal function clear(p)\n for _,o in ipairs(workspace:GetChildren()) do if o:GetAttribute(\"PetOwner\")==p.UserId then o:Destroy() end end\n local root=p.Character and p.Character:FindFirstChild(\"HumanoidRootPart\");if root then for _,a in ipairs(root:GetChildren()) do if a.Name:match(\"^SkyPetPoint\") then a:Destroy() end end end\nend\nlocal function modelPet(p,name,index)\n local root=p.Character and p.Character:FindFirstChild(\"HumanoidRootPart\");if not root then return end\n local r=rarity[name] or \"Rare\";local colors={Common=Color3.fromRGB(235,245,255),Uncommon=Color3.fromRGB(90,220,150),Rare=Color3.fromRGB(80,170,255),Epic=Color3.fromRGB(190,90,255),Legendary=Color3.fromRGB(255,190,50),Mythic=Color3.fromRGB(255,80,150),Secret=Color3.fromRGB(70,70,90)}\n local m=Instance.new(\"Model\");m.Name=p.Name..\"_\"..name;m:SetAttribute(\"PetOwner\",p.UserId);m.Parent=workspace\n local body=Instance.new(\"Part\");body.Name=\"Body\";body.Shape=Enum.PartType.Ball;body.Size=Vector3.new(3.5,3,3.5);body.Color=colors[r];body.Material=Enum.Material.SmoothPlastic;body.CanCollide=false;body.Massless=true;body.Parent=m\n local head=Instance.new(\"Part\");head.Shape=Enum.PartType.Ball;head.Size=Vector3.new(2.5,2.5,2.5);head.Color=colors[r];head.CanCollide=false;head.Massless=true;head.CFrame=body.CFrame*CFrame.new(0,1.8,-1);head.Parent=m\n local w=Instance.new(\"WeldConstraint\");w.Part0=body;w.Part1=head;w.Parent=body\n local gui=Instance.new(\"BillboardGui\");gui.Size=UDim2.fromOffset(170,45);gui.StudsOffset=Vector3.new(0,3,0);gui.AlwaysOnTop=true;gui.Parent=head\n local t=Instance.new(\"TextLabel\");t.Size=UDim2.fromScale(1,1);t.BackgroundTransparency=1;t.Text=name..\" [\"..r..\"]\";t.TextScaled=true;t.TextColor3=Color3.new(1,1,1);t.TextStrokeTransparency=.2;t.Font=Enum.Font.GothamBold;t.Parent=gui\n body.CFrame=root.CFrame*CFrame.new(4+(index-1)*2,1,3)\n local a=Instance.new(\"Attachment\");a.Name=\"SkyPetPoint\"..index;a.Position=Vector3.new(4+(index-1)*3,1,3);a.Parent=root\n local b=Instance.new(\"Attachment\");b.Parent=body\n local ap=Instance.new(\"AlignPosition\");ap.Attachment0=b;ap.Attachment1=a;ap.MaxForce=60000;ap.Responsiveness=10;ap.Parent=body\nend\nlocal function refresh(p)\n clear(p);local folder=p:FindFirstChild(\"EquippedPets\");if not folder then return end\n local total=0;local i=0\n for _,v in ipairs(folder:GetChildren()) do i+=1;local r=rarity[v.Value] or \"Rare\";total+=power[r] or 1;modelPet(p,v.Value,i) end\n p:SetAttribute(\"PetPower\",total)\nend\nequip.OnServerEvent:Connect(function(p,name)\n local inv=p:FindFirstChild(\"Pets\");if not inv then return end\n local owned=false;for _,v in ipairs(inv:GetChildren()) do if v.Value==name then owned=true break end end;if not owned then return end\n local eq=p:FindFirstChild(\"EquippedPets\") or Instance.new(\"Folder\");eq.Name=\"EquippedPets\";eq.Parent=p\n for _,v in ipairs(eq:GetChildren()) do if v.Value==name then v:Destroy();refresh(p);return end end\n if #eq:GetChildren()>=3 then return end\n local v=Instance.new(\"StringValue\");v.Name=\"Pet\"..(#eq:GetChildren()+1);v.Value=name;v.Parent=eq;refresh(p)\nend)\nPlayers.PlayerAdded:Connect(function(p) local e=Instance.new(\"Folder\");e.Name=\"EquippedPets\";e.Parent=p end)"
+    },
+    {
+      "action": "create",
+      "class": "LocalScript",
+      "parent": "StarterPlayer.StarterPlayerScripts",
+      "name": "SkyboundPetInventory",
+      "source": "local Players=game:GetService(\"Players\");local RS=game:GetService(\"ReplicatedStorage\");local p=Players.LocalPlayer\nlocal gui=Instance.new(\"ScreenGui\");gui.Name=\"PetInventoryUI\";gui.ResetOnSpawn=false;gui.Parent=p:WaitForChild(\"PlayerGui\")\nlocal b=Instance.new(\"TextButton\");b.Size=UDim2.fromOffset(130,46);b.Position=UDim2.new(0,18,1,-70);b.Text=\"PETS\";b.TextScaled=true;b.Font=Enum.Font.GothamBold;b.Parent=gui\nlocal frame=Instance.new(\"Frame\");frame.Size=UDim2.fromOffset(430,420);frame.Position=UDim2.new(.5,-215,.5,-210);frame.Visible=false;frame.Parent=gui\nlocal title=Instance.new(\"TextLabel\");title.Size=UDim2.new(1,0,0,55);title.BackgroundTransparency=1;title.Text=\"SKYBOUND PETS  •  EQUIP 3\";title.TextScaled=true;title.Font=Enum.Font.GothamBold;title.Parent=frame\nlocal list=Instance.new(\"ScrollingFrame\");list.Position=UDim2.fromOffset(15,65);list.Size=UDim2.new(1,-30,1,-80);list.CanvasSize=UDim2.new();list.AutomaticCanvasSize=Enum.AutomaticSize.Y;list.Parent=frame\nlocal layout=Instance.new(\"UIListLayout\");layout.Padding=UDim.new(0,7);layout.Parent=list\nlocal function rebuild()\n for _,x in ipairs(list:GetChildren()) do if x:IsA(\"TextButton\") then x:Destroy() end end\n local inv=p:FindFirstChild(\"Pets\");if not inv then return end\n for _,v in ipairs(inv:GetChildren()) do local x=Instance.new(\"TextButton\");x.Size=UDim2.new(1,-8,0,52);x.Text=v.Value..\"   •   CLICK TO EQUIP / UNEQUIP\";x.TextScaled=true;x.Font=Enum.Font.GothamBold;x.Parent=list;x.Activated:Connect(function() RS.SkyboundEquipPet:FireServer(v.Value) end) end\nend\nb.Activated:Connect(function() frame.Visible=not frame.Visible;if frame.Visible then rebuild() end end)\ntask.spawn(function() while true do task.wait(2);if frame.Visible then rebuild() end end end)"
+    },
+    {
+      "action": "create",
+      "class": "Script",
+      "parent": "ServerScriptService",
+      "name": "EggHatchEffects",
+      "source": "local RS=game:GetService(\"ReplicatedStorage\")\nlocal TweenService=game:GetService(\"TweenService\")\nfor _,d in ipairs(workspace.SkyboundMap:GetDescendants()) do\n if d:IsA(\"ProximityPrompt\") and d.Name==\"HatchPrompt\" then\n  d.Triggered:Connect(function(p)\n   local egg=d.Parent;if not egg:IsA(\"BasePart\") then return end\n   local original=egg.Size\n   TweenService:Create(egg,TweenInfo.new(.15,Enum.EasingStyle.Back),{Size=original*1.18}):Play()\n   task.delay(.18,function() if egg.Parent then TweenService:Create(egg,TweenInfo.new(.2),{Size=original}):Play() end end)\n  end)\n end\nend"
+    },
+    {
+      "action": "delete",
+      "path": "ServerScriptService.SkyboundDataSave"
+    },
+    {
+      "action": "create",
+      "class": "Script",
+      "parent": "ServerScriptService",
+      "name": "SkyboundDataSaveV2",
+      "source": "local DSS=game:GetService(\"DataStoreService\");local Players=game:GetService(\"Players\");local store=DSS:GetDataStore(\"SkyboundPlayerData_v2\")\nlocal attrs={\"WaterfallUnlocked\",\"DesertUnlocked\",\"FrozenUnlocked\",\"VolcanoRealmUnlocked\",\"CelestialCityUnlocked\",\"VoidRealmUnlocked\"}\nlocal function save(p)\n local c=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"SkyCoins\");if not c then return end\n local d={coins=c.Value,pets={},equipped={},unlocks={}}\n local inv=p:FindFirstChild(\"Pets\");if inv then for _,v in ipairs(inv:GetChildren()) do table.insert(d.pets,v.Value) end end\n local eq=p:FindFirstChild(\"EquippedPets\");if eq then for _,v in ipairs(eq:GetChildren()) do table.insert(d.equipped,v.Value) end end\n for _,a in ipairs(attrs) do d.unlocks[a]=p:GetAttribute(a)==true end\n pcall(function() store:SetAsync(\"P_\"..p.UserId,d) end)\nend\nlocal function load(p)\n local ok,d=pcall(function() return store:GetAsync(\"P_\"..p.UserId) end);if not ok or type(d)~=\"table\" then return end\n local c=p:WaitForChild(\"leaderstats\",10) and p.leaderstats:FindFirstChild(\"SkyCoins\");if c then c.Value=d.coins or 0 end\n local inv=p:FindFirstChild(\"Pets\") or Instance.new(\"Folder\");inv.Name=\"Pets\";inv.Parent=p\n for _,n in ipairs(d.pets or {}) do local v=Instance.new(\"StringValue\");v.Name=n;v.Value=n;v.Parent=inv end\n local eq=p:WaitForChild(\"EquippedPets\",10);if eq then for i,n in ipairs(d.equipped or {}) do if i<=3 then local v=Instance.new(\"StringValue\");v.Name=\"Pet\"..i;v.Value=n;v.Parent=eq end end end\n for _,a in ipairs(attrs) do p:SetAttribute(a,d.unlocks and d.unlocks[a]==true) end\nend\nPlayers.PlayerAdded:Connect(function(p) task.delay(2,load,p) end);Players.PlayerRemoving:Connect(save)\ntask.spawn(function() while task.wait(60) do for _,p in ipairs(Players:GetPlayers()) do task.spawn(save,p) end end end)\ngame:BindToClose(function() for _,p in ipairs(Players:GetPlayers()) do task.spawn(save,p) end task.wait(3) end)"
     },
     {
       "action": "create",
       "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "IslandTop",
-      "properties": {
-        "Size": {
-          "x": 90,
-          "y": 7,
-          "z": 85
-        },
-        "Position": {
-          "x": 0,
-          "y": 170,
-          "z": 12000
-        },
-        "Anchored": true,
-        "Material": "Basalt",
-        "Color": {
-          "r": 75,
-          "g": 65,
-          "b": 65
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "RockBase",
-      "properties": {
-        "Size": {
-          "x": 74,
-          "y": 24,
-          "z": 70
-        },
-        "Position": {
-          "x": 0,
-          "y": 154,
-          "z": 12000
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 70,
-          "g": 70,
-          "b": 80
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "RockTip",
-      "properties": {
-        "Size": {
-          "x": 45,
-          "y": 25,
-          "z": 42
-        },
-        "Position": {
-          "x": 0,
-          "y": 130,
-          "z": 12000
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 55,
-          "g": 55,
-          "b": 65
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Folder",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "Orbs"
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs",
-      "name": "Orb1",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -32,
-          "y": 174,
-          "z": 11978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs.Orb1",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs",
-      "name": "Orb2",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -16,
-          "y": 174,
-          "z": 11978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs.Orb2",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs",
-      "name": "Orb3",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 0,
-          "y": 174,
-          "z": 11978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs.Orb3",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs",
-      "name": "Orb4",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 16,
-          "y": 174,
-          "z": 11978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs.Orb4",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs",
-      "name": "Orb5",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 32,
-          "y": 174,
-          "z": 11978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs.Orb5",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs",
-      "name": "Orb6",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -32,
-          "y": 174,
-          "z": 12022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs.Orb6",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs",
-      "name": "Orb7",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -16,
-          "y": 174,
-          "z": 12022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs.Orb7",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs",
-      "name": "Orb8",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 0,
-          "y": 174,
-          "z": 12022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs.Orb8",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs",
-      "name": "Orb9",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 16,
-          "y": 174,
-          "z": 12022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs.Orb9",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs",
-      "name": "Orb10",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 32,
-          "y": 174,
-          "z": 12022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.Orbs.Orb10",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "EggStand",
-      "properties": {
-        "Size": {
-          "x": 10,
-          "y": 2,
-          "z": 10
-        },
-        "Position": {
-          "x": 28,
-          "y": 173,
-          "z": 12028
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 75,
-          "g": 65,
-          "b": 65
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.EggStand",
-      "name": "Egg",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "Decoration1",
       "properties": {
         "Size": {
           "x": 5,
-          "y": 7,
+          "y": 8,
           "z": 5
         },
         "Position": {
-          "x": 28,
-          "y": 178,
-          "z": 12028
+          "x": -22,
+          "y": 147,
+          "z": 9018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 20,
+          "z": 8
         },
         "Anchored": true,
-        "Material": "SmoothPlastic",
-        "Shape": "Ball",
+        "Material": "Neon",
         "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
+          "r": 160,
+          "g": 235,
+          "b": 255
         }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.EggStand.Egg",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 3,
-        "Range": 15
-      }
-    },
-    {
-      "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.EggStand.Egg",
-      "name": "HatchPrompt",
-      "properties": {
-        "ActionText": "HATCH - 10 SKY COINS",
-        "ObjectText": "VOLCANO EGG",
-        "HoldDuration": 0.4,
-        "MaxActivationDistance": 10
       }
     },
     {
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "VolcanoPortal",
+      "name": "Decoration2",
       "properties": {
         "Size": {
-          "x": 12,
-          "y": 15,
-          "z": 2
+          "x": 3,
+          "y": 9,
+          "z": 3
         },
         "Position": {
-          "x": 30,
-          "y": 152,
-          "z": 8970
+          "x": -12,
+          "y": 147,
+          "z": 8982
         },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Transparency": 0.15,
-        "Color": {
-          "r": 255,
-          "g": 85,
-          "b": 30
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks.VolcanoPortal",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 3,
-        "Range": 20
-      }
-    },
-    {
-      "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks.VolcanoPortal",
-      "name": "TravelPrompt",
-      "properties": {
-        "ActionText": "UNLOCK - 10 COINS",
-        "ObjectText": "VOLCANO REALM",
-        "HoldDuration": 0.6,
-        "MaxActivationDistance": 12
-      }
-    },
-    {
-      "action": "create",
-      "class": "Folder",
-      "parent": "Workspace.SkyboundMap",
-      "name": "CelestialCity"
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "IslandTop",
-      "properties": {
-        "Size": {
-          "x": 90,
-          "y": 7,
-          "z": 85
-        },
-        "Position": {
+        "Orientation": {
           "x": 0,
-          "y": 200,
-          "z": 15000
+          "y": 40,
+          "z": -8
         },
         "Anchored": true,
-        "Material": "Marble",
-        "Color": {
-          "r": 225,
-          "g": 225,
-          "b": 245
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "RockBase",
-      "properties": {
-        "Size": {
-          "x": 74,
-          "y": 24,
-          "z": 70
-        },
-        "Position": {
-          "x": 0,
-          "y": 184,
-          "z": 15000
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 70,
-          "g": 70,
-          "b": 80
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "RockTip",
-      "properties": {
-        "Size": {
-          "x": 45,
-          "y": 25,
-          "z": 42
-        },
-        "Position": {
-          "x": 0,
-          "y": 160,
-          "z": 15000
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 55,
-          "g": 55,
-          "b": 65
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Folder",
-      "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "Orbs"
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs",
-      "name": "Orb1",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -32,
-          "y": 204,
-          "z": 14978
-        },
-        "Anchored": true,
-        "CanCollide": false,
         "Material": "Neon",
-        "Shape": "Ball",
         "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs.Orb1",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs",
-      "name": "Orb2",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -16,
-          "y": 204,
-          "z": 14978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs.Orb2",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs",
-      "name": "Orb3",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 0,
-          "y": 204,
-          "z": 14978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs.Orb3",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs",
-      "name": "Orb4",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 16,
-          "y": 204,
-          "z": 14978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs.Orb4",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs",
-      "name": "Orb5",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 32,
-          "y": 204,
-          "z": 14978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs.Orb5",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs",
-      "name": "Orb6",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -32,
-          "y": 204,
-          "z": 15022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs.Orb6",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs",
-      "name": "Orb7",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -16,
-          "y": 204,
-          "z": 15022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs.Orb7",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs",
-      "name": "Orb8",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 0,
-          "y": 204,
-          "z": 15022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs.Orb8",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs",
-      "name": "Orb9",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 16,
-          "y": 204,
-          "z": 15022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs.Orb9",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs",
-      "name": "Orb10",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 32,
-          "y": 204,
-          "z": 15022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.Orbs.Orb10",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "EggStand",
-      "properties": {
-        "Size": {
-          "x": 10,
-          "y": 2,
-          "z": 10
-        },
-        "Position": {
-          "x": 28,
-          "y": 203,
-          "z": 15028
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 225,
-          "g": 225,
-          "b": 245
+          "r": 160,
+          "g": 235,
+          "b": 255
         }
       }
     },
     {
       "action": "create",
       "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity.EggStand",
-      "name": "Egg",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "Decoration3",
       "properties": {
         "Size": {
           "x": 5,
-          "y": 7,
+          "y": 10,
           "z": 5
         },
         "Position": {
-          "x": 28,
-          "y": 208,
-          "z": 15028
+          "x": -2,
+          "y": 147,
+          "z": 9018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 60,
+          "z": 8
         },
         "Anchored": true,
-        "Material": "SmoothPlastic",
-        "Shape": "Ball",
+        "Material": "Neon",
         "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
+          "r": 160,
+          "g": 235,
+          "b": 255
         }
       }
     },
     {
       "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.EggStand.Egg",
-      "name": "Glow",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "Decoration4",
       "properties": {
-        "Brightness": 3,
-        "Range": 15
+        "Size": {
+          "x": 3,
+          "y": 11,
+          "z": 3
+        },
+        "Position": {
+          "x": 8,
+          "y": 147,
+          "z": 8982
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 80,
+          "z": -8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 160,
+          "g": 235,
+          "b": 255
+        }
       }
     },
     {
       "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.CelestialCity.EggStand.Egg",
-      "name": "HatchPrompt",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "Decoration5",
       "properties": {
-        "ActionText": "HATCH - 10 SKY COINS",
-        "ObjectText": "CELESTIAL EGG",
-        "HoldDuration": 0.4,
-        "MaxActivationDistance": 10
+        "Size": {
+          "x": 5,
+          "y": 12,
+          "z": 5
+        },
+        "Position": {
+          "x": 18,
+          "y": 147,
+          "z": 9018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 100,
+          "z": 8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 160,
+          "g": 235,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "Decoration6",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 13,
+          "z": 3
+        },
+        "Position": {
+          "x": 28,
+          "y": 147,
+          "z": 8982
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 120,
+          "z": -8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 160,
+          "g": 235,
+          "b": 255
+        }
       }
     },
     {
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "CelestialPortal",
-      "properties": {
-        "Size": {
-          "x": 12,
-          "y": 15,
-          "z": 2
-        },
-        "Position": {
-          "x": 30,
-          "y": 182,
-          "z": 11970
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Transparency": 0.15,
-        "Color": {
-          "r": 255,
-          "g": 225,
-          "b": 90
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.CelestialPortal",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 3,
-        "Range": 20
-      }
-    },
-    {
-      "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.CelestialPortal",
-      "name": "TravelPrompt",
-      "properties": {
-        "ActionText": "UNLOCK - 10 COINS",
-        "ObjectText": "CELESTIAL CITY",
-        "HoldDuration": 0.6,
-        "MaxActivationDistance": 12
-      }
-    },
-    {
-      "action": "create",
-      "class": "Folder",
-      "parent": "Workspace.SkyboundMap",
-      "name": "VoidRealm"
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "IslandTop",
-      "properties": {
-        "Size": {
-          "x": 90,
-          "y": 7,
-          "z": 85
-        },
-        "Position": {
-          "x": 0,
-          "y": 230,
-          "z": 18000
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 55,
-          "g": 40,
-          "b": 80
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "RockBase",
-      "properties": {
-        "Size": {
-          "x": 74,
-          "y": 24,
-          "z": 70
-        },
-        "Position": {
-          "x": 0,
-          "y": 214,
-          "z": 18000
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 70,
-          "g": 70,
-          "b": 80
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "RockTip",
-      "properties": {
-        "Size": {
-          "x": 45,
-          "y": 25,
-          "z": 42
-        },
-        "Position": {
-          "x": 0,
-          "y": 190,
-          "z": 18000
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 55,
-          "g": 55,
-          "b": 65
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Folder",
-      "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "Orbs"
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs",
-      "name": "Orb1",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -32,
-          "y": 234,
-          "z": 17978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 180,
-          "g": 80,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs.Orb1",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs",
-      "name": "Orb2",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -16,
-          "y": 234,
-          "z": 17978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 180,
-          "g": 80,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs.Orb2",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs",
-      "name": "Orb3",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 0,
-          "y": 234,
-          "z": 17978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 180,
-          "g": 80,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs.Orb3",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs",
-      "name": "Orb4",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 16,
-          "y": 234,
-          "z": 17978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 180,
-          "g": 80,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs.Orb4",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs",
-      "name": "Orb5",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 32,
-          "y": 234,
-          "z": 17978
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 180,
-          "g": 80,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs.Orb5",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs",
-      "name": "Orb6",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -32,
-          "y": 234,
-          "z": 18022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 180,
-          "g": 80,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs.Orb6",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs",
-      "name": "Orb7",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -16,
-          "y": 234,
-          "z": 18022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 180,
-          "g": 80,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs.Orb7",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs",
-      "name": "Orb8",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 0,
-          "y": 234,
-          "z": 18022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 180,
-          "g": 80,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs.Orb8",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs",
-      "name": "Orb9",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 16,
-          "y": 234,
-          "z": 18022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 180,
-          "g": 80,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs.Orb9",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs",
-      "name": "Orb10",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 32,
-          "y": 234,
-          "z": 18022
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 180,
-          "g": 80,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.Orbs.Orb10",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "EggStand",
-      "properties": {
-        "Size": {
-          "x": 10,
-          "y": 2,
-          "z": 10
-        },
-        "Position": {
-          "x": 28,
-          "y": 233,
-          "z": 18028
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 55,
-          "g": 40,
-          "b": 80
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm.EggStand",
-      "name": "Egg",
+      "name": "Decoration1",
       "properties": {
         "Size": {
           "x": 5,
-          "y": 7,
+          "y": 8,
           "z": 5
         },
         "Position": {
-          "x": 28,
-          "y": 238,
-          "z": 18028
+          "x": -22,
+          "y": 177,
+          "z": 12018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 20,
+          "z": 8
         },
         "Anchored": true,
-        "Material": "SmoothPlastic",
-        "Shape": "Ball",
+        "Material": "Neon",
         "Color": {
-          "r": 180,
+          "r": 255,
           "g": 80,
-          "b": 255
+          "b": 25
         }
       }
     },
     {
       "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.EggStand.Egg",
-      "name": "Glow",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "Decoration2",
       "properties": {
-        "Brightness": 3,
-        "Range": 15
+        "Size": {
+          "x": 3,
+          "y": 9,
+          "z": 3
+        },
+        "Position": {
+          "x": -12,
+          "y": 177,
+          "z": 11982
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 40,
+          "z": -8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 255,
+          "g": 80,
+          "b": 25
+        }
       }
     },
     {
       "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.VoidRealm.EggStand.Egg",
-      "name": "HatchPrompt",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "Decoration3",
       "properties": {
-        "ActionText": "HATCH - 10 SKY COINS",
-        "ObjectText": "VOID EGG",
-        "HoldDuration": 0.4,
-        "MaxActivationDistance": 10
+        "Size": {
+          "x": 5,
+          "y": 10,
+          "z": 5
+        },
+        "Position": {
+          "x": -2,
+          "y": 177,
+          "z": 12018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 60,
+          "z": 8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 255,
+          "g": 80,
+          "b": 25
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "Decoration4",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 11,
+          "z": 3
+        },
+        "Position": {
+          "x": 8,
+          "y": 177,
+          "z": 11982
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 80,
+          "z": -8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 255,
+          "g": 80,
+          "b": 25
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "Decoration5",
+      "properties": {
+        "Size": {
+          "x": 5,
+          "y": 12,
+          "z": 5
+        },
+        "Position": {
+          "x": 18,
+          "y": 177,
+          "z": 12018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 100,
+          "z": 8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 255,
+          "g": 80,
+          "b": 25
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "Decoration6",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 13,
+          "z": 3
+        },
+        "Position": {
+          "x": 28,
+          "y": 177,
+          "z": 11982
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 120,
+          "z": -8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 255,
+          "g": 80,
+          "b": 25
+        }
       }
     },
     {
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "VoidPortal",
+      "name": "Decoration1",
       "properties": {
         "Size": {
-          "x": 12,
-          "y": 15,
-          "z": 2
+          "x": 5,
+          "y": 8,
+          "z": 5
         },
         "Position": {
-          "x": 30,
-          "y": 212,
-          "z": 14970
+          "x": -22,
+          "y": 207,
+          "z": 15018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 20,
+          "z": 8
         },
         "Anchored": true,
-        "CanCollide": false,
         "Material": "Neon",
-        "Transparency": 0.15,
         "Color": {
-          "r": 180,
+          "r": 255,
+          "g": 230,
+          "b": 100
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.CelestialCity",
+      "name": "Decoration2",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 9,
+          "z": 3
+        },
+        "Position": {
+          "x": -12,
+          "y": 207,
+          "z": 14982
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 40,
+          "z": -8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 255,
+          "g": 230,
+          "b": 100
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.CelestialCity",
+      "name": "Decoration3",
+      "properties": {
+        "Size": {
+          "x": 5,
+          "y": 10,
+          "z": 5
+        },
+        "Position": {
+          "x": -2,
+          "y": 207,
+          "z": 15018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 60,
+          "z": 8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 255,
+          "g": 230,
+          "b": 100
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.CelestialCity",
+      "name": "Decoration4",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 11,
+          "z": 3
+        },
+        "Position": {
+          "x": 8,
+          "y": 207,
+          "z": 14982
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 80,
+          "z": -8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 255,
+          "g": 230,
+          "b": 100
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.CelestialCity",
+      "name": "Decoration5",
+      "properties": {
+        "Size": {
+          "x": 5,
+          "y": 12,
+          "z": 5
+        },
+        "Position": {
+          "x": 18,
+          "y": 207,
+          "z": 15018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 100,
+          "z": 8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 255,
+          "g": 230,
+          "b": 100
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.CelestialCity",
+      "name": "Decoration6",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 13,
+          "z": 3
+        },
+        "Position": {
+          "x": 28,
+          "y": 207,
+          "z": 14982
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 120,
+          "z": -8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 255,
+          "g": 230,
+          "b": 100
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VoidRealm",
+      "name": "Decoration1",
+      "properties": {
+        "Size": {
+          "x": 5,
+          "y": 8,
+          "z": 5
+        },
+        "Position": {
+          "x": -22,
+          "y": 237,
+          "z": 18018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 20,
+          "z": 8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 185,
           "g": 80,
           "b": 255
         }
@@ -1719,32 +612,153 @@
     },
     {
       "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.VoidPortal",
-      "name": "Glow",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VoidRealm",
+      "name": "Decoration2",
       "properties": {
-        "Brightness": 3,
-        "Range": 20
+        "Size": {
+          "x": 3,
+          "y": 9,
+          "z": 3
+        },
+        "Position": {
+          "x": -12,
+          "y": 237,
+          "z": 17982
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 40,
+          "z": -8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 185,
+          "g": 80,
+          "b": 255
+        }
       }
     },
     {
       "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.CelestialCity.VoidPortal",
-      "name": "TravelPrompt",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VoidRealm",
+      "name": "Decoration3",
       "properties": {
-        "ActionText": "UNLOCK - 10 COINS",
-        "ObjectText": "VOID REALM",
-        "HoldDuration": 0.6,
-        "MaxActivationDistance": 12
+        "Size": {
+          "x": 5,
+          "y": 10,
+          "z": 5
+        },
+        "Position": {
+          "x": -2,
+          "y": 237,
+          "z": 18018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 60,
+          "z": 8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 185,
+          "g": 80,
+          "b": 255
+        }
       }
     },
     {
       "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "FinalRealmsSystem",
-      "source": "local Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal areas={{\"VolcanoRealm\",\"FrozenPeaks\",\"VolcanoPortal\"},{\"CelestialCity\",\"VolcanoRealm\",\"CelestialPortal\"},{\"VoidRealm\",\"CelestialCity\",\"VoidPortal\"}}\nfor _,info in ipairs(areas) do\n local name,prev,pn=info[1],info[2],info[3]\n local prompt=map[prev][pn]:WaitForChild(\"TravelPrompt\")\n prompt.Triggered:Connect(function(p)\n  local c=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"SkyCoins\");if not c then return end\n  local key=name..\"Unlocked\";if p:GetAttribute(key)~=true then if c.Value<10 then return end;c.Value-=10;p:SetAttribute(key,true);prompt.ActionText=\"TRAVEL\" end\n  local r=p.Character and p.Character:FindFirstChild(\"HumanoidRootPart\");if r then r.CFrame=CFrame.new(map[name].IslandTop.Position+Vector3.new(0,7,0)) end\n end)\n local folder=map[name]:WaitForChild(\"Orbs\");local busy={}\n for _,o in ipairs(folder:GetChildren()) do o.Touched:Connect(function(hit)\n  local p=Players:GetPlayerFromCharacter(hit.Parent);if not p or busy[o] then return end;local c=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"SkyCoins\");if not c then return end\n  busy[o]=true;c.Value+=1000000;o.Transparency=1;o.CanTouch=false;task.delay(7,function() if o.Parent then o.Transparency=0;o.CanTouch=true;busy[o]=nil end end)\n end) end\n local ep=map[name].EggStand.Egg.HatchPrompt\n ep.Triggered:Connect(function(p)\n  local c=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"SkyCoins\");if not c or c.Value<10 then return end;c.Value-=10\n  local inv=p:FindFirstChild(\"Pets\") or Instance.new(\"Folder\");inv.Name=\"Pets\";inv.Parent=p\n  local v=Instance.new(\"StringValue\");v.Name=name..\" Pet\";v.Value=v.Name;v.Parent=inv;ep.ObjectText=\"HATCHED: \"..v.Name;task.delay(2,function() if ep.Parent then ep.ObjectText=string.upper(name)..\" EGG\" end end)\n end)\nend"
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VoidRealm",
+      "name": "Decoration4",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 11,
+          "z": 3
+        },
+        "Position": {
+          "x": 8,
+          "y": 237,
+          "z": 17982
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 80,
+          "z": -8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 185,
+          "g": 80,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VoidRealm",
+      "name": "Decoration5",
+      "properties": {
+        "Size": {
+          "x": 5,
+          "y": 12,
+          "z": 5
+        },
+        "Position": {
+          "x": 18,
+          "y": 237,
+          "z": 18018
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 100,
+          "z": 8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 185,
+          "g": 80,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VoidRealm",
+      "name": "Decoration6",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 13,
+          "z": 3
+        },
+        "Position": {
+          "x": 28,
+          "y": 237,
+          "z": 17982
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 120,
+          "z": -8
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 185,
+          "g": 80,
+          "b": 255
+        }
+      }
     }
   ]
 }
