@@ -1,83 +1,27 @@
 {
-  "version": 13,
-  "name": "Permanent Waterfall Isles",
+  "version": 14,
+  "name": "Grasslands to Waterfall Progression",
   "changes": [
     {
       "action": "create",
-      "class": "Folder",
+      "class": "Part",
       "parent": "Workspace.SkyboundMap",
-      "name": "WaterfallIsles"
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "IslandTop",
+      "name": "WaterfallPortal",
       "properties": {
         "Size": {
-          "x": 52,
-          "y": 7,
-          "z": 48
-        },
-        "Position": {
-          "x": 48,
-          "y": 93,
-          "z": 62
-        },
-        "Anchored": true,
-        "Material": "Grass",
-        "Color": {
-          "r": 75,
-          "g": 175,
-          "b": 92
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "RockBase",
-      "properties": {
-        "Size": {
-          "x": 44,
-          "y": 15,
-          "z": 40
-        },
-        "Position": {
-          "x": 48,
-          "y": 82,
-          "z": 62
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 88,
-          "g": 94,
-          "b": 105
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "Waterfall",
-      "properties": {
-        "Size": {
-          "x": 10,
-          "y": 28,
+          "x": 12,
+          "y": 14,
           "z": 2
         },
         "Position": {
-          "x": 48,
-          "y": 80,
-          "z": 38
+          "x": 0,
+          "y": 68,
+          "z": -40
         },
         "Anchored": true,
         "CanCollide": false,
         "Material": "Neon",
-        "Transparency": 0.25,
+        "Transparency": 0.18,
         "Color": {
           "r": 80,
           "g": 190,
@@ -87,132 +31,32 @@
     },
     {
       "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "Pond",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.WaterfallPortal",
+      "name": "PortalGlow",
       "properties": {
-        "Size": {
-          "x": 20,
-          "y": 1,
-          "z": 15
-        },
-        "Position": {
-          "x": 48,
-          "y": 97,
-          "z": 64
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Transparency": 0.35,
-        "Color": {
-          "r": 70,
-          "g": 180,
-          "b": 255
-        }
+        "Brightness": 3,
+        "Range": 20
       }
     },
     {
       "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "TreeTrunk1",
+      "class": "ProximityPrompt",
+      "parent": "Workspace.SkyboundMap.WaterfallPortal",
+      "name": "TravelPrompt",
       "properties": {
-        "Size": {
-          "x": 3,
-          "y": 10,
-          "z": 3
-        },
-        "Position": {
-          "x": 32,
-          "y": 102,
-          "z": 68
-        },
-        "Anchored": true,
-        "Material": "Wood",
-        "Color": {
-          "r": 105,
-          "g": 70,
-          "b": 40
-        }
+        "ActionText": "UNLOCK - 50 SKY COINS",
+        "ObjectText": "WATERFALL ISLES",
+        "HoldDuration": 0.5,
+        "MaxActivationDistance": 12
       }
     },
     {
       "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "TreeTop1",
-      "properties": {
-        "Size": {
-          "x": 10,
-          "y": 9,
-          "z": 10
-        },
-        "Position": {
-          "x": 32,
-          "y": 111,
-          "z": 68
-        },
-        "Anchored": true,
-        "Material": "Grass",
-        "Shape": "Ball",
-        "Color": {
-          "r": 55,
-          "g": 160,
-          "b": 80
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "TreeTrunk2",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 9,
-          "z": 3
-        },
-        "Position": {
-          "x": 65,
-          "y": 101.5,
-          "z": 70
-        },
-        "Anchored": true,
-        "Material": "Wood",
-        "Color": {
-          "r": 105,
-          "g": 70,
-          "b": 40
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "TreeTop2",
-      "properties": {
-        "Size": {
-          "x": 10,
-          "y": 9,
-          "z": 10
-        },
-        "Position": {
-          "x": 65,
-          "y": 110,
-          "z": 70
-        },
-        "Anchored": true,
-        "Material": "Grass",
-        "Shape": "Ball",
-        "Color": {
-          "r": 55,
-          "g": 160,
-          "b": 80
-        }
-      }
+      "class": "Script",
+      "parent": "ServerScriptService",
+      "name": "WaterfallProgression",
+      "source": "local Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal portal=map:WaitForChild(\"WaterfallPortal\")\nlocal prompt=portal:WaitForChild(\"TravelPrompt\")\nlocal destination=map:WaitForChild(\"WaterfallIsles\"):WaitForChild(\"IslandTop\")\n\nprompt.Triggered:Connect(function(player)\n local stats=player:FindFirstChild(\"leaderstats\")\n local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n if not coins then return end\n if player:GetAttribute(\"WaterfallUnlocked\")~=true then\n  if coins.Value<50 then\n   prompt.ObjectText=\"NEED \"..tostring(50-coins.Value)..\" MORE SKY COINS\"\n   task.delay(2,function() if prompt.Parent then prompt.ObjectText=\"WATERFALL ISLES\" end end)\n   return\n  end\n  coins.Value-=50\n  player:SetAttribute(\"WaterfallUnlocked\",true)\n end\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\")\n if root then root.CFrame=CFrame.new(destination.Position+Vector3.new(0,7,0)) end\nend)"
     }
   ]
 }
