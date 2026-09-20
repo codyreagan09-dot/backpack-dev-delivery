@@ -1,13 +1,20 @@
 {
-  "version": 49,
-  "name": "Island Discovery HUD",
+  "version": 50,
+  "name": "Pet Collection Index",
   "changes": [
+    {
+      "action": "create",
+      "class": "Script",
+      "parent": "ServerScriptService",
+      "name": "SkyboundPetIndex",
+      "source": "local Players=game:GetService(\"Players\")\nlocal function hook(p)\n local pets=p:WaitForChild(\"Pets\",15);if not pets then return end\n local function count()\n  local n=#pets:GetChildren();p:SetAttribute(\"PetCount\",n);p:SetAttribute(\"PetIndexPercent\",math.min(100,math.floor(n/24*100)))\n end\n pets.ChildAdded:Connect(count);pets.ChildRemoved:Connect(count);count()\nend\nPlayers.PlayerAdded:Connect(function(p) task.spawn(hook,p) end)"
+    },
     {
       "action": "create",
       "class": "LocalScript",
       "parent": "StarterPlayer.StarterPlayerScripts",
-      "name": "SkyboundAreaHUD",
-      "source": "local Players=game:GetService(\"Players\")\nlocal p=Players.LocalPlayer\nlocal gui=Instance.new(\"ScreenGui\");gui.Name=\"SkyboundAreaHUD\";gui.ResetOnSpawn=false;gui.Parent=p:WaitForChild(\"PlayerGui\")\nlocal label=Instance.new(\"TextLabel\");label.Size=UDim2.fromOffset(340,50);label.Position=UDim2.new(.5,-170,0,70);label.BackgroundTransparency=.25;label.TextColor3=Color3.new(1,1,1);label.TextStrokeTransparency=.3;label.TextScaled=true;label.Font=Enum.Font.GothamBlack;label.Parent=gui\nlocal areas={{\"GRASSLANDS\",0,1000},{\"WATERFALL ISLES\",3000,1000},{\"DESERT TEMPLE\",6000,1000},{\"FROZEN PEAKS\",9000,1000},{\"VOLCANO REALM\",12000,1000},{\"CELESTIAL CITY\",15000,1000},{\"VOID REALM\",18000,1000}}\nlocal last=\"\"\nwhile task.wait(.35) do\n local root=p.Character and p.Character:FindFirstChild(\"HumanoidRootPart\")\n if root then\n  local best,bestd=\"GRASSLANDS\",math.huge\n  for _,a in ipairs(areas) do local d=math.abs(root.Position.Z-a[2]);if d<bestd then bestd=d;best=a[1] end end\n  if best~=last then\n   last=best;label.Text=best;label.TextTransparency=0;label.BackgroundTransparency=.25\n   task.delay(2.5,function() if last==best then for i=1,10 do label.TextTransparency=i/10;label.BackgroundTransparency=.25+(i/10)*.75;task.wait(.04) end end end)\n  end\n end\nend"
+      "name": "SkyboundPetIndexUI",
+      "source": "local Players=game:GetService(\"Players\");local p=Players.LocalPlayer\nlocal gui=Instance.new(\"ScreenGui\");gui.Name=\"PetIndexUI\";gui.ResetOnSpawn=false;gui.Parent=p:WaitForChild(\"PlayerGui\")\nlocal b=Instance.new(\"TextButton\");b.Size=UDim2.fromOffset(130,46);b.Position=UDim2.new(0,158,1,-70);b.Text=\"PET INDEX\";b.TextScaled=true;b.Font=Enum.Font.GothamBold;b.Parent=gui\nlocal f=Instance.new(\"Frame\");f.Size=UDim2.fromOffset(420,360);f.Position=UDim2.new(.5,-210,.5,-180);f.Visible=false;f.Parent=gui\nlocal t=Instance.new(\"TextLabel\");t.Size=UDim2.new(1,0,0,60);t.BackgroundTransparency=1;t.TextScaled=true;t.Font=Enum.Font.GothamBlack;t.Parent=f\nlocal list=Instance.new(\"TextLabel\");list.Position=UDim2.fromOffset(20,70);list.Size=UDim2.new(1,-40,1,-90);list.BackgroundTransparency=1;list.TextWrapped=true;list.TextYAlignment=Enum.TextYAlignment.Top;list.TextScaled=false;list.TextSize=18;list.Font=Enum.Font.Gotham;list.Parent=f\nlocal known={\"Cloud Bunny\",\"Sky Fox\",\"Sun Cub\",\"Storm Dragon\",\"Bubble Bunny\",\"River Fox\",\"Aqua Cub\",\"Tide Dragon\",\"Sand Bunny\",\"Dune Fox\",\"Sun Lion\",\"Pharaoh Dragon\",\"VolcanoRealm Pet\",\"CelestialCity Pet\",\"VoidRealm Pet\"}\nlocal function update()\n t.Text=\"PET INDEX  •  \"..tostring(p:GetAttribute(\"PetCount\") or 0)..\" OWNED\"\n local inv=p:FindFirstChild(\"Pets\");local owned={}\n if inv then for _,v in ipairs(inv:GetChildren()) do owned[v.Value]=true end end\n local lines={};for _,n in ipairs(known) do table.insert(lines,(owned[n] and \"✓  \" or \"???  \")..(owned[n] and n or \"UNDISCOVERED PET\")) end\n list.Text=table.concat(lines,\"\\n\")\nend\nb.Activated:Connect(function() f.Visible=not f.Visible;if f.Visible then update() end end)\np:GetAttributeChangedSignal(\"PetCount\"):Connect(function() if f.Visible then update() end end)"
     }
   ]
 }
