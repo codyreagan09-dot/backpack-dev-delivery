@@ -1,30 +1,37 @@
 {
-  "version": 14,
-  "name": "Grasslands to Waterfall Progression",
+  "version": 15,
+  "name": "Waterfall Isles Coin Trail",
   "changes": [
     {
       "action": "create",
+      "class": "Folder",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles",
+      "name": "WaterfallCoins"
+    },
+    {
+      "action": "create",
       "class": "Part",
-      "parent": "Workspace.SkyboundMap",
-      "name": "WaterfallPortal",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
+      "name": "WaterCoin1",
       "properties": {
         "Size": {
-          "x": 12,
-          "y": 14,
-          "z": 2
+          "x": 3,
+          "y": 3,
+          "z": 3
         },
         "Position": {
-          "x": 0,
-          "y": 68,
-          "z": -40
+          "x": 38,
+          "y": 98,
+          "z": 52
         },
         "Anchored": true,
         "CanCollide": false,
+        "CanTouch": true,
         "Material": "Neon",
-        "Transparency": 0.18,
+        "Shape": "Ball",
         "Color": {
-          "r": 80,
-          "g": 190,
+          "r": 90,
+          "g": 225,
           "b": 255
         }
       }
@@ -32,31 +39,285 @@
     {
       "action": "create",
       "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.WaterfallPortal",
-      "name": "PortalGlow",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterCoin1",
+      "name": "Glow",
       "properties": {
-        "Brightness": 3,
-        "Range": 20
+        "Brightness": 1.5,
+        "Range": 10
       }
     },
     {
       "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.WaterfallPortal",
-      "name": "TravelPrompt",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
+      "name": "WaterCoin2",
       "properties": {
-        "ActionText": "UNLOCK - 50 SKY COINS",
-        "ObjectText": "WATERFALL ISLES",
-        "HoldDuration": 0.5,
-        "MaxActivationDistance": 12
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 48,
+          "y": 98,
+          "z": 50
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 90,
+          "g": 225,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterCoin2",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
+      "name": "WaterCoin3",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 58,
+          "y": 98,
+          "z": 53
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 90,
+          "g": 225,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterCoin3",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
+      "name": "WaterCoin4",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 65,
+          "y": 98,
+          "z": 62
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 90,
+          "g": 225,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterCoin4",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
+      "name": "WaterCoin5",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 60,
+          "y": 98,
+          "z": 75
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 90,
+          "g": 225,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterCoin5",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
+      "name": "WaterCoin6",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 48,
+          "y": 98,
+          "z": 78
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 90,
+          "g": 225,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterCoin6",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
+      "name": "WaterCoin7",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 36,
+          "y": 98,
+          "z": 74
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 90,
+          "g": 225,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterCoin7",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
+      "name": "WaterCoin8",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 30,
+          "y": 98,
+          "z": 62
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 90,
+          "g": 225,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterCoin8",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 10
       }
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "WaterfallProgression",
-      "source": "local Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal portal=map:WaitForChild(\"WaterfallPortal\")\nlocal prompt=portal:WaitForChild(\"TravelPrompt\")\nlocal destination=map:WaitForChild(\"WaterfallIsles\"):WaitForChild(\"IslandTop\")\n\nprompt.Triggered:Connect(function(player)\n local stats=player:FindFirstChild(\"leaderstats\")\n local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n if not coins then return end\n if player:GetAttribute(\"WaterfallUnlocked\")~=true then\n  if coins.Value<50 then\n   prompt.ObjectText=\"NEED \"..tostring(50-coins.Value)..\" MORE SKY COINS\"\n   task.delay(2,function() if prompt.Parent then prompt.ObjectText=\"WATERFALL ISLES\" end end)\n   return\n  end\n  coins.Value-=50\n  player:SetAttribute(\"WaterfallUnlocked\",true)\n end\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\")\n if root then root.CFrame=CFrame.new(destination.Position+Vector3.new(0,7,0)) end\nend)"
+      "name": "WaterfallCoinSystem",
+      "source": "local Players=game:GetService(\"Players\")\nlocal folder=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"WaterfallIsles\"):WaitForChild(\"WaterfallCoins\")\nlocal busy={} local values={2,2,2,3,3,3,4,4}\nfor i=1,8 do local coin=folder:WaitForChild(\"WaterCoin\"..i)\n coin.Touched:Connect(function(hit)\n  local p=Players:GetPlayerFromCharacter(hit.Parent) if not p or busy[coin] then return end\n  local st=p:FindFirstChild(\"leaderstats\") local c=st and st:FindFirstChild(\"SkyCoins\") if not c then return end\n  busy[coin]=true c.Value+=values[i] or 2 coin.Transparency=1 coin.CanTouch=false\n  local l=coin:FindFirstChildOfClass(\"PointLight\") if l then l.Enabled=false end\n  task.delay(10,function() if coin.Parent then coin.Transparency=0 coin.CanTouch=true if l then l.Enabled=true end busy[coin]=nil end end)\n end)\nend"
     }
   ]
 }
