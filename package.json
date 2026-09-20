@@ -1,11 +1,12 @@
 {
-  "version": 7,
-  "name": "Upgrade Station Rotation Fix",
+  "version": 8,
+  "name": "Upgrade Stations Clean Install",
   "changes": [
     {
-      "action": "replaceScript",
+      "action": "create",
+      "class": "Script",
       "parent": "ServerScriptService",
-      "name": "MeteorUpgradeStations",
+      "name": "MeteorUpgradeStationsV8",
       "source": "local Players=game:GetService(\"Players\")\nlocal world=workspace:WaitForChild(\"MeteorGame\")\n\nlocal defs={\n {key=\"MiningPower\",title=\"MINING POWER\",effect=\"+1 Power\",base=20,pos=Vector3.new(-55,4,-14),color=Color3.fromRGB(255,120,70)},\n {key=\"MiningSpeed\",title=\"MINING SPEED\",effect=\"Faster Mining\",base=30,pos=Vector3.new(-55,4,0),color=Color3.fromRGB(80,180,255)},\n {key=\"MiningLuck\",title=\"LUCK\",effect=\"Bonus Gems\",base=40,pos=Vector3.new(-55,4,14),color=Color3.fromRGB(190,100,255)}\n}\nlocal old=world:FindFirstChild(\"UpgradeStations\")\nif old then old:Destroy() end\nlocal folder=Instance.new(\"Folder\");folder.Name=\"UpgradeStations\";folder.Parent=world\n\nlocal function setupPlayer(p)\n for _,d in ipairs(defs) do\n  if not p:FindFirstChild(d.key) then local v=Instance.new(\"IntValue\");v.Name=d.key;v.Value=0;v.Parent=p end\n end\nend\nfor _,p in ipairs(Players:GetPlayers()) do setupPlayer(p) end\nPlayers.PlayerAdded:Connect(setupPlayer)\n\nfor _,d in ipairs(defs) do\n local b=Instance.new(\"Part\");b.Name=d.key..\"Station\";b.Size=Vector3.new(15,7,2);b.Position=d.pos;b.Orientation=Vector3.new(0,-90,0);b.Anchored=true\n b.Material=Enum.Material.SmoothPlastic;b.Color=Color3.fromRGB(30,34,42);b.Parent=folder\n local light=Instance.new(\"PointLight\");light.Color=d.color;light.Brightness=1.4;light.Range=14;light.Parent=b\n local gui=Instance.new(\"SurfaceGui\");gui.Face=Enum.NormalId.Front;gui.CanvasSize=Vector2.new(600,300);gui.Parent=b\n local txt=Instance.new(\"TextLabel\");txt.Size=UDim2.fromScale(1,1);txt.BackgroundTransparency=1;txt.TextColor3=d.color\n txt.Font=Enum.Font.GothamBold;txt.TextScaled=true;txt.TextWrapped=true;txt.Parent=gui\n local prompt=Instance.new(\"ProximityPrompt\");prompt.ActionText=\"BUY UPGRADE\";prompt.ObjectText=d.title;prompt.HoldDuration=.15\n prompt.MaxActivationDistance=10;prompt.RequiresLineOfSight=false;prompt.Parent=b\n local function refreshFor(p)\n  local lv=p:FindFirstChild(d.key);if not lv then return end\n  local cost=d.base*(lv.Value+1)\n  txt.Text=d.title..\"\\nLevel \"..lv.Value..\"  →  \"..(lv.Value+1)..\"\\n\"..d.effect..\"\\n💎 \"..cost\n  prompt.ActionText=\"BUY - \"..cost..\" GEMS\"\n end\n prompt.PromptShown:Connect(function(p) refreshFor(p) end)\n prompt.Triggered:Connect(function(p)\n  local lv=p:FindFirstChild(d.key);local gems=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"Gems\")\n  if not lv or not gems then return end\n  local cost=d.base*(lv.Value+1)\n  if gems.Value>=cost then gems.Value-=cost;lv.Value+=1;refreshFor(p) end\n end)\nend\nprint(\"Meteor upgrade stations loaded on left, facing inward\")"
     }
   ]
