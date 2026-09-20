@@ -1,389 +1,69 @@
 {
-  "version": 38,
-  "name": "Desert Temple Sun Orbs",
+  "version": 39,
+  "name": "Player Saving and Desert Return Portal",
   "changes": [
     {
       "action": "create",
-      "class": "Folder",
-      "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "DesertCoins"
+      "class": "Script",
+      "parent": "ServerScriptService",
+      "name": "SkyboundDataSave",
+      "source": "local DSS=game:GetService(\"DataStoreService\")\nlocal Players=game:GetService(\"Players\")\nlocal store=DSS:GetDataStore(\"SkyboundPlayerData_v1\")\nlocal function save(p)\n local stats=p:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n if not coins then return end\n local pets={};local folder=p:FindFirstChild(\"Pets\")\n if folder then for _,v in ipairs(folder:GetChildren()) do if v:IsA(\"StringValue\") then table.insert(pets,v.Value) end end end\n local data={coins=coins.Value,pets=pets,waterfall=p:GetAttribute(\"WaterfallUnlocked\")==true,desert=p:GetAttribute(\"DesertUnlocked\")==true}\n local ok,err=pcall(function() store:SetAsync(\"Player_\"..p.UserId,data) end)\n if not ok then warn(\"Skybound save failed for \"..p.Name..\": \"..tostring(err)) end\nend\nlocal function load(p)\n local ok,data=pcall(function() return store:GetAsync(\"Player_\"..p.UserId) end)\n if not ok or type(data)~=\"table\" then return end\n local stats=p:WaitForChild(\"leaderstats\",10);local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n if coins and type(data.coins)==\"number\" then coins.Value=data.coins end\n p:SetAttribute(\"WaterfallUnlocked\",data.waterfall==true);p:SetAttribute(\"DesertUnlocked\",data.desert==true)\n local pets=p:FindFirstChild(\"Pets\") or Instance.new(\"Folder\");pets.Name=\"Pets\";pets.Parent=p\n for _,name in ipairs(data.pets or {}) do local v=Instance.new(\"StringValue\");v.Name=name;v.Value=name;v.Parent=pets end\nend\nPlayers.PlayerAdded:Connect(function(p) task.spawn(load,p) end)\nPlayers.PlayerRemoving:Connect(save)\ntask.spawn(function() while true do task.wait(60);for _,p in ipairs(Players:GetPlayers()) do task.spawn(save,p) end end end)\ngame:BindToClose(function() for _,p in ipairs(Players:GetPlayers()) do task.spawn(save,p) end task.wait(3) end)"
     },
     {
       "action": "create",
       "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins",
-      "name": "SunOrb1",
+      "parent": "Workspace.SkyboundMap.DesertTemple",
+      "name": "ReturnPortal",
       "properties": {
         "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
+          "x": 12,
+          "y": 15,
+          "z": 2
         },
         "Position": {
           "x": -28,
-          "y": 114,
-          "z": 6025
+          "y": 122,
+          "z": 6020
         },
         "Anchored": true,
         "CanCollide": false,
         "Material": "Neon",
-        "Shape": "Ball",
+        "Transparency": 0.15,
         "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 45
+          "r": 90,
+          "g": 210,
+          "b": 255
         }
       }
     },
     {
       "action": "create",
       "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins.SunOrb1",
+      "parent": "Workspace.SkyboundMap.DesertTemple.ReturnPortal",
       "name": "Glow",
       "properties": {
-        "Brightness": 2,
-        "Range": 10
+        "Brightness": 3,
+        "Range": 20
       }
     },
     {
       "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins",
-      "name": "SunOrb2",
+      "class": "ProximityPrompt",
+      "parent": "Workspace.SkyboundMap.DesertTemple.ReturnPortal",
+      "name": "TravelPrompt",
       "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -12,
-          "y": 114,
-          "z": 6028
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 45
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins.SunOrb2",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins",
-      "name": "SunOrb3",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 8,
-          "y": 114,
-          "z": 6025
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 45
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins.SunOrb3",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins",
-      "name": "SunOrb4",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 28,
-          "y": 114,
-          "z": 6018
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 45
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins.SunOrb4",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins",
-      "name": "SunOrb5",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -30,
-          "y": 114,
-          "z": 5998
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 45
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins.SunOrb5",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins",
-      "name": "SunOrb6",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 114,
-          "z": 5995
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 45
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins.SunOrb6",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins",
-      "name": "SunOrb7",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -24,
-          "y": 114,
-          "z": 5970
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 45
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins.SunOrb7",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins",
-      "name": "SunOrb8",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 24,
-          "y": 114,
-          "z": 5968
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 45
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins.SunOrb8",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins",
-      "name": "SunOrb9",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 0,
-          "y": 114,
-          "z": 5960
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 45
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins.SunOrb9",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins",
-      "name": "SunOrb10",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 0,
-          "y": 142,
-          "z": 5982
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 45
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertCoins.SunOrb10",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
+        "ActionText": "RETURN",
+        "ObjectText": "WATERFALL ISLES",
+        "HoldDuration": 0.4,
+        "MaxActivationDistance": 12
       }
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "DesertOrbSystem",
-      "source": "local Players=game:GetService(\"Players\")\nlocal folder=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"DesertTemple\"):WaitForChild(\"DesertCoins\")\nlocal busy={}\nfor _,orb in ipairs(folder:GetChildren()) do\n if orb:IsA(\"BasePart\") then orb.Touched:Connect(function(hit)\n  local p=Players:GetPlayerFromCharacter(hit.Parent)\n  if not p or busy[orb] then return end\n  local stats=p:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not coins then return end\n  busy[orb]=true;coins.Value+=1000000\n  orb.Transparency=1;orb.CanTouch=false\n  local l=orb:FindFirstChildOfClass(\"PointLight\");if l then l.Enabled=false end\n  task.delay(7,function() if orb.Parent then orb.Transparency=0;orb.CanTouch=true;if l then l.Enabled=true end;busy[orb]=nil end end)\n end) end\nend"
+      "name": "DesertReturnPortalSystem",
+      "source": "local portal=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"DesertTemple\"):WaitForChild(\"ReturnPortal\")\nlocal prompt=portal:WaitForChild(\"TravelPrompt\")\nlocal destination=workspace.SkyboundMap.WaterfallIsles:WaitForChild(\"IslandTop\")\nprompt.Triggered:Connect(function(player)\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\")\n if root then root.CFrame=CFrame.new(destination.Position+Vector3.new(0,7,0)) end\nend)"
     }
   ]
 }
