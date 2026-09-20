@@ -1,13 +1,13 @@
 {
-  "version": 7,
-  "name": "Remove Skybound Screen UI",
+  "version": 8,
+  "name": "Skybound Collectible Sky Coins",
   "changes": [
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "RemoveSkyboundUI",
-      "source": "local StarterPlayer=game:GetService(\"StarterPlayer\")\nlocal Players=game:GetService(\"Players\")\n\nfor _,name in ipairs({\"SkyboundClient\",\"SkyboundUI\",\"SkyboundHUD\"}) do\n local s=StarterPlayer.StarterPlayerScripts:FindFirstChild(name)\n if s then s:Destroy() end\nend\n\nfor _,player in ipairs(Players:GetPlayers()) do\n local pg=player:FindFirstChildOfClass(\"PlayerGui\")\n if pg then\n  local ui=pg:FindFirstChild(\"SkyboundUI\")\n  if ui then ui:Destroy() end\n end\nend\n\nscript:Destroy()"
+      "name": "SkyCoinSystem",
+      "source": "local Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\n\nlocal old=map:FindFirstChild(\"SkyCoinPickups\")\nif old then old:Destroy() end\n\nlocal folder=Instance.new(\"Folder\")\nfolder.Name=\"SkyCoinPickups\"\nfolder.Parent=map\n\nlocal function setupPlayer(player)\n local stats=player:FindFirstChild(\"leaderstats\")\n if not stats then\n  stats=Instance.new(\"Folder\")\n  stats.Name=\"leaderstats\"\n  stats.Parent=player\n end\n local coins=stats:FindFirstChild(\"SkyCoins\")\n if not coins then\n  coins=Instance.new(\"IntValue\")\n  coins.Name=\"SkyCoins\"\n  coins.Value=0\n  coins.Parent=stats\n end\nend\n\nfor _,p in ipairs(Players:GetPlayers()) do setupPlayer(p) end\nPlayers.PlayerAdded:Connect(setupPlayer)\n\nlocal positions={\n Vector3.new(-28,62,-10),Vector3.new(-16,62,-25),Vector3.new(0,62,-34),\n Vector3.new(18,62,-25),Vector3.new(30,62,-8),Vector3.new(28,62,18),\n Vector3.new(12,62,30),Vector3.new(-10,62,31),Vector3.new(-29,62,18),\n Vector3.new(0,62,4),Vector3.new(15,62,8),Vector3.new(-15,62,8)\n}\n\nlocal function makeCoin(index,pos)\n local coin=Instance.new(\"Part\")\n coin.Name=\"SkyCoin\"..index\n coin.Shape=Enum.PartType.Ball\n coin.Size=Vector3.new(3,3,3)\n coin.Position=pos\n coin.Anchored=true\n coin.CanCollide=false\n coin.CanTouch=true\n coin.Material=Enum.Material.Neon\n coin.Color=Color3.fromRGB(255,215,55)\n coin.Parent=folder\n\n local light=Instance.new(\"PointLight\")\n light.Color=coin.Color\n light.Brightness=1.5\n light.Range=10\n light.Parent=coin\n\n local available=true\n coin.Touched:Connect(function(hit)\n  if not available then return end\n  local character=hit.Parent\n  local player=character and Players:GetPlayerFromCharacter(character)\n  if not player then return end\n  local stats=player:FindFirstChild(\"leaderstats\")\n  local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not coins then return end\n  available=false\n  coins.Value+=1\n  coin.Transparency=1\n  light.Enabled=false\n  coin.CanTouch=false\n  task.delay(8,function()\n   if coin.Parent then\n    coin.Transparency=0\n    light.Enabled=true\n    coin.CanTouch=true\n    available=true\n   end\n  end)\n end)\nend\n\nfor i,pos in ipairs(positions) do makeCoin(i,pos) end\n\nprint(\"Skybound collectible coins loaded\")"
     }
   ]
 }
