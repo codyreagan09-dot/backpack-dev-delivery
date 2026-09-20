@@ -1,13 +1,13 @@
 {
-  "version": 43,
-  "name": "Matching Island Color And Texture",
+  "version": 44,
+  "name": "Fresh Session Island Reset",
   "changes": [
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "MatchingIslandVisualsV43",
-      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\nlocal starter=world:WaitForChild(\"StarterIsland\")\n\n-- Visual-only matching: do NOT move or resize any land.\n-- Expansion pieces keep their normal animation/position and simply use\n-- the exact same material and color as the starter island.\nlocal function matchVisuals(p)\n if not p:IsA(\"BasePart\") then return end\n if p.Name:match(\"^L%d+_\") or p.Name:find(\"Expansion\") then\n  p.Material=starter.Material\n  p.Color=starter.Color\n end\nend\n\nlocal function apply()\n local directional=world:FindFirstChild(\"DirectionalExpansions\")\n if directional then\n  for _,v in ipairs(directional:GetDescendants()) do matchVisuals(v) end\n end\n for _,v in ipairs(world:GetChildren()) do matchVisuals(v) end\nend\n\napply()\nworld.DescendantAdded:Connect(function(v)\n task.wait()\n matchVisuals(v)\nend)"
+      "name": "FreshIslandResetV44",
+      "source": "local Players=game:GetService(\"Players\")\nlocal world=workspace:WaitForChild(\"GrowIslandWorld\")\n\nlocal function hideExpansionPart(p)\n if not p:IsA(\"BasePart\") then return end\n if p.Name:match(\"^L%d+_\") or p.Name:find(\"Expansion\") or p.Name==\"Bridge\" or p.Name==\"TreasureIsland\" then\n  p.Transparency=1\n  p.CanCollide=false\n end\nend\n\n-- Every fresh server starts with expansion land hidden.\nlocal directional=world:FindFirstChild(\"DirectionalExpansions\")\nif directional then\n for _,v in ipairs(directional:GetDescendants()) do hideExpansionPart(v) end\nend\nfor _,v in ipairs(world:GetChildren()) do hideExpansionPart(v) end\n\n-- No saving: every player starts at stage 0 each session.\nlocal function resetPlayer(player)\n local stage=player:WaitForChild(\"IslandStage\")\n stage.Value=0\nend\nfor _,p in ipairs(Players:GetPlayers()) do task.spawn(resetPlayer,p) end\nPlayers.PlayerAdded:Connect(resetPlayer)\n\nprint(\"Fresh-session island reset loaded\")"
     }
   ]
 }
