@@ -1,406 +1,86 @@
 {
-  "version": 23,
-  "name": "Sky Coins Core Loop",
+  "version": 24,
+  "name": "Permanent Starter Egg",
   "changes": [
     {
       "action": "create",
-      "class": "Folder",
+      "class": "Part",
       "parent": "Workspace.SkyboundMap",
-      "name": "SkyCoins"
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.SkyCoins",
-      "name": "SkyCoin1",
+      "name": "StarterEgg",
       "properties": {
         "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -30,
-          "y": 62,
-          "z": 28
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "CanTouch": true,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 215,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin1",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 1.5,
-        "Range": 9
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.SkyCoins",
-      "name": "SkyCoin2",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -18,
-          "y": 62,
-          "z": 16
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "CanTouch": true,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 215,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin2",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 1.5,
-        "Range": 9
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.SkyCoins",
-      "name": "SkyCoin3",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -8,
-          "y": 62,
-          "z": 2
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "CanTouch": true,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 215,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin3",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 1.5,
-        "Range": 9
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.SkyCoins",
-      "name": "SkyCoin4",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 8,
-          "y": 62,
-          "z": -10
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "CanTouch": true,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 215,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin4",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 1.5,
-        "Range": 9
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.SkyCoins",
-      "name": "SkyCoin5",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 18,
-          "y": 62,
-          "z": -22
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "CanTouch": true,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 215,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin5",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 1.5,
-        "Range": 9
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.SkyCoins",
-      "name": "SkyCoin6",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 0,
-          "y": 62,
-          "z": -30
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "CanTouch": true,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 215,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin6",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 1.5,
-        "Range": 9
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.SkyCoins",
-      "name": "SkyCoin7",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
+          "x": 10,
+          "y": 2,
+          "z": 10
         },
         "Position": {
           "x": 28,
-          "y": 62,
-          "z": 10
+          "y": 60,
+          "z": 31
         },
         "Anchored": true,
-        "CanCollide": false,
-        "CanTouch": true,
-        "Material": "Neon",
-        "Shape": "Ball",
+        "Material": "Slate",
         "Color": {
-          "r": 255,
-          "g": 215,
-          "b": 55
+          "r": 105,
+          "g": 110,
+          "b": 118
         }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin7",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 1.5,
-        "Range": 9
       }
     },
     {
       "action": "create",
       "class": "Part",
-      "parent": "Workspace.SkyboundMap.SkyCoins",
-      "name": "SkyCoin8",
+      "parent": "Workspace.SkyboundMap.StarterEgg",
+      "name": "Egg",
       "properties": {
         "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
+          "x": 5,
+          "y": 7,
+          "z": 5
         },
         "Position": {
-          "x": -32,
-          "y": 62,
-          "z": -18
+          "x": 28,
+          "y": 65,
+          "z": 31
         },
         "Anchored": true,
-        "CanCollide": false,
-        "CanTouch": true,
-        "Material": "Neon",
+        "Material": "SmoothPlastic",
         "Shape": "Ball",
         "Color": {
-          "r": 255,
-          "g": 215,
-          "b": 55
+          "r": 180,
+          "g": 235,
+          "b": 255
         }
       }
     },
     {
       "action": "create",
       "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin8",
-      "name": "Glow",
+      "parent": "Workspace.SkyboundMap.StarterEgg.Egg",
+      "name": "EggGlow",
       "properties": {
-        "Brightness": 1.5,
-        "Range": 9
+        "Brightness": 2,
+        "Range": 14
       }
     },
     {
       "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.SkyCoins",
-      "name": "SkyCoin9",
+      "class": "ProximityPrompt",
+      "parent": "Workspace.SkyboundMap.StarterEgg.Egg",
+      "name": "HatchPrompt",
       "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 35,
-          "y": 62,
-          "z": -34
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "CanTouch": true,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 215,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin9",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 1.5,
-        "Range": 9
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.SkyCoins",
-      "name": "SkyCoin10",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": -38,
-          "y": 62,
-          "z": 38
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "CanTouch": true,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 255,
-          "g": 215,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin10",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 1.5,
-        "Range": 9
+        "ActionText": "HATCH - 10 SKY COINS",
+        "ObjectText": "STARTER EGG",
+        "HoldDuration": 0.4,
+        "MaxActivationDistance": 10
       }
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "SkyboundCore",
-      "source": "local Players=game:GetService(\"Players\")\nlocal folder=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"SkyCoins\")\nlocal busy={}\nlocal function setup(p)\n local stats=Instance.new(\"Folder\");stats.Name=\"leaderstats\";stats.Parent=p\n local coins=Instance.new(\"IntValue\");coins.Name=\"SkyCoins\";coins.Value=0;coins.Parent=stats\nend\nPlayers.PlayerAdded:Connect(setup)\nfor _,p in ipairs(Players:GetPlayers()) do if not p:FindFirstChild(\"leaderstats\") then setup(p) end end\nfor _,coin in ipairs(folder:GetChildren()) do\n if coin:IsA(\"BasePart\") then coin.Touched:Connect(function(hit)\n  local p=Players:GetPlayerFromCharacter(hit.Parent)\n  if not p or busy[coin] then return end\n  local stats=p:FindFirstChild(\"leaderstats\");local c=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not c then return end\n  busy[coin]=true;c.Value+=1;coin.Transparency=1;coin.CanTouch=false\n  local l=coin:FindFirstChildOfClass(\"PointLight\");if l then l.Enabled=false end\n  task.delay(7,function() if coin.Parent then coin.Transparency=0;coin.CanTouch=true;if l then l.Enabled=true end;busy[coin]=nil end end)\n end) end\nend"
-    },
-    {
-      "action": "create",
-      "class": "LocalScript",
-      "parent": "StarterPlayer.StarterPlayerScripts",
-      "name": "SkyboundHUD",
-      "source": "local p=game:GetService(\"Players\").LocalPlayer\nlocal gui=Instance.new(\"ScreenGui\");gui.Name=\"SkyboundHUD\";gui.ResetOnSpawn=false;gui.Parent=p:WaitForChild(\"PlayerGui\")\nlocal box=Instance.new(\"TextLabel\");box.Size=UDim2.fromOffset(230,54);box.Position=UDim2.new(1,-250,0,20);box.BackgroundColor3=Color3.fromRGB(20,30,50);box.BackgroundTransparency=.12;box.TextColor3=Color3.new(1,1,1);box.Font=Enum.Font.GothamBold;box.TextScaled=true;box.Parent=gui\nlocal corner=Instance.new(\"UICorner\");corner.CornerRadius=UDim.new(0,14);corner.Parent=box\nlocal coins=p:WaitForChild(\"leaderstats\"):WaitForChild(\"SkyCoins\")\nlocal function update() box.Text=\"✦  \"..coins.Value..\" SKY COINS\" end\ncoins:GetPropertyChangedSignal(\"Value\"):Connect(update);update()"
+      "name": "StarterEggSystem",
+      "source": "local egg=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"StarterEgg\"):WaitForChild(\"Egg\")\nlocal prompt=egg:WaitForChild(\"HatchPrompt\")\nlocal pets={{\"Cloud Bunny\",60},{\"Sky Fox\",30},{\"Sun Cub\",9},{\"Storm Dragon\",1}}\nprompt.Triggered:Connect(function(player)\n local stats=player:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n if not coins or coins.Value<10 then return end\n coins.Value-=10\n local r=math.random(1,100);local total=0;local pet=pets[1][1]\n for _,v in ipairs(pets) do total+=v[2];if r<=total then pet=v[1];break end end\n local inv=player:FindFirstChild(\"Pets\")\n if not inv then inv=Instance.new(\"Folder\");inv.Name=\"Pets\";inv.Parent=player end\n local owned=Instance.new(\"StringValue\");owned.Name=pet;owned.Value=pet;owned.Parent=inv\n prompt.ObjectText=\"HATCHED: \"..pet\n task.delay(2,function() if prompt.Parent then prompt.ObjectText=\"STARTER EGG\" end end)\nend)"
     }
   ]
 }
