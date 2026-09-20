@@ -1,24 +1,17 @@
 {
-  "version": 47,
-  "name": "Egg Hatch Polish and Pet Power HUD",
+  "version": 48,
+  "name": "Island Reward Progression",
   "changes": [
     {
       "action": "delete",
-      "path": "ServerScriptService.EggHatchEffects"
+      "path": "ServerScriptService.SkyboundOrbRewards"
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "SkyboundHatchPolish",
-      "source": "local TweenService=game:GetService(\"TweenService\")\nlocal Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal function rarity(name)\n if name:find(\"Dragon\") then return \"LEGENDARY\" end\n if name:find(\"Cub\") or name:find(\"Lion\") then return \"EPIC\" end\n if name:find(\"Fox\") then return \"UNCOMMON\" end\n return \"COMMON\"\nend\nfor _,prompt in ipairs(map:GetDescendants()) do\n if prompt:IsA(\"ProximityPrompt\") and prompt.Name==\"HatchPrompt\" then\n  prompt.Triggered:Connect(function(player)\n   local egg=prompt.Parent;if not egg:IsA(\"BasePart\") then return end\n   local original=egg.CFrame\n   for i=1,3 do\n    TweenService:Create(egg,TweenInfo.new(.08),{CFrame=original*CFrame.Angles(0,0,math.rad(12))}):Play();task.wait(.08)\n    TweenService:Create(egg,TweenInfo.new(.08),{CFrame=original*CFrame.Angles(0,0,math.rad(-12))}):Play();task.wait(.08)\n   end\n   egg.CFrame=original\n   local gui=Instance.new(\"BillboardGui\");gui.Name=\"HatchFlash\";gui.Size=UDim2.fromOffset(250,80);gui.StudsOffset=Vector3.new(0,5,0);gui.AlwaysOnTop=true;gui.Parent=egg\n   local label=Instance.new(\"TextLabel\");label.Size=UDim2.fromScale(1,1);label.BackgroundTransparency=1;label.Text=\"✨ HATCHING... ✨\";label.TextScaled=true;label.Font=Enum.Font.GothamBlack;label.TextColor3=Color3.new(1,1,1);label.TextStrokeTransparency=.1;label.Parent=gui\n   task.delay(1,function() if gui.Parent then gui:Destroy() end end)\n  end)\n end\nend\nPlayers.PlayerAdded:Connect(function(p)\n p.ChildAdded:Connect(function(child)\n  if child.Name==\"Pets\" then\n   child.ChildAdded:Connect(function(v)\n    if not v:IsA(\"StringValue\") then return end\n    v:SetAttribute(\"Rarity\",rarity(v.Value))\n   end)\n  end\n end)\n local inv=p:FindFirstChild(\"Pets\")\n if inv then inv.ChildAdded:Connect(function(v) if v:IsA(\"StringValue\") then v:SetAttribute(\"Rarity\",rarity(v.Value)) end end) end\nend)"
-    },
-    {
-      "action": "create",
-      "class": "LocalScript",
-      "parent": "StarterPlayer.StarterPlayerScripts",
-      "name": "SkyboundPetPowerHUD",
-      "source": "local Players=game:GetService(\"Players\");local p=Players.LocalPlayer\nlocal gui=Instance.new(\"ScreenGui\");gui.Name=\"SkyboundStats\";gui.ResetOnSpawn=false;gui.Parent=p:WaitForChild(\"PlayerGui\")\nlocal box=Instance.new(\"TextLabel\");box.Size=UDim2.fromOffset(190,44);box.Position=UDim2.new(0.5,-95,0,18);box.BackgroundTransparency=.2;box.TextScaled=true;box.Font=Enum.Font.GothamBold;box.TextColor3=Color3.new(1,1,1);box.Parent=gui\nlocal function update() box.Text=\"⚡ PET POWER: \"..tostring(p:GetAttribute(\"PetPower\") or 0) end\np:GetAttributeChangedSignal(\"PetPower\"):Connect(update);update()"
+      "name": "SkyboundProgressionRewards",
+      "source": "local Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal areas={\n {name=\"Grasslands\",folder=map,orb=\"SkyCoins\",reward=1000000},\n {name=\"Waterfall\",folder=map.WaterfallIsles,orb=\"WaterfallCoins\",reward=2000000},\n {name=\"Desert\",folder=map.DesertTemple,orb=\"DesertCoins\",reward=4000000},\n {name=\"Frozen\",folder=map.FrozenPeaks,orb=\"FrozenCoins\",reward=8000000},\n {name=\"Volcano\",folder=map.VolcanoRealm,orb=\"Orbs\",reward=16000000},\n {name=\"Celestial\",folder=map.CelestialCity,orb=\"Orbs\",reward=32000000},\n {name=\"Void\",folder=map.VoidRealm,orb=\"Orbs\",reward=64000000}\n}\nlocal busy={}\nfor _,a in ipairs(areas) do\n local folder=a.folder:FindFirstChild(a.orb)\n if folder then for _,orb in ipairs(folder:GetChildren()) do\n  if orb:IsA(\"BasePart\") then orb.Touched:Connect(function(hit)\n   local p=Players:GetPlayerFromCharacter(hit.Parent);if not p or busy[orb] then return end\n   local c=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"SkyCoins\");if not c then return end\n   busy[orb]=true;local power=p:GetAttribute(\"PetPower\") or 0;c.Value+=a.reward+(power*math.floor(a.reward*.25))\n   orb.Transparency=1;orb.CanTouch=false;local l=orb:FindFirstChildOfClass(\"PointLight\");if l then l.Enabled=false end\n   task.delay(7,function() if orb.Parent then orb.Transparency=0;orb.CanTouch=true;if l then l.Enabled=true end;busy[orb]=nil end end)\n  end) end\n end end\nend"
     }
   ]
 }
