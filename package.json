@@ -1,1487 +1,1120 @@
 {
-  "version": 53,
-  "name": "SKYBOUND Publish Candidate — World, Pets, Progression and UI Overhaul",
+  "version": 54,
+  "name": "Grounded Island Layout Polish",
   "changes": [
     {
       "action": "delete",
-      "path": "ServerScriptService.StarterEggSystem10"
+      "path": "Workspace.SkyboundMap.VoidRealm.ColorCrystal8"
     },
     {
       "action": "delete",
-      "path": "ServerScriptService.WaterfallEggSystem"
+      "path": "Workspace.SkyboundMap.VoidRealm.ColorCrystal7"
     },
     {
       "action": "delete",
-      "path": "ServerScriptService.DesertEggSystem"
+      "path": "Workspace.SkyboundMap.VoidRealm.ColorCrystal6"
     },
     {
       "action": "delete",
-      "path": "ServerScriptService.LateRealmPortalSystem"
+      "path": "Workspace.SkyboundMap.VoidRealm.ColorCrystal5"
     },
     {
       "action": "delete",
-      "path": "ServerScriptService.LateRealmReturnPortalSystem"
+      "path": "Workspace.SkyboundMap.VoidRealm.ColorCrystal4"
     },
     {
       "action": "delete",
-      "path": "ServerScriptService.WaterfallPortalSystem10"
+      "path": "Workspace.SkyboundMap.VoidRealm.ColorCrystal3"
     },
     {
       "action": "delete",
-      "path": "ServerScriptService.DesertPortalSystem"
+      "path": "Workspace.SkyboundMap.VoidRealm.ColorCrystal2"
     },
     {
       "action": "delete",
-      "path": "ServerScriptService.FrozenPortalSystem"
+      "path": "Workspace.SkyboundMap.VoidRealm.ColorCrystal1"
     },
     {
       "action": "delete",
-      "path": "ServerScriptService.WaterfallReturnPortalSystem"
+      "path": "Workspace.SkyboundMap.CelestialCity.ColorCrystal8"
     },
     {
       "action": "delete",
-      "path": "ServerScriptService.DesertReturnPortalSystem"
+      "path": "Workspace.SkyboundMap.CelestialCity.ColorCrystal7"
     },
     {
       "action": "delete",
-      "path": "ServerScriptService.SkyboundHatchPolish"
+      "path": "Workspace.SkyboundMap.CelestialCity.ColorCrystal6"
     },
     {
       "action": "delete",
-      "path": "StarterPlayer.StarterPlayerScripts.SkyboundHUD"
+      "path": "Workspace.SkyboundMap.CelestialCity.ColorCrystal5"
     },
     {
       "action": "delete",
-      "path": "StarterPlayer.StarterPlayerScripts.SkyboundPetPowerHUD"
+      "path": "Workspace.SkyboundMap.CelestialCity.ColorCrystal4"
     },
     {
       "action": "delete",
-      "path": "StarterPlayer.StarterPlayerScripts.SkyboundAreaHUD"
+      "path": "Workspace.SkyboundMap.CelestialCity.ColorCrystal3"
     },
     {
       "action": "delete",
-      "path": "StarterPlayer.StarterPlayerScripts.SkyboundPetInventory"
+      "path": "Workspace.SkyboundMap.CelestialCity.ColorCrystal2"
     },
     {
       "action": "delete",
-      "path": "StarterPlayer.StarterPlayerScripts.SkyboundPetIndexUI"
+      "path": "Workspace.SkyboundMap.CelestialCity.ColorCrystal1"
     },
     {
       "action": "delete",
-      "path": "StarterPlayer.StarterPlayerScripts.SkyboundPetCraftUI"
+      "path": "Workspace.SkyboundMap.VolcanoRealm.ColorCrystal8"
     },
     {
-      "action": "create",
-      "class": "Model",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "FrozenEgg"
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.VolcanoRealm.ColorCrystal7"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.VolcanoRealm.ColorCrystal6"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.VolcanoRealm.ColorCrystal5"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.VolcanoRealm.ColorCrystal4"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.VolcanoRealm.ColorCrystal3"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.VolcanoRealm.ColorCrystal2"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.VolcanoRealm.ColorCrystal1"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.FrozenPeaks.ColorCrystal8"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.FrozenPeaks.ColorCrystal7"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.FrozenPeaks.ColorCrystal6"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.FrozenPeaks.ColorCrystal5"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.FrozenPeaks.ColorCrystal4"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.FrozenPeaks.ColorCrystal3"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.FrozenPeaks.ColorCrystal2"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.FrozenPeaks.ColorCrystal1"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.DesertTemple.ColorCrystal8"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.DesertTemple.ColorCrystal7"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.DesertTemple.ColorCrystal6"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.DesertTemple.ColorCrystal5"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.DesertTemple.ColorCrystal4"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.DesertTemple.ColorCrystal3"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.DesertTemple.ColorCrystal2"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.DesertTemple.ColorCrystal1"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.ColorCrystal8"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.ColorCrystal7"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.ColorCrystal6"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.ColorCrystal5"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.ColorCrystal4"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.ColorCrystal3"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.ColorCrystal2"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.ColorCrystal1"
     },
     {
       "action": "create",
       "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenEgg",
-      "name": "Stand",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles",
+      "name": "MainWalkway",
       "properties": {
         "Size": {
-          "x": 8,
-          "y": 2,
-          "z": 8
+          "x": 12,
+          "y": 1,
+          "z": 58
         },
         "Position": {
-          "x": 24,
-          "y": 145,
-          "z": 9020
+          "x": 0,
+          "y": 93,
+          "z": 3000
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 75,
+          "g": 205,
+          "b": 125
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles",
+      "name": "AccentPad1",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": -28,
+          "y": 93,
+          "z": 2978
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 80,
+          "g": 145,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles",
+      "name": "AccentPad2",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": 28,
+          "y": 93,
+          "z": 2978
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 80,
+          "g": 145,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles",
+      "name": "AccentPad3",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": -28,
+          "y": 93,
+          "z": 3022
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 80,
+          "g": 145,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles",
+      "name": "AccentPad4",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": 28,
+          "y": 93,
+          "z": 3022
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 80,
+          "g": 145,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles",
+      "name": "LandmarkColumn1",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": -36,
+          "y": 97.5,
+          "z": 2970
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 75,
+          "g": 205,
+          "b": 125
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles",
+      "name": "LandmarkColumn2",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": 36,
+          "y": 97.5,
+          "z": 2970
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 75,
+          "g": 205,
+          "b": 125
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles",
+      "name": "LandmarkColumn3",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": -36,
+          "y": 97.5,
+          "z": 3030
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 75,
+          "g": 205,
+          "b": 125
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles",
+      "name": "LandmarkColumn4",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": 36,
+          "y": 97.5,
+          "z": 3030
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 75,
+          "g": 205,
+          "b": 125
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.DesertTemple",
+      "name": "MainWalkway",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 58
+        },
+        "Position": {
+          "x": 0,
+          "y": 118,
+          "z": 6000
+        },
+        "Anchored": true,
+        "Material": "Sand",
+        "Color": {
+          "r": 245,
+          "g": 190,
+          "b": 95
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.DesertTemple",
+      "name": "AccentPad1",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": -28,
+          "y": 118,
+          "z": 5978
+        },
+        "Anchored": true,
+        "Material": "Sand",
+        "Color": {
+          "r": 255,
+          "g": 130,
+          "b": 65
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.DesertTemple",
+      "name": "AccentPad2",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": 28,
+          "y": 118,
+          "z": 5978
+        },
+        "Anchored": true,
+        "Material": "Sand",
+        "Color": {
+          "r": 255,
+          "g": 130,
+          "b": 65
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.DesertTemple",
+      "name": "AccentPad3",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": -28,
+          "y": 118,
+          "z": 6022
+        },
+        "Anchored": true,
+        "Material": "Sand",
+        "Color": {
+          "r": 255,
+          "g": 130,
+          "b": 65
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.DesertTemple",
+      "name": "AccentPad4",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": 28,
+          "y": 118,
+          "z": 6022
+        },
+        "Anchored": true,
+        "Material": "Sand",
+        "Color": {
+          "r": 255,
+          "g": 130,
+          "b": 65
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.DesertTemple",
+      "name": "LandmarkColumn1",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": -36,
+          "y": 122.5,
+          "z": 5970
+        },
+        "Anchored": true,
+        "Material": "Sand",
+        "Color": {
+          "r": 245,
+          "g": 190,
+          "b": 95
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.DesertTemple",
+      "name": "LandmarkColumn2",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": 36,
+          "y": 122.5,
+          "z": 5970
+        },
+        "Anchored": true,
+        "Material": "Sand",
+        "Color": {
+          "r": 245,
+          "g": 190,
+          "b": 95
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.DesertTemple",
+      "name": "LandmarkColumn3",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": -36,
+          "y": 122.5,
+          "z": 6030
+        },
+        "Anchored": true,
+        "Material": "Sand",
+        "Color": {
+          "r": 245,
+          "g": 190,
+          "b": 95
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.DesertTemple",
+      "name": "LandmarkColumn4",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": 36,
+          "y": 122.5,
+          "z": 6030
+        },
+        "Anchored": true,
+        "Material": "Sand",
+        "Color": {
+          "r": 245,
+          "g": 190,
+          "b": 95
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "MainWalkway",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 58
+        },
+        "Position": {
+          "x": 0,
+          "y": 148,
+          "z": 9000
+        },
+        "Anchored": true,
+        "Material": "Snow",
+        "Color": {
+          "r": 185,
+          "g": 230,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "AccentPad1",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": -28,
+          "y": 148,
+          "z": 8978
+        },
+        "Anchored": true,
+        "Material": "Snow",
+        "Color": {
+          "r": 100,
+          "g": 190,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "AccentPad2",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": 28,
+          "y": 148,
+          "z": 8978
+        },
+        "Anchored": true,
+        "Material": "Snow",
+        "Color": {
+          "r": 100,
+          "g": 190,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "AccentPad3",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": -28,
+          "y": 148,
+          "z": 9022
+        },
+        "Anchored": true,
+        "Material": "Snow",
+        "Color": {
+          "r": 100,
+          "g": 190,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "AccentPad4",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": 28,
+          "y": 148,
+          "z": 9022
+        },
+        "Anchored": true,
+        "Material": "Snow",
+        "Color": {
+          "r": 100,
+          "g": 190,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "LandmarkColumn1",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": -36,
+          "y": 152.5,
+          "z": 8970
+        },
+        "Anchored": true,
+        "Material": "Snow",
+        "Color": {
+          "r": 185,
+          "g": 230,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "LandmarkColumn2",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": 36,
+          "y": 152.5,
+          "z": 8970
+        },
+        "Anchored": true,
+        "Material": "Snow",
+        "Color": {
+          "r": 185,
+          "g": 230,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "LandmarkColumn3",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": -36,
+          "y": 152.5,
+          "z": 9030
+        },
+        "Anchored": true,
+        "Material": "Snow",
+        "Color": {
+          "r": 185,
+          "g": 230,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "LandmarkColumn4",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": 36,
+          "y": 152.5,
+          "z": 9030
+        },
+        "Anchored": true,
+        "Material": "Snow",
+        "Color": {
+          "r": 185,
+          "g": 230,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "MainWalkway",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 58
+        },
+        "Position": {
+          "x": 0,
+          "y": 178,
+          "z": 12000
+        },
+        "Anchored": true,
+        "Material": "Basalt",
+        "Color": {
+          "r": 85,
+          "g": 75,
+          "b": 85
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "AccentPad1",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": -28,
+          "y": 178,
+          "z": 11978
+        },
+        "Anchored": true,
+        "Material": "Basalt",
+        "Color": {
+          "r": 255,
+          "g": 95,
+          "b": 45
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "AccentPad2",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": 28,
+          "y": 178,
+          "z": 11978
+        },
+        "Anchored": true,
+        "Material": "Basalt",
+        "Color": {
+          "r": 255,
+          "g": 95,
+          "b": 45
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "AccentPad3",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": -28,
+          "y": 178,
+          "z": 12022
+        },
+        "Anchored": true,
+        "Material": "Basalt",
+        "Color": {
+          "r": 255,
+          "g": 95,
+          "b": 45
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "AccentPad4",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": 28,
+          "y": 178,
+          "z": 12022
+        },
+        "Anchored": true,
+        "Material": "Basalt",
+        "Color": {
+          "r": 255,
+          "g": 95,
+          "b": 45
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "LandmarkColumn1",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": -36,
+          "y": 182.5,
+          "z": 11970
+        },
+        "Anchored": true,
+        "Material": "Basalt",
+        "Color": {
+          "r": 85,
+          "g": 75,
+          "b": 85
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "LandmarkColumn2",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": 36,
+          "y": 182.5,
+          "z": 11970
+        },
+        "Anchored": true,
+        "Material": "Basalt",
+        "Color": {
+          "r": 85,
+          "g": 75,
+          "b": 85
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "LandmarkColumn3",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": -36,
+          "y": 182.5,
+          "z": 12030
+        },
+        "Anchored": true,
+        "Material": "Basalt",
+        "Color": {
+          "r": 85,
+          "g": 75,
+          "b": 85
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "LandmarkColumn4",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": 36,
+          "y": 182.5,
+          "z": 12030
+        },
+        "Anchored": true,
+        "Material": "Basalt",
+        "Color": {
+          "r": 85,
+          "g": 75,
+          "b": 85
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.CelestialCity",
+      "name": "MainWalkway",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 58
+        },
+        "Position": {
+          "x": 0,
+          "y": 208,
+          "z": 15000
         },
         "Anchored": true,
         "Material": "Marble",
         "Color": {
-          "r": 180,
-          "g": 225,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenEgg",
-      "name": "Egg",
-      "properties": {
-        "Size": {
-          "x": 5,
-          "y": 7,
-          "z": 5
-        },
-        "Position": {
-          "x": 24,
-          "y": 149.5,
-          "z": 9020
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Shape": "Ball",
-        "Material": "Neon",
-        "Color": {
-          "r": 130,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenEgg.Egg",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 3,
-        "Range": 18
-      }
-    },
-    {
-      "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenEgg.Egg",
-      "name": "HatchPrompt",
-      "properties": {
-        "ActionText": "HATCH",
-        "ObjectText": "FROZEN EGG",
-        "HoldDuration": 0.35,
-        "MaxActivationDistance": 12
-      }
-    },
-    {
-      "action": "create",
-      "class": "RemoteEvent",
-      "parent": "ReplicatedStorage",
-      "name": "SkyboundClaimReward"
-    },
-    {
-      "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "SkyboundEggSystem",
-      "source": "local Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal eggs={\n {map.StarterEgg.HatchPrompt,1000000,{{\"Cloud Bunny\",55},{\"Sky Fox\",30},{\"Sun Cub\",12},{\"Storm Dragon\",2.8},{\"Aurora Griffin\",.2}}},\n {map.WaterfallIsles.Egg.HatchPrompt,3000000,{{\"Bubble Bunny\",55},{\"River Fox\",30},{\"Aqua Cub\",12},{\"Tide Dragon\",2.8},{\"Prism Axolotl\",.2}}},\n {map.DesertTemple.Egg.HatchPrompt,10000000,{{\"Sand Bunny\",55},{\"Dune Fox\",30},{\"Sun Lion\",12},{\"Pharaoh Dragon\",2.8},{\"Solar Sphinx\",.2}}},\n {map.FrozenPeaks.FrozenEgg.Egg.HatchPrompt,30000000,{{\"Snow Hare\",55},{\"Frost Fox\",30},{\"Ice Bear\",12},{\"Glacier Dragon\",2.8},{\"Aurora Yeti\",.2}}},\n {map.VolcanoRealm.Egg.HatchPrompt,100000000,{{\"Ember Bunny\",55},{\"Magma Fox\",30},{\"Lava Golem\",12},{\"Inferno Dragon\",2.8},{\"Phoenix\",.2}}},\n {map.CelestialCity.Egg.HatchPrompt,300000000,{{\"Star Bunny\",55},{\"Comet Fox\",30},{\"Moon Guardian\",12},{\"Galaxy Dragon\",2.8},{\"Celestial Seraph\",.2}}},\n {map.VoidRealm.Egg.HatchPrompt,1000000000,{{\"Void Bunny\",55},{\"Shadow Fox\",30},{\"Rift Beast\",12},{\"Void Dragon\",2.8},{\"Eclipse Leviathan\",.2}}}\n}\nlocal rarity={55=\"Common\",30=\"Uncommon\",12=\"Epic\",[2.8]=\"Legendary\",[.2]=\"Secret\"}\nlocal function roll(t)\n local r=math.random()*100;local s=0\n for _,x in ipairs(t) do s+=x[2];if r<=s then return x[1],rarity[x[2]] end end\n return t[1][1],\"Common\"\nend\nfor _,e in ipairs(eggs) do\n local prompt,cost,pets=e[1],e[2],e[3];prompt.ActionText=\"HATCH\";prompt.ObjectText=\"EGG • \"..cost..\" SKY COINS\"\n prompt.Triggered:Connect(function(p)\n  local coins=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"SkyCoins\");if not coins or coins.Value<cost then return end\n  coins.Value-=cost\n  local inv=p:FindFirstChild(\"Pets\");if not inv then inv=Instance.new(\"Folder\");inv.Name=\"Pets\";inv.Parent=p end\n  local name,r=roll(pets);local v=Instance.new(\"StringValue\");v.Name=\"Pet\";v.Value=name;v:SetAttribute(\"Rarity\",r);v.Parent=inv\n  p:SetAttribute(\"LastHatch\",name);p:SetAttribute(\"LastHatchRarity\",r);p:SetAttribute(\"HatchSerial\",(p:GetAttribute(\"HatchSerial\") or 0)+1)\n  local eq=p:FindFirstChild(\"EquippedPets\");if eq and #eq:GetChildren()<3 then local q=Instance.new(\"StringValue\");q.Name=\"Pet\";q.Value=name;q.Parent=eq end\n end)\nend"
-    },
-    {
-      "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "SkyboundPortalSystem",
-      "source": "local map=workspace:WaitForChild(\"SkyboundMap\")\nlocal gates={\n {map.WaterfallPortal,\"WaterfallUnlocked\",5000000,map.WaterfallIsles},\n {map.WaterfallIsles.DesertPortal,\"DesertUnlocked\",25000000,map.DesertTemple},\n {map.DesertTemple.FrozenPortal,\"FrozenUnlocked\",100000000,map.FrozenPeaks},\n {map.FrozenPeaks.VolcanoPortal,\"VolcanoRealmUnlocked\",400000000,map.VolcanoRealm},\n {map.VolcanoRealm.CelestialPortal,\"CelestialCityUnlocked\",1500000000,map.CelestialCity},\n {map.CelestialCity.VoidPortal,\"VoidRealmUnlocked\",5000000000,map.VoidRealm}\n}\nfor _,g in ipairs(gates) do\n local portal,key,cost,dest=g[1],g[2],g[3],g[4];local prompt=portal:FindFirstChildWhichIsA(\"ProximityPrompt\")\n if prompt then prompt.ActionText=\"UNLOCK / TRAVEL\";prompt.ObjectText=tostring(cost)..\" SKY COINS\"\n  prompt.Triggered:Connect(function(p)\n   local c=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"SkyCoins\");if not c then return end\n   if not p:GetAttribute(key) then if c.Value<cost then return end;c.Value-=cost;p:SetAttribute(key,true) end\n   local r=p.Character and p.Character:FindFirstChild(\"HumanoidRootPart\");if r then r.CFrame=CFrame.new(dest.IslandTop.Position+Vector3.new(0,8,0)) end\n  end)\n end\nend\nlocal returns={{map.WaterfallIsles,\"GrasslandsTop\"},{map.DesertTemple,\"WaterfallIsles\"},{map.FrozenPeaks,\"DesertTemple\"},{map.VolcanoRealm,\"FrozenPeaks\"},{map.CelestialCity,\"VolcanoRealm\"},{map.VoidRealm,\"CelestialCity\"}}\nfor _,x in ipairs(returns) do\n local area,target=x[1],x[2];local rp=area:FindFirstChild(\"ReturnPortal\");if rp then local pr=rp:FindFirstChildWhichIsA(\"ProximityPrompt\");if pr then pr.ActionText=\"RETURN\";pr.ObjectText=\"PREVIOUS ISLAND\";pr.Triggered:Connect(function(p)\n  local r=p.Character and p.Character:FindFirstChild(\"HumanoidRootPart\");if not r then return end\n  local d=target==\"GrasslandsTop\" and map.GrasslandsTop or map[target].IslandTop;r.CFrame=CFrame.new(d.Position+Vector3.new(0,8,0))\n end) end end\nend"
-    },
-    {
-      "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "SkyboundGoals",
-      "source": "local Players=game:GetService(\"Players\")\nlocal RS=game:GetService(\"ReplicatedStorage\")\nlocal claim=RS:WaitForChild(\"SkyboundClaimReward\")\nlocal rewards={1000000,3000000,10000000,30000000,100000000,300000000,1000000000}\nlocal function setup(p)\n p:SetAttribute(\"QuestOrbs\",0);p:SetAttribute(\"QuestGoal\",15);p:SetAttribute(\"QuestReward\",5000000);p:SetAttribute(\"QuestReady\",false)\n p:SetAttribute(\"DailyReady\",true)\nend\nPlayers.PlayerAdded:Connect(setup)\nclaim.OnServerEvent:Connect(function(p,kind)\n local c=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"SkyCoins\");if not c then return end\n if kind==\"Quest\" and p:GetAttribute(\"QuestReady\") then c.Value+=p:GetAttribute(\"QuestReward\") or 0;p:SetAttribute(\"QuestOrbs\",0);p:SetAttribute(\"QuestGoal\",math.min(100,(p:GetAttribute(\"QuestGoal\") or 15)+10));p:SetAttribute(\"QuestReward\",math.floor((p:GetAttribute(\"QuestReward\") or 5000000)*1.8));p:SetAttribute(\"QuestReady\",false)\n elseif kind==\"Daily\" and p:GetAttribute(\"DailyReady\") then c.Value+=rewards[1];p:SetAttribute(\"DailyReady\",false) end\nend)\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nfor _,d in ipairs(map:GetDescendants()) do if d:IsA(\"BasePart\") and (d.Name:find(\"Orb\") or d.Parent and (d.Parent.Name==\"SkyCoins\" or d.Parent.Name==\"Orbs\" or d.Parent.Name:find(\"Coins\"))) then\n d.Touched:Connect(function(hit) local p=Players:GetPlayerFromCharacter(hit.Parent);if p then local n=(p:GetAttribute(\"QuestOrbs\") or 0)+1;p:SetAttribute(\"QuestOrbs\",n);if n>=(p:GetAttribute(\"QuestGoal\") or 15) then p:SetAttribute(\"QuestReady\",true) end end end)\nend end"
-    },
-    {
-      "action": "create",
-      "class": "LocalScript",
-      "parent": "StarterPlayer.StarterPlayerScripts",
-      "name": "SkyboundProfessionalUI",
-      "source": "local Players=game:GetService(\"Players\");local RS=game:GetService(\"ReplicatedStorage\");local p=Players.LocalPlayer\nlocal pg=p:WaitForChild(\"PlayerGui\")\nfor _,n in ipairs({\"SkyboundHUD\",\"SkyboundStats\",\"SkyboundAreaHUD\",\"PetIndexUI\",\"PetCraftUI\",\"PetInventoryUI\"}) do local x=pg:FindFirstChild(n);if x then x:Destroy() end end\nlocal gui=Instance.new(\"ScreenGui\");gui.Name=\"SkyboundUI\";gui.ResetOnSpawn=false;gui.IgnoreGuiInset=false;gui.Parent=pg\nlocal function round(o,r) local c=Instance.new(\"UICorner\");c.CornerRadius=UDim.new(0,r or 12);c.Parent=o end\nlocal function stroke(o) local s=Instance.new(\"UIStroke\");s.Thickness=2;s.Transparency=.55;s.Parent=o end\nlocal top=Instance.new(\"Frame\");top.Size=UDim2.fromOffset(270,58);top.Position=UDim2.new(.5,-135,0,14);top.BackgroundColor3=Color3.fromRGB(40,55,100);top.BackgroundTransparency=.08;top.Parent=gui;round(top,18);stroke(top)\nlocal coins=Instance.new(\"TextLabel\");coins.Size=UDim2.new(1,-16,1,0);coins.Position=UDim2.fromOffset(8,0);coins.BackgroundTransparency=1;coins.TextColor3=Color3.fromRGB(255,235,90);coins.Font=Enum.Font.GothamBlack;coins.TextScaled=true;coins.Parent=top\nlocal power=Instance.new(\"TextLabel\");power.Size=UDim2.fromOffset(190,38);power.Position=UDim2.new(.5,-95,0,78);power.BackgroundColor3=Color3.fromRGB(110,75,190);power.TextColor3=Color3.new(1,1,1);power.Font=Enum.Font.GothamBold;power.TextScaled=true;power.Parent=gui;round(power,14)\nlocal nav=Instance.new(\"Frame\");nav.Size=UDim2.fromOffset(118,250);nav.Position=UDim2.new(0,16,.5,-125);nav.BackgroundTransparency=1;nav.Parent=gui\nlocal lay=Instance.new(\"UIListLayout\");lay.Padding=UDim.new(0,9);lay.Parent=nav\nlocal panel=Instance.new(\"Frame\");panel.Size=UDim2.fromOffset(520,430);panel.Position=UDim2.new(.5,-260,.5,-200);panel.BackgroundColor3=Color3.fromRGB(35,42,75);panel.Visible=false;panel.Parent=gui;round(panel,20);stroke(panel)\nlocal title=Instance.new(\"TextLabel\");title.Size=UDim2.new(1,-80,0,55);title.Position=UDim2.fromOffset(20,8);title.BackgroundTransparency=1;title.TextColor3=Color3.new(1,1,1);title.Font=Enum.Font.GothamBlack;title.TextScaled=true;title.Parent=panel\nlocal close=Instance.new(\"TextButton\");close.Size=UDim2.fromOffset(46,46);close.Position=UDim2.new(1,-58,0,10);close.Text=\"×\";close.TextScaled=true;close.BackgroundColor3=Color3.fromRGB(235,80,100);close.TextColor3=Color3.new(1,1,1);close.Parent=panel;round(close,14)\nlocal body=Instance.new(\"ScrollingFrame\");body.Position=UDim2.fromOffset(18,72);body.Size=UDim2.new(1,-36,1,-90);body.BackgroundTransparency=1;body.BorderSizePixel=0;body.AutomaticCanvasSize=Enum.AutomaticSize.Y;body.CanvasSize=UDim2.new();body.Parent=panel\nlocal bl=Instance.new(\"UIListLayout\");bl.Padding=UDim.new(0,8);bl.Parent=body\nlocal function clear() for _,x in ipairs(body:GetChildren()) do if x~=bl then x:Destroy() end end end\nlocal function row(text,click)\n local b=Instance.new(\"TextButton\");b.Size=UDim2.new(1,-8,0,54);b.BackgroundColor3=Color3.fromRGB(62,78,125);b.TextColor3=Color3.new(1,1,1);b.Text=text;b.TextScaled=true;b.Font=Enum.Font.GothamBold;b.Parent=body;round(b,13);if click then b.Activated:Connect(click) end;return b\nend\nlocal function open(kind)\n clear();panel.Visible=true;title.Text=kind\n local inv=p:FindFirstChild(\"Pets\")\n if kind==\"PETS\" then\n  if inv then for _,v in ipairs(inv:GetChildren()) do local n=v.Value;row(n..\"   •   CLICK TO EQUIP\",function() RS.SkyboundEquipPet:FireServer(n) end) end end\n elseif kind==\"INDEX\" then\n  local seen={};if inv then for _,v in ipairs(inv:GetChildren()) do seen[v.Value]=true end end\n  local names={\"Cloud Bunny\",\"Sky Fox\",\"Sun Cub\",\"Storm Dragon\",\"Aurora Griffin\",\"Bubble Bunny\",\"River Fox\",\"Aqua Cub\",\"Tide Dragon\",\"Prism Axolotl\",\"Sand Bunny\",\"Dune Fox\",\"Sun Lion\",\"Pharaoh Dragon\",\"Solar Sphinx\",\"Snow Hare\",\"Frost Fox\",\"Ice Bear\",\"Glacier Dragon\",\"Aurora Yeti\",\"Ember Bunny\",\"Magma Fox\",\"Lava Golem\",\"Inferno Dragon\",\"Phoenix\",\"Star Bunny\",\"Comet Fox\",\"Moon Guardian\",\"Galaxy Dragon\",\"Celestial Seraph\",\"Void Bunny\",\"Shadow Fox\",\"Rift Beast\",\"Void Dragon\",\"Eclipse Leviathan\"}\n  for _,n in ipairs(names) do row(seen[n] and \"✓  \"..n or \"🔒  UNDISCOVERED\") end\n elseif kind==\"CRAFT\" then\n  local counts={};if inv then for _,v in ipairs(inv:GetChildren()) do counts[v.Value]=(counts[v.Value] or 0)+1 end end\n  for n,c in pairs(counts) do row(n..\"  ×\"..c..(c>=3 and \"   → SHINY\" or \"   • NEED 3\"),function() if c>=3 then RS.SkyboundCraftPet:FireServer(n) end end) end\n elseif kind==\"REWARDS\" then\n  local goal=p:GetAttribute(\"QuestGoal\") or 15;local q=p:GetAttribute(\"QuestOrbs\") or 0\n  row(\"QUEST: COLLECT ORBS  \"..q..\"/\"..goal,function() if p:GetAttribute(\"QuestReady\") then RS.SkyboundClaimReward:FireServer(\"Quest\") end end)\n  row(p:GetAttribute(\"DailyReady\") and \"DAILY GIFT • CLAIM\" or \"DAILY GIFT • CLAIMED\",function() if p:GetAttribute(\"DailyReady\") then RS.SkyboundClaimReward:FireServer(\"Daily\") end end)\n end\nend\nfor _,n in ipairs({\"PETS\",\"INDEX\",\"CRAFT\",\"REWARDS\"}) do local b=Instance.new(\"TextButton\");b.Size=UDim2.fromOffset(118,52);b.BackgroundColor3=Color3.fromRGB(75,145,235);b.TextColor3=Color3.new(1,1,1);b.Text=n;b.TextScaled=true;b.Font=Enum.Font.GothamBlack;b.Parent=nav;round(b,14);stroke(b);b.Activated:Connect(function() open(n) end) end\nclose.Activated:Connect(function() panel.Visible=false end)\nlocal hatch=Instance.new(\"Frame\");hatch.Size=UDim2.fromOffset(400,180);hatch.Position=UDim2.new(.5,-200,.5,-90);hatch.BackgroundColor3=Color3.fromRGB(50,55,95);hatch.Visible=false;hatch.Parent=gui;round(hatch,24);stroke(hatch)\nlocal ht=Instance.new(\"TextLabel\");ht.Size=UDim2.new(1,-20,1,-20);ht.Position=UDim2.fromOffset(10,10);ht.BackgroundTransparency=1;ht.TextColor3=Color3.new(1,1,1);ht.TextScaled=true;ht.TextWrapped=true;ht.Font=Enum.Font.GothamBlack;ht.Parent=hatch\nlocal serial=p:GetAttribute(\"HatchSerial\") or 0\np:GetAttributeChangedSignal(\"HatchSerial\"):Connect(function() local s=p:GetAttribute(\"HatchSerial\") or 0;if s==serial then return end;serial=s;ht.Text=\"YOU HATCHED!\\n\"..tostring(p:GetAttribute(\"LastHatch\"))..\"\\n\"..tostring(p:GetAttribute(\"LastHatchRarity\"));hatch.Visible=true;task.delay(2.4,function() hatch.Visible=false end) end)\nlocal function fmt(n) n=tonumber(n) or 0;if n>=1e9 then return string.format(\"%.2fB\",n/1e9) elseif n>=1e6 then return string.format(\"%.2fM\",n/1e6) elseif n>=1e3 then return string.format(\"%.1fK\",n/1e3) end;return tostring(n) end\ntask.spawn(function() while task.wait(.2) do local c=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"SkyCoins\");coins.Text=\"☁  \"..fmt(c and c.Value or 0)..\" SKY COINS\";power.Text=\"⚡ PET POWER  \"..tostring(p:GetAttribute(\"PetPower\") or 0) end end)"
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "ColorCrystal1",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 8,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 63,
-          "z": 30
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 35,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 80,
-          "g": 220,
-          "b": 120
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "ColorCrystal2",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 9,
-          "z": 4
-        },
-        "Position": {
-          "x": 0,
-          "y": 63,
-          "z": 34
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 70,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 220,
-          "b": 80
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "ColorCrystal3",
-      "properties": {
-        "Size": {
-          "x": 2,
-          "y": 10,
-          "z": 2
-        },
-        "Position": {
-          "x": -30,
-          "y": 63,
-          "z": 30
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 105,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 80,
-          "g": 220,
-          "b": 120
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "ColorCrystal4",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 7,
-          "z": 3
-        },
-        "Position": {
-          "x": -34,
-          "y": 63,
-          "z": 0
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 140,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 220,
-          "b": 80
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "ColorCrystal5",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 8,
-          "z": 4
-        },
-        "Position": {
-          "x": -30,
-          "y": 63,
-          "z": -30
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 175,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 80,
-          "g": 220,
-          "b": 120
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "ColorCrystal6",
-      "properties": {
-        "Size": {
-          "x": 2,
-          "y": 9,
-          "z": 2
-        },
-        "Position": {
-          "x": 0,
-          "y": 63,
-          "z": -34
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 210,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 220,
-          "b": 80
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "ColorCrystal7",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 10,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 63,
-          "z": -30
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 245,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 80,
-          "g": 220,
-          "b": 120
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "ColorCrystal8",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 7,
-          "z": 4
-        },
-        "Position": {
-          "x": 34,
-          "y": 63,
-          "z": 0
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 280,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 220,
-          "b": 80
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "ColorCrystal1",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 8,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 94,
-          "z": 3030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 35,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 70,
-          "g": 190,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "ColorCrystal2",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 9,
-          "z": 4
-        },
-        "Position": {
-          "x": 0,
-          "y": 94,
-          "z": 3034
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 70,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 110,
-          "g": 255,
-          "b": 220
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "ColorCrystal3",
-      "properties": {
-        "Size": {
-          "x": 2,
-          "y": 10,
-          "z": 2
-        },
-        "Position": {
-          "x": -30,
-          "y": 94,
-          "z": 3030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 105,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 70,
-          "g": 190,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "ColorCrystal4",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 7,
-          "z": 3
-        },
-        "Position": {
-          "x": -34,
-          "y": 94,
-          "z": 3000
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 140,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 110,
-          "g": 255,
-          "b": 220
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "ColorCrystal5",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 8,
-          "z": 4
-        },
-        "Position": {
-          "x": -30,
-          "y": 94,
-          "z": 2970
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 175,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 70,
-          "g": 190,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "ColorCrystal6",
-      "properties": {
-        "Size": {
-          "x": 2,
-          "y": 9,
-          "z": 2
-        },
-        "Position": {
-          "x": 0,
-          "y": 94,
-          "z": 2966
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 210,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 110,
-          "g": 255,
-          "b": 220
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "ColorCrystal7",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 10,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 94,
-          "z": 2970
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 245,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 70,
-          "g": 190,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "ColorCrystal8",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 7,
-          "z": 4
-        },
-        "Position": {
-          "x": 34,
-          "y": 94,
-          "z": 3000
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 280,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 110,
-          "g": 255,
-          "b": 220
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "ColorCrystal1",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 8,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 119,
-          "z": 6030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 35,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 70
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "ColorCrystal2",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 9,
-          "z": 4
-        },
-        "Position": {
-          "x": 0,
-          "y": 119,
-          "z": 6034
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 70,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 110,
-          "b": 60
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "ColorCrystal3",
-      "properties": {
-        "Size": {
-          "x": 2,
-          "y": 10,
-          "z": 2
-        },
-        "Position": {
-          "x": -30,
-          "y": 119,
-          "z": 6030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 105,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 70
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "ColorCrystal4",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 7,
-          "z": 3
-        },
-        "Position": {
-          "x": -34,
-          "y": 119,
-          "z": 6000
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 140,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 110,
-          "b": 60
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "ColorCrystal5",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 8,
-          "z": 4
-        },
-        "Position": {
-          "x": -30,
-          "y": 119,
-          "z": 5970
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 175,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 70
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "ColorCrystal6",
-      "properties": {
-        "Size": {
-          "x": 2,
-          "y": 9,
-          "z": 2
-        },
-        "Position": {
-          "x": 0,
-          "y": 119,
-          "z": 5966
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 210,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 110,
-          "b": 60
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "ColorCrystal7",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 10,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 119,
-          "z": 5970
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 245,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 190,
-          "b": 70
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "ColorCrystal8",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 7,
-          "z": 4
-        },
-        "Position": {
-          "x": 34,
-          "y": 119,
-          "z": 6000
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 280,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 110,
-          "b": 60
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "ColorCrystal1",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 8,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 149,
-          "z": 9030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 35,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 140,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "ColorCrystal2",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 9,
-          "z": 4
-        },
-        "Position": {
-          "x": 0,
-          "y": 149,
-          "z": 9034
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 70,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 220,
-          "g": 255,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "ColorCrystal3",
-      "properties": {
-        "Size": {
-          "x": 2,
-          "y": 10,
-          "z": 2
-        },
-        "Position": {
-          "x": -30,
-          "y": 149,
-          "z": 9030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 105,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 140,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "ColorCrystal4",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 7,
-          "z": 3
-        },
-        "Position": {
-          "x": -34,
-          "y": 149,
-          "z": 9000
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 140,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 220,
-          "g": 255,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "ColorCrystal5",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 8,
-          "z": 4
-        },
-        "Position": {
-          "x": -30,
-          "y": 149,
-          "z": 8970
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 175,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 140,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "ColorCrystal6",
-      "properties": {
-        "Size": {
-          "x": 2,
-          "y": 9,
-          "z": 2
-        },
-        "Position": {
-          "x": 0,
-          "y": 149,
-          "z": 8966
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 210,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 220,
-          "g": 255,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "ColorCrystal7",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 10,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 149,
-          "z": 8970
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 245,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 140,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "ColorCrystal8",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 7,
-          "z": 4
-        },
-        "Position": {
-          "x": 34,
-          "y": 149,
-          "z": 9000
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 280,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 220,
-          "g": 255,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "ColorCrystal1",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 8,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 179,
-          "z": 12030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 35,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 90,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "ColorCrystal2",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 9,
-          "z": 4
-        },
-        "Position": {
-          "x": 0,
-          "y": 179,
-          "z": 12034
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 70,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 180,
-          "b": 50
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "ColorCrystal3",
-      "properties": {
-        "Size": {
-          "x": 2,
-          "y": 10,
-          "z": 2
-        },
-        "Position": {
-          "x": -30,
-          "y": 179,
-          "z": 12030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 105,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 90,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "ColorCrystal4",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 7,
-          "z": 3
-        },
-        "Position": {
-          "x": -34,
-          "y": 179,
-          "z": 12000
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 140,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 180,
-          "b": 50
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "ColorCrystal5",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 8,
-          "z": 4
-        },
-        "Position": {
-          "x": -30,
-          "y": 179,
-          "z": 11970
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 175,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 90,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "ColorCrystal6",
-      "properties": {
-        "Size": {
-          "x": 2,
-          "y": 9,
-          "z": 2
-        },
-        "Position": {
-          "x": 0,
-          "y": 179,
-          "z": 11966
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 210,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 180,
-          "b": 50
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "ColorCrystal7",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 10,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 179,
-          "z": 11970
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 245,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 90,
-          "b": 55
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "ColorCrystal8",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 7,
-          "z": 4
-        },
-        "Position": {
-          "x": 34,
-          "y": 179,
-          "z": 12000
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 280,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
-          "g": 180,
-          "b": 50
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "ColorCrystal1",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 8,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 209,
-          "z": 15030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 35,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 255,
+          "r": 235,
           "g": 235,
-          "b": 120
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "ColorCrystal2",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 9,
-          "z": 4
-        },
-        "Position": {
-          "x": 0,
-          "y": 209,
-          "z": 15034
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 70,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 180,
-          "g": 150,
           "b": 255
         }
       }
@@ -1490,30 +1123,24 @@
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "ColorCrystal3",
+      "name": "AccentPad1",
       "properties": {
         "Size": {
-          "x": 2,
-          "y": 10,
-          "z": 2
-        },
-        "Position": {
-          "x": -30,
-          "y": 209,
-          "z": 15030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 105,
+          "x": 12,
+          "y": 1,
           "z": 12
         },
+        "Position": {
+          "x": -28,
+          "y": 208,
+          "z": 14978
+        },
         "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
+        "Material": "Marble",
         "Color": {
           "r": 255,
-          "g": 235,
-          "b": 120
+          "g": 215,
+          "b": 90
         }
       }
     },
@@ -1521,30 +1148,24 @@
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "ColorCrystal4",
+      "name": "AccentPad2",
       "properties": {
         "Size": {
-          "x": 3,
-          "y": 7,
-          "z": 3
+          "x": 12,
+          "y": 1,
+          "z": 12
         },
         "Position": {
-          "x": -34,
-          "y": 209,
-          "z": 15000
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 140,
-          "z": -12
+          "x": 28,
+          "y": 208,
+          "z": 14978
         },
         "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
+        "Material": "Marble",
         "Color": {
-          "r": 180,
-          "g": 150,
-          "b": 255
+          "r": 255,
+          "g": 215,
+          "b": 90
         }
       }
     },
@@ -1552,60 +1173,73 @@
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "ColorCrystal5",
+      "name": "AccentPad3",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": -28,
+          "y": 208,
+          "z": 15022
+        },
+        "Anchored": true,
+        "Material": "Marble",
+        "Color": {
+          "r": 255,
+          "g": 215,
+          "b": 90
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.CelestialCity",
+      "name": "AccentPad4",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": 28,
+          "y": 208,
+          "z": 15022
+        },
+        "Anchored": true,
+        "Material": "Marble",
+        "Color": {
+          "r": 255,
+          "g": 215,
+          "b": 90
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.CelestialCity",
+      "name": "LandmarkColumn1",
       "properties": {
         "Size": {
           "x": 4,
-          "y": 8,
+          "y": 10,
           "z": 4
         },
         "Position": {
-          "x": -30,
-          "y": 209,
+          "x": -36,
+          "y": 212.5,
           "z": 14970
         },
-        "Orientation": {
-          "x": 0,
-          "y": 175,
-          "z": 12
-        },
         "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
+        "Material": "Marble",
         "Color": {
-          "r": 255,
+          "r": 235,
           "g": 235,
-          "b": 120
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "ColorCrystal6",
-      "properties": {
-        "Size": {
-          "x": 2,
-          "y": 9,
-          "z": 2
-        },
-        "Position": {
-          "x": 0,
-          "y": 209,
-          "z": 14966
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 210,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 180,
-          "g": 150,
           "b": 255
         }
       }
@@ -1614,30 +1248,24 @@
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "ColorCrystal7",
+      "name": "LandmarkColumn2",
       "properties": {
         "Size": {
-          "x": 3,
+          "x": 4,
           "y": 10,
-          "z": 3
+          "z": 4
         },
         "Position": {
-          "x": 30,
-          "y": 209,
+          "x": 36,
+          "y": 212.5,
           "z": 14970
         },
-        "Orientation": {
-          "x": 0,
-          "y": 245,
-          "z": 12
-        },
         "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
+        "Material": "Marble",
         "Color": {
-          "r": 255,
+          "r": 235,
           "g": 235,
-          "b": 120
+          "b": 255
         }
       }
     },
@@ -1645,122 +1273,48 @@
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "ColorCrystal8",
+      "name": "LandmarkColumn3",
       "properties": {
         "Size": {
           "x": 4,
-          "y": 7,
-          "z": 4
-        },
-        "Position": {
-          "x": 34,
-          "y": 209,
-          "z": 15000
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 280,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 180,
-          "g": 150,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "ColorCrystal1",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 8,
-          "z": 3
-        },
-        "Position": {
-          "x": 30,
-          "y": 239,
-          "z": 18030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 35,
-          "z": 12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 170,
-          "g": 80,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "ColorCrystal2",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 9,
-          "z": 4
-        },
-        "Position": {
-          "x": 0,
-          "y": 239,
-          "z": 18034
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 70,
-          "z": -12
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 70,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "ColorCrystal3",
-      "properties": {
-        "Size": {
-          "x": 2,
           "y": 10,
-          "z": 2
+          "z": 4
         },
         "Position": {
-          "x": -30,
-          "y": 239,
-          "z": 18030
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 105,
-          "z": 12
+          "x": -36,
+          "y": 212.5,
+          "z": 15030
         },
         "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
+        "Material": "Marble",
         "Color": {
-          "r": 170,
-          "g": 80,
+          "r": 235,
+          "g": 235,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.CelestialCity",
+      "name": "LandmarkColumn4",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": 36,
+          "y": 212.5,
+          "z": 15030
+        },
+        "Anchored": true,
+        "Material": "Marble",
+        "Color": {
+          "r": 235,
+          "g": 235,
           "b": 255
         }
       }
@@ -1769,30 +1323,24 @@
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "ColorCrystal4",
+      "name": "MainWalkway",
       "properties": {
         "Size": {
-          "x": 3,
-          "y": 7,
-          "z": 3
+          "x": 12,
+          "y": 1,
+          "z": 58
         },
         "Position": {
-          "x": -34,
-          "y": 239,
+          "x": 0,
+          "y": 238,
           "z": 18000
         },
-        "Orientation": {
-          "x": 0,
-          "y": 140,
-          "z": -12
-        },
         "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
+        "Material": "Slate",
         "Color": {
-          "r": 70,
-          "g": 220,
-          "b": 255
+          "r": 75,
+          "g": 55,
+          "b": 105
         }
       }
     },
@@ -1800,28 +1348,22 @@
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "ColorCrystal5",
+      "name": "AccentPad1",
       "properties": {
         "Size": {
-          "x": 4,
-          "y": 8,
-          "z": 4
-        },
-        "Position": {
-          "x": -30,
-          "y": 239,
-          "z": 17970
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 175,
+          "x": 12,
+          "y": 1,
           "z": 12
         },
+        "Position": {
+          "x": -28,
+          "y": 238,
+          "z": 17978
+        },
         "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
+        "Material": "Slate",
         "Color": {
-          "r": 170,
+          "r": 175,
           "g": 80,
           "b": 255
         }
@@ -1831,29 +1373,23 @@
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "ColorCrystal6",
+      "name": "AccentPad2",
       "properties": {
         "Size": {
-          "x": 2,
-          "y": 9,
-          "z": 2
+          "x": 12,
+          "y": 1,
+          "z": 12
         },
         "Position": {
-          "x": 0,
-          "y": 239,
-          "z": 17966
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 210,
-          "z": -12
+          "x": 28,
+          "y": 238,
+          "z": 17978
         },
         "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
+        "Material": "Slate",
         "Color": {
-          "r": 70,
-          "g": 220,
+          "r": 175,
+          "g": 80,
           "b": 255
         }
       }
@@ -1862,30 +1398,74 @@
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "ColorCrystal7",
+      "name": "AccentPad3",
       "properties": {
         "Size": {
-          "x": 3,
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": -28,
+          "y": 238,
+          "z": 18022
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 175,
+          "g": 80,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VoidRealm",
+      "name": "AccentPad4",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 12
+        },
+        "Position": {
+          "x": 28,
+          "y": 238,
+          "z": 18022
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 175,
+          "g": 80,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VoidRealm",
+      "name": "LandmarkColumn1",
+      "properties": {
+        "Size": {
+          "x": 4,
           "y": 10,
-          "z": 3
+          "z": 4
         },
         "Position": {
-          "x": 30,
-          "y": 239,
+          "x": -36,
+          "y": 242.5,
           "z": 17970
         },
-        "Orientation": {
-          "x": 0,
-          "y": 245,
-          "z": 12
-        },
         "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
+        "Material": "Slate",
         "Color": {
-          "r": 170,
-          "g": 80,
-          "b": 255
+          "r": 75,
+          "g": 55,
+          "b": 105
         }
       }
     },
@@ -1893,30 +1473,256 @@
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "ColorCrystal8",
+      "name": "LandmarkColumn2",
       "properties": {
         "Size": {
           "x": 4,
-          "y": 7,
+          "y": 10,
           "z": 4
         },
         "Position": {
-          "x": 34,
-          "y": 239,
-          "z": 18000
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 280,
-          "z": -12
+          "x": 36,
+          "y": 242.5,
+          "z": 17970
         },
         "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
+        "Material": "Slate",
         "Color": {
-          "r": 70,
-          "g": 220,
-          "b": 255
+          "r": 75,
+          "g": 55,
+          "b": 105
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VoidRealm",
+      "name": "LandmarkColumn3",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": -36,
+          "y": 242.5,
+          "z": 18030
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 75,
+          "g": 55,
+          "b": 105
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VoidRealm",
+      "name": "LandmarkColumn4",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 10,
+          "z": 4
+        },
+        "Position": {
+          "x": 36,
+          "y": 242.5,
+          "z": 18030
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 75,
+          "g": 55,
+          "b": 105
+        }
+      }
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.GrasslandsDecor.ColorCrystal1"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.GrasslandsDecor.ColorCrystal2"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.GrasslandsDecor.ColorCrystal3"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.GrasslandsDecor.ColorCrystal4"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.GrasslandsDecor.ColorCrystal5"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.GrasslandsDecor.ColorCrystal6"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.GrasslandsDecor.ColorCrystal7"
+    },
+    {
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.GrasslandsDecor.ColorCrystal8"
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
+      "name": "GardenStone1",
+      "properties": {
+        "Size": {
+          "x": 8,
+          "y": 1,
+          "z": 8
+        },
+        "Position": {
+          "x": -38,
+          "y": 58.5,
+          "z": -30
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 125,
+          "g": 135,
+          "b": 145
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
+      "name": "GardenStone2",
+      "properties": {
+        "Size": {
+          "x": 8,
+          "y": 1,
+          "z": 8
+        },
+        "Position": {
+          "x": 38,
+          "y": 58.5,
+          "z": -30
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 125,
+          "g": 135,
+          "b": 145
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
+      "name": "GardenStone3",
+      "properties": {
+        "Size": {
+          "x": 8,
+          "y": 1,
+          "z": 8
+        },
+        "Position": {
+          "x": -38,
+          "y": 58.5,
+          "z": 25
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 125,
+          "g": 135,
+          "b": 145
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
+      "name": "GardenStone4",
+      "properties": {
+        "Size": {
+          "x": 8,
+          "y": 1,
+          "z": 8
+        },
+        "Position": {
+          "x": 38,
+          "y": 58.5,
+          "z": 25
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 125,
+          "g": 135,
+          "b": 145
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
+      "name": "GardenStone5",
+      "properties": {
+        "Size": {
+          "x": 8,
+          "y": 1,
+          "z": 8
+        },
+        "Position": {
+          "x": -22,
+          "y": 58.5,
+          "z": -42
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 125,
+          "g": 135,
+          "b": 145
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
+      "name": "GardenStone6",
+      "properties": {
+        "Size": {
+          "x": 8,
+          "y": 1,
+          "z": 8
+        },
+        "Position": {
+          "x": 22,
+          "y": 58.5,
+          "z": -42
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 125,
+          "g": 135,
+          "b": 145
         }
       }
     }
