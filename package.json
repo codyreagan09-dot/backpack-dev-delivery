@@ -1,379 +1,406 @@
 {
-  "version": 22,
-  "name": "Grasslands Environment Pass",
+  "version": 23,
+  "name": "Sky Coins Core Loop",
   "changes": [
     {
       "action": "create",
       "class": "Folder",
       "parent": "Workspace.SkyboundMap",
-      "name": "GrasslandsDecor"
+      "name": "SkyCoins"
     },
     {
       "action": "create",
       "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "Rock1",
+      "parent": "Workspace.SkyboundMap.SkyCoins",
+      "name": "SkyCoin1",
       "properties": {
         "Size": {
-          "x": 8,
-          "y": 4,
-          "z": 7
-        },
-        "Position": {
-          "x": -46,
-          "y": 60,
-          "z": 5
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 112,
-          "g": 110,
-          "b": 106
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "Rock2",
-      "properties": {
-        "Size": {
-          "x": 10,
-          "y": 5,
-          "z": 8
-        },
-        "Position": {
-          "x": 45,
-          "y": 60,
-          "z": -8
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 112,
-          "g": 110,
-          "b": 106
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "Rock3",
-      "properties": {
-        "Size": {
-          "x": 7,
-          "y": 4,
-          "z": 9
-        },
-        "Position": {
-          "x": -25,
-          "y": 60,
-          "z": -45
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 112,
-          "g": 110,
-          "b": 106
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "Rock4",
-      "properties": {
-        "Size": {
-          "x": 9,
-          "y": 5,
-          "z": 7
-        },
-        "Position": {
-          "x": 28,
-          "y": 60,
-          "z": -43
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 112,
-          "g": 110,
-          "b": 106
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "Rock5",
-      "properties": {
-        "Size": {
-          "x": 8,
-          "y": 4,
-          "z": 6
-        },
-        "Position": {
-          "x": -18,
-          "y": 60,
-          "z": 43
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 112,
-          "g": 110,
-          "b": 106
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "Rock6",
-      "properties": {
-        "Size": {
-          "x": 6,
+          "x": 3,
           "y": 3,
-          "z": 8
-        },
-        "Position": {
-          "x": 20,
-          "y": 60,
-          "z": 45
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 112,
-          "g": 110,
-          "b": 106
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "CrystalFlower1",
-      "properties": {
-        "Size": {
-          "x": 1.5,
-          "y": 3,
-          "z": 1.5
-        },
-        "Position": {
-          "x": -22,
-          "y": 61.5,
-          "z": 10
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 115,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "CrystalFlower2",
-      "properties": {
-        "Size": {
-          "x": 1.5,
-          "y": 3,
-          "z": 1.5
-        },
-        "Position": {
-          "x": 22,
-          "y": 61.5,
-          "z": 8
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 115,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "CrystalFlower3",
-      "properties": {
-        "Size": {
-          "x": 1.5,
-          "y": 3,
-          "z": 1.5
+          "z": 3
         },
         "Position": {
           "x": -30,
-          "y": 61.5,
-          "z": -12
+          "y": 62,
+          "z": 28
         },
         "Anchored": true,
         "CanCollide": false,
+        "CanTouch": true,
         "Material": "Neon",
+        "Shape": "Ball",
         "Color": {
-          "r": 115,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "CrystalFlower4",
-      "properties": {
-        "Size": {
-          "x": 1.5,
-          "y": 3,
-          "z": 1.5
-        },
-        "Position": {
-          "x": 30,
-          "y": 61.5,
-          "z": -15
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 115,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "CrystalFlower5",
-      "properties": {
-        "Size": {
-          "x": 1.5,
-          "y": 3,
-          "z": 1.5
-        },
-        "Position": {
-          "x": -15,
-          "y": 61.5,
-          "z": -35
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 115,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "CrystalFlower6",
-      "properties": {
-        "Size": {
-          "x": 1.5,
-          "y": 3,
-          "z": 1.5
-        },
-        "Position": {
-          "x": 16,
-          "y": 61.5,
-          "z": -34
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 115,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "CentralShrineBase",
-      "properties": {
-        "Size": {
-          "x": 18,
-          "y": 2,
-          "z": 14
-        },
-        "Position": {
-          "x": 0,
-          "y": 60,
-          "z": -39
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 100,
-          "g": 105,
-          "b": 112
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor",
-      "name": "CentralShrineCrystal",
-      "properties": {
-        "Size": {
-          "x": 5,
-          "y": 10,
-          "z": 5
-        },
-        "Position": {
-          "x": 0,
-          "y": 66,
-          "z": -39
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Color": {
-          "r": 80,
-          "g": 205,
-          "b": 255
+          "r": 255,
+          "g": 215,
+          "b": 55
         }
       }
     },
     {
       "action": "create",
       "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.GrasslandsDecor.CentralShrineCrystal",
-      "name": "ShrineGlow",
+      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin1",
+      "name": "Glow",
       "properties": {
-        "Brightness": 2.5,
-        "Range": 20
+        "Brightness": 1.5,
+        "Range": 9
       }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.SkyCoins",
+      "name": "SkyCoin2",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": -18,
+          "y": 62,
+          "z": 16
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 255,
+          "g": 215,
+          "b": 55
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin2",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 9
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.SkyCoins",
+      "name": "SkyCoin3",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": -8,
+          "y": 62,
+          "z": 2
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 255,
+          "g": 215,
+          "b": 55
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin3",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 9
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.SkyCoins",
+      "name": "SkyCoin4",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 8,
+          "y": 62,
+          "z": -10
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 255,
+          "g": 215,
+          "b": 55
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin4",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 9
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.SkyCoins",
+      "name": "SkyCoin5",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 18,
+          "y": 62,
+          "z": -22
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 255,
+          "g": 215,
+          "b": 55
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin5",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 9
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.SkyCoins",
+      "name": "SkyCoin6",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 0,
+          "y": 62,
+          "z": -30
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 255,
+          "g": 215,
+          "b": 55
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin6",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 9
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.SkyCoins",
+      "name": "SkyCoin7",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 28,
+          "y": 62,
+          "z": 10
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 255,
+          "g": 215,
+          "b": 55
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin7",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 9
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.SkyCoins",
+      "name": "SkyCoin8",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": -32,
+          "y": 62,
+          "z": -18
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 255,
+          "g": 215,
+          "b": 55
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin8",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 9
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.SkyCoins",
+      "name": "SkyCoin9",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 35,
+          "y": 62,
+          "z": -34
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 255,
+          "g": 215,
+          "b": 55
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin9",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 9
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.SkyCoins",
+      "name": "SkyCoin10",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": -38,
+          "y": 62,
+          "z": 38
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": true,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 255,
+          "g": 215,
+          "b": 55
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.SkyCoins.SkyCoin10",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 1.5,
+        "Range": 9
+      }
+    },
+    {
+      "action": "create",
+      "class": "Script",
+      "parent": "ServerScriptService",
+      "name": "SkyboundCore",
+      "source": "local Players=game:GetService(\"Players\")\nlocal folder=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"SkyCoins\")\nlocal busy={}\nlocal function setup(p)\n local stats=Instance.new(\"Folder\");stats.Name=\"leaderstats\";stats.Parent=p\n local coins=Instance.new(\"IntValue\");coins.Name=\"SkyCoins\";coins.Value=0;coins.Parent=stats\nend\nPlayers.PlayerAdded:Connect(setup)\nfor _,p in ipairs(Players:GetPlayers()) do if not p:FindFirstChild(\"leaderstats\") then setup(p) end end\nfor _,coin in ipairs(folder:GetChildren()) do\n if coin:IsA(\"BasePart\") then coin.Touched:Connect(function(hit)\n  local p=Players:GetPlayerFromCharacter(hit.Parent)\n  if not p or busy[coin] then return end\n  local stats=p:FindFirstChild(\"leaderstats\");local c=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not c then return end\n  busy[coin]=true;c.Value+=1;coin.Transparency=1;coin.CanTouch=false\n  local l=coin:FindFirstChildOfClass(\"PointLight\");if l then l.Enabled=false end\n  task.delay(7,function() if coin.Parent then coin.Transparency=0;coin.CanTouch=true;if l then l.Enabled=true end;busy[coin]=nil end end)\n end) end\nend"
+    },
+    {
+      "action": "create",
+      "class": "LocalScript",
+      "parent": "StarterPlayer.StarterPlayerScripts",
+      "name": "SkyboundHUD",
+      "source": "local p=game:GetService(\"Players\").LocalPlayer\nlocal gui=Instance.new(\"ScreenGui\");gui.Name=\"SkyboundHUD\";gui.ResetOnSpawn=false;gui.Parent=p:WaitForChild(\"PlayerGui\")\nlocal box=Instance.new(\"TextLabel\");box.Size=UDim2.fromOffset(230,54);box.Position=UDim2.new(1,-250,0,20);box.BackgroundColor3=Color3.fromRGB(20,30,50);box.BackgroundTransparency=.12;box.TextColor3=Color3.new(1,1,1);box.Font=Enum.Font.GothamBold;box.TextScaled=true;box.Parent=gui\nlocal corner=Instance.new(\"UICorner\");corner.CornerRadius=UDim.new(0,14);corner.Parent=box\nlocal coins=p:WaitForChild(\"leaderstats\"):WaitForChild(\"SkyCoins\")\nlocal function update() box.Text=\"✦  \"..coins.Value..\" SKY COINS\" end\ncoins:GetPropertyChangedSignal(\"Value\"):Connect(update);update()"
     }
   ]
 }
