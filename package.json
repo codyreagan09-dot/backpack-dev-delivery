@@ -1,204 +1,36 @@
 {
-  "version": 41,
-  "name": "Frozen Peaks Expansion",
+  "version": 42,
+  "name": "Frozen Peaks Frost Orbs",
   "changes": [
     {
       "action": "create",
       "class": "Folder",
-      "parent": "Workspace.SkyboundMap",
-      "name": "FrozenPeaks"
-    },
-    {
-      "action": "create",
-      "class": "Part",
       "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "IslandTop",
-      "properties": {
-        "Size": {
-          "x": 85,
-          "y": 7,
-          "z": 80
-        },
-        "Position": {
-          "x": 0,
-          "y": 140,
-          "z": 9000
-        },
-        "Anchored": true,
-        "Material": "Snow",
-        "Color": {
-          "r": 230,
-          "g": 245,
-          "b": 255
-        }
-      }
+      "name": "FrozenCoins"
     },
     {
       "action": "create",
       "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "RockBase",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins",
+      "name": "FrostOrb1",
       "properties": {
         "Size": {
-          "x": 70,
-          "y": 22,
-          "z": 66
+          "x": 3,
+          "y": 3,
+          "z": 3
         },
         "Position": {
-          "x": 0,
-          "y": 125,
-          "z": 9000
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 100,
-          "g": 120,
-          "b": 140
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "RockTip",
-      "properties": {
-        "Size": {
-          "x": 42,
-          "y": 24,
-          "z": 40
-        },
-        "Position": {
-          "x": 0,
-          "y": 102,
-          "z": 9000
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 80,
-          "g": 100,
-          "b": 120
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "IceCrystal1",
-      "properties": {
-        "Size": {
-          "x": 5,
-          "y": 16,
-          "z": 5
-        },
-        "Position": {
-          "x": -25,
-          "y": 152,
-          "z": 8980
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 0,
-          "z": 12
-        },
-        "Anchored": true,
-        "Material": "Neon",
-        "Transparency": 0.15,
-        "Color": {
-          "r": 100,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "IceCrystal2",
-      "properties": {
-        "Size": {
-          "x": 4,
-          "y": 12,
-          "z": 4
-        },
-        "Position": {
-          "x": -18,
-          "y": 150,
-          "z": 8984
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 0,
-          "z": -15
-        },
-        "Anchored": true,
-        "Material": "Neon",
-        "Transparency": 0.15,
-        "Color": {
-          "r": 120,
-          "g": 230,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "IceCrystal3",
-      "properties": {
-        "Size": {
-          "x": 6,
-          "y": 18,
-          "z": 6
-        },
-        "Position": {
-          "x": 28,
-          "y": 153,
-          "z": 9015
-        },
-        "Orientation": {
-          "x": 0,
-          "y": 0,
-          "z": -10
-        },
-        "Anchored": true,
-        "Material": "Neon",
-        "Transparency": 0.15,
-        "Color": {
-          "r": 90,
-          "g": 205,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "FrozenPortal",
-      "properties": {
-        "Size": {
-          "x": 12,
-          "y": 15,
-          "z": 2
-        },
-        "Position": {
-          "x": 28,
-          "y": 122,
-          "z": 5970
+          "x": -30,
+          "y": 144,
+          "z": 9030
         },
         "Anchored": true,
         "CanCollide": false,
         "Material": "Neon",
-        "Transparency": 0.15,
+        "Shape": "Ball",
         "Color": {
-          "r": 120,
-          "g": 225,
+          "r": 170,
+          "g": 240,
           "b": 255
         }
       }
@@ -206,31 +38,352 @@
     {
       "action": "create",
       "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.FrozenPortal",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins.FrostOrb1",
       "name": "Glow",
       "properties": {
-        "Brightness": 3,
-        "Range": 20
+        "Brightness": 2,
+        "Range": 10
       }
     },
     {
       "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.DesertTemple.FrozenPortal",
-      "name": "TravelPrompt",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins",
+      "name": "FrostOrb2",
       "properties": {
-        "ActionText": "UNLOCK - 10 COINS",
-        "ObjectText": "FROZEN PEAKS",
-        "HoldDuration": 0.6,
-        "MaxActivationDistance": 12
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": -12,
+          "y": 144,
+          "z": 9032
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 170,
+          "g": 240,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins.FrostOrb2",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 2,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins",
+      "name": "FrostOrb3",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 10,
+          "y": 144,
+          "z": 9030
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 170,
+          "g": 240,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins.FrostOrb3",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 2,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins",
+      "name": "FrostOrb4",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 30,
+          "y": 144,
+          "z": 9024
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 170,
+          "g": 240,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins.FrostOrb4",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 2,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins",
+      "name": "FrostOrb5",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": -34,
+          "y": 144,
+          "z": 9005
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 170,
+          "g": 240,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins.FrostOrb5",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 2,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins",
+      "name": "FrostOrb6",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 34,
+          "y": 144,
+          "z": 9000
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 170,
+          "g": 240,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins.FrostOrb6",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 2,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins",
+      "name": "FrostOrb7",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": -28,
+          "y": 144,
+          "z": 8974
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 170,
+          "g": 240,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins.FrostOrb7",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 2,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins",
+      "name": "FrostOrb8",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": -8,
+          "y": 144,
+          "z": 8970
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 170,
+          "g": 240,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins.FrostOrb8",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 2,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins",
+      "name": "FrostOrb9",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 14,
+          "y": 144,
+          "z": 8972
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 170,
+          "g": 240,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins.FrostOrb9",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 2,
+        "Range": 10
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins",
+      "name": "FrostOrb10",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 3,
+          "z": 3
+        },
+        "Position": {
+          "x": 32,
+          "y": 144,
+          "z": 8980
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Shape": "Ball",
+        "Color": {
+          "r": 170,
+          "g": 240,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.FrozenCoins.FrostOrb10",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 2,
+        "Range": 10
       }
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "FrozenPortalSystem",
-      "source": "local portal=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"DesertTemple\"):WaitForChild(\"FrozenPortal\")\nlocal prompt=portal:WaitForChild(\"TravelPrompt\")\nlocal destination=workspace.SkyboundMap:WaitForChild(\"FrozenPeaks\"):WaitForChild(\"IslandTop\")\nprompt.Triggered:Connect(function(player)\n local stats=player:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n if not coins then return end\n if player:GetAttribute(\"FrozenUnlocked\")~=true then\n  if coins.Value<10 then return end\n  coins.Value-=10;player:SetAttribute(\"FrozenUnlocked\",true);prompt.ActionText=\"TRAVEL\"\n end\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\")\n if root then root.CFrame=CFrame.new(destination.Position+Vector3.new(0,7,0)) end\nend)"
+      "name": "FrozenOrbSystem",
+      "source": "local Players=game:GetService(\"Players\")\nlocal folder=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"FrozenPeaks\"):WaitForChild(\"FrozenCoins\")\nlocal busy={}\nfor _,orb in ipairs(folder:GetChildren()) do\n if orb:IsA(\"BasePart\") then orb.Touched:Connect(function(hit)\n  local p=Players:GetPlayerFromCharacter(hit.Parent)\n  if not p or busy[orb] then return end\n  local stats=p:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not coins then return end\n  busy[orb]=true;coins.Value+=1000000;orb.Transparency=1;orb.CanTouch=false\n  local l=orb:FindFirstChildOfClass(\"PointLight\");if l then l.Enabled=false end\n  task.delay(7,function() if orb.Parent then orb.Transparency=0;orb.CanTouch=true;if l then l.Enabled=true end;busy[orb]=nil end end)\n end) end\nend"
     }
   ]
 }
