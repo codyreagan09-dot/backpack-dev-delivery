@@ -1,13 +1,17 @@
 {
-  "version": 17,
-  "name": "Sky Coins Currency UI",
+  "version": 18,
+  "name": "All Grasslands Coins Worth 100 Million",
   "changes": [
     {
+      "action": "delete",
+      "path": "ServerScriptService.SkyCoinSystem"
+    },
+    {
       "action": "create",
-      "class": "LocalScript",
-      "parent": "StarterPlayer.StarterPlayerScripts",
-      "name": "SkyCurrencyUI",
-      "source": "local Players=game:GetService(\"Players\")\nlocal player=Players.LocalPlayer\nlocal gui=Instance.new(\"ScreenGui\")\ngui.Name=\"SkyCurrencyUI\"\ngui.ResetOnSpawn=false\ngui.Parent=player:WaitForChild(\"PlayerGui\")\n\nlocal frame=Instance.new(\"Frame\")\nframe.Name=\"CurrencyBox\"\nframe.Size=UDim2.fromOffset(270,64)\nframe.Position=UDim2.new(1,-290,0,20)\nframe.BackgroundColor3=Color3.fromRGB(20,28,48)\nframe.BackgroundTransparency=.08\nframe.BorderSizePixel=0\nframe.Parent=gui\n\nlocal corner=Instance.new(\"UICorner\")\ncorner.CornerRadius=UDim.new(0,16)\ncorner.Parent=frame\n\nlocal stroke=Instance.new(\"UIStroke\")\nstroke.Thickness=2\nstroke.Color=Color3.fromRGB(90,210,255)\nstroke.Transparency=.15\nstroke.Parent=frame\n\nlocal icon=Instance.new(\"TextLabel\")\nicon.Size=UDim2.fromOffset(55,55)\nicon.Position=UDim2.fromOffset(6,4)\nicon.BackgroundTransparency=1\nicon.Text=\"✦\"\nicon.TextColor3=Color3.fromRGB(100,220,255)\nicon.TextScaled=true\nicon.Font=Enum.Font.GothamBold\nicon.Parent=frame\n\nlocal label=Instance.new(\"TextLabel\")\nlabel.Size=UDim2.new(1,-68,1,0)\nlabel.Position=UDim2.fromOffset(64,0)\nlabel.BackgroundTransparency=1\nlabel.TextColor3=Color3.new(1,1,1)\nlabel.TextXAlignment=Enum.TextXAlignment.Left\nlabel.Font=Enum.Font.GothamBold\nlabel.TextScaled=true\nlabel.Parent=frame\n\nlocal function format(n)\n if n>=1e12 then return string.format(\"%.2fT\",n/1e12) end\n if n>=1e9 then return string.format(\"%.2fB\",n/1e9) end\n if n>=1e6 then return string.format(\"%.2fM\",n/1e6) end\n if n>=1e3 then return string.format(\"%.1fK\",n/1e3) end\n return tostring(n)\nend\n\nlocal stats=player:WaitForChild(\"leaderstats\")\nlocal coins=stats:WaitForChild(\"SkyCoins\")\nlocal function update()\n label.Text=format(coins.Value)..\"  SKY COINS\"\nend\ncoins:GetPropertyChangedSignal(\"Value\"):Connect(update)\nupdate()"
+      "class": "Script",
+      "parent": "ServerScriptService",
+      "name": "SkyCoinSystem100M",
+      "source": "local Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal folder=map:WaitForChild(\"SkyCoinPickups\")\nlocal busy={}\n\nlocal function hook(coin)\n coin.Touched:Connect(function(hit)\n  local player=Players:GetPlayerFromCharacter(hit.Parent)\n  if not player or busy[coin] then return end\n  local stats=player:FindFirstChild(\"leaderstats\")\n  local sky=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not sky then return end\n  busy[coin]=true\n  sky.Value+=100000000\n  coin.Transparency=1\n  coin.CanTouch=false\n  local light=coin:FindFirstChildOfClass(\"PointLight\")\n  if light then light.Enabled=false end\n  task.delay(8,function()\n   if coin.Parent then\n    coin.Transparency=0\n    coin.CanTouch=true\n    if light then light.Enabled=true end\n    busy[coin]=nil\n   end\n  end)\n end)\nend\n\nfor _,coin in ipairs(folder:GetChildren()) do\n if coin:IsA(\"BasePart\") then hook(coin) end\nend"
     }
   ]
 }
