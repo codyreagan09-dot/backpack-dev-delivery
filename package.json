@@ -1,13 +1,17 @@
 {
-  "version": 10,
-  "name": "Skybound Pet Coin Boosts",
+  "version": 11,
+  "name": "Fix Pet Movement and Multipliers",
   "changes": [
+    {
+      "action": "delete",
+      "path": "ServerScriptService.SkyboundPetBoosts"
+    },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "SkyboundPetBoosts",
-      "source": "local Players=game:GetService(\"Players\")\nlocal RunService=game:GetService(\"RunService\")\n\nlocal function getEquippedPet(player)\n return workspace:FindFirstChild(player.Name..\"_Pet\")\nend\n\nlocal function getBoost(player)\n local pet=getEquippedPet(player)\n if not pet then return 1 end\n local name=\"\"\n local gui=pet:FindFirstChildOfClass(\"BillboardGui\")\n local label=gui and gui:FindFirstChildOfClass(\"TextLabel\")\n if label then name=label.Text end\n if name==\"Cloud Bunny\" then return 1.25 end\n if name==\"Sky Fox\" then return 1.5 end\n if name==\"Sun Cub\" then return 2 end\n if name==\"Storm Dragon\" then return 3 end\n return 1\nend\n\nlocal lastAward={}\n\nRunService.Heartbeat:Connect(function()\n for _,player in ipairs(Players:GetPlayers()) do\n  local pet=getEquippedPet(player)\n  local character=player.Character\n  local root=character and character:FindFirstChild(\"HumanoidRootPart\")\n  if pet and root and pet:IsA(\"BasePart\") then\n   local target=root.CFrame*CFrame.new(4,1,3)\n   pet.CFrame=pet.CFrame:Lerp(target,0.08)\n  end\n end\nend)\n\nfor _,obj in ipairs(workspace:GetDescendants()) do\n if obj:IsA(\"BasePart\") and string.match(obj.Name,\"^SkyCoin%d+$\") then\n  obj.Touched:Connect(function(hit)\n   local player=Players:GetPlayerFromCharacter(hit.Parent)\n   if not player then return end\n   local now=os.clock()\n   local key=tostring(player.UserId)..\":\"..obj:GetFullName()\n   if lastAward[key] and now-lastAward[key]<1 then return end\n   lastAward[key]=now\n\n   local stats=player:FindFirstChild(\"leaderstats\")\n   local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n   if not coins then return end\n   local boost=getBoost(player)\n   local bonus=math.max(0,math.floor(boost-1))\n   if bonus>0 then coins.Value+=bonus end\n  end)\n end\nend\n\nprint(\"Skybound pet boosts loaded\")"
+      "name": "SkyboundPetBoostsFixed",
+      "source": "local Players=game:GetService(\"Players\")\n\nlocal boosts={\n [\"Cloud Bunny\"]=1.25,\n [\"Sky Fox\"]=1.5,\n [\"Sun Cub\"]=2,\n [\"Storm Dragon\"]=3\n}\n\nlocal function getBoost(player)\n local pet=workspace:FindFirstChild(player.Name..\"_Pet\")\n if not pet then return 1 end\n local gui=pet:FindFirstChildOfClass(\"BillboardGui\")\n local label=gui and gui:FindFirstChildOfClass(\"TextLabel\")\n return (label and boosts[label.Text]) or 1\nend\n\nlocal function hookCoin(coin)\n if coin:GetAttribute(\"PetBoostHooked\") then return end\n coin:SetAttribute(\"PetBoostHooked\",true)\n coin.Touched:Connect(function(hit)\n  local player=Players:GetPlayerFromCharacter(hit.Parent)\n  if not player then return end\n  local boost=getBoost(player)\n  if boost<=1 then return end\n  local stats=player:FindFirstChild(\"leaderstats\")\n  local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not coins then return end\n\n  local extra=0\n  if boost==1.25 then\n   local progress=(player:GetAttribute(\"CloudBunnyBonus\") or 0)+0.25\n   if progress>=1 then extra=1 progress-=1 end\n   player:SetAttribute(\"CloudBunnyBonus\",progress)\n  elseif boost==1.5 then\n   local progress=(player:GetAttribute(\"SkyFoxBonus\") or 0)+0.5\n   if progress>=1 then extra=1 progress-=1 end\n   player:SetAttribute(\"SkyFoxBonus\",progress)\n  else\n   extra=boost-1\n  end\n  coins.Value+=extra\n end)\nend\n\nlocal function scan()\n for _,obj in ipairs(workspace:GetDescendants()) do\n  if obj:IsA(\"BasePart\") and string.match(obj.Name,\"^SkyCoin%d+$\") then hookCoin(obj) end\n end\nend\n\nscan()\nworkspace.DescendantAdded:Connect(function(obj)\n if obj:IsA(\"BasePart\") and string.match(obj.Name,\"^SkyCoin%d+$\") then task.defer(hookCoin,obj) end\nend)\n\nprint(\"Skybound pet coin boosts fixed\")"
     }
   ]
 }
