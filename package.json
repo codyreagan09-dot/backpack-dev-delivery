@@ -1,20 +1,539 @@
 {
-  "version": 5,
-  "name": "Skybound Fresh Recovery",
+  "version": 6,
+  "name": "Skybound Permanent Map",
   "changes": [
     {
       "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "SkyboundGame",
-      "source": "local Players=game:GetService(\"Players\")\nlocal Lighting=game:GetService(\"Lighting\")\n\nlocal old=workspace:FindFirstChild(\"Skybound\")\nif old then old:Destroy() end\n\nlocal world=Instance.new(\"Folder\")\nworld.Name=\"Skybound\"\nworld.Parent=workspace\n\nworkspace.FallenPartsDestroyHeight=-150\n\nLighting.ClockTime=13.5\nLighting.Brightness=2.5\nLighting.Ambient=Color3.fromRGB(150,175,210)\nLighting.OutdoorAmbient=Color3.fromRGB(180,205,255)\n\nlocal atmosphere=Lighting:FindFirstChildOfClass(\"Atmosphere\") or Instance.new(\"Atmosphere\")\natmosphere.Density=.22\natmosphere.Offset=.1\natmosphere.Color=Color3.fromRGB(205,225,255)\natmosphere.Decay=Color3.fromRGB(100,145,210)\natmosphere.Glare=.2\natmosphere.Haze=1\natmosphere.Parent=Lighting\n\nlocal function part(name,size,pos,color,material,parent)\n local p=Instance.new(\"Part\")\n p.Name=name\n p.Size=size\n p.Position=pos\n p.Anchored=true\n p.Color=color\n p.Material=material\n p.TopSurface=Enum.SurfaceType.Smooth\n p.BottomSurface=Enum.SurfaceType.Smooth\n p.Parent=parent or world\n return p\nend\n\nlocal function island(name,pos,radius)\n local model=Instance.new(\"Model\")\n model.Name=name\n model.Parent=world\n\n local rock=part(\"FloatingRock\",Vector3.new(radius*1.7,8,radius*1.7),pos-Vector3.new(0,5,0),Color3.fromRGB(92,82,78),Enum.Material.Slate,model)\n rock.Shape=Enum.PartType.Ball\n\n local underside=part(\"Underside\",Vector3.new(radius*1.15,12,radius*1.15),pos-Vector3.new(0,11,0),Color3.fromRGB(70,66,72),Enum.Material.Rock,model)\n underside.Shape=Enum.PartType.Ball\n\n local grass=part(\"Grass\",Vector3.new(radius*1.75,3,radius*1.75),pos,Color3.fromRGB(82,170,76),Enum.Material.Grass,model)\n grass.Shape=Enum.PartType.Cylinder\n grass.Orientation=Vector3.new(0,0,90)\n\n return model\nend\n\nlocal main=island(\"Grasslands\",Vector3.new(0,65,0),52)\n\nlocal spawn=Instance.new(\"SpawnLocation\")\nspawn.Name=\"SkySpawn\"\nspawn.Size=Vector3.new(10,1,10)\nspawn.Position=Vector3.new(0,68,12)\nspawn.Anchored=true\nspawn.Neutral=true\nspawn.Material=Enum.Material.Neon\nspawn.Color=Color3.fromRGB(110,220,255)\nspawn.Transparency=.15\nspawn.Parent=main\n\npart(\"Path\",Vector3.new(12,1,34),Vector3.new(0,68,-12),Color3.fromRGB(154,121,82),Enum.Material.Ground,main)\n\nfor i,data in ipairs({\n {Vector3.new(70,78,-25),25},\n {Vector3.new(-75,88,-18),22},\n {Vector3.new(48,103,62),18},\n {Vector3.new(-52,112,58),20},\n {Vector3.new(0,132,-82),24}\n}) do\n island(\"DistantIsland\"..i,data[1],data[2])\nend\n\nfor i=1,10 do\n local angle=(i/10)*math.pi*2\n local r=32+(i%3)*5\n local x=math.cos(angle)*r\n local z=math.sin(angle)*r\n local trunk=part(\"TreeTrunk\"..i,Vector3.new(2.5,8,2.5),Vector3.new(x,72,z),Color3.fromRGB(105,72,45),Enum.Material.Wood,main)\n local leaves=part(\"TreeTop\"..i,Vector3.new(9,9,9),Vector3.new(x,79,z),Color3.fromRGB(65,155,72),Enum.Material.Grass,main)\n leaves.Shape=Enum.PartType.Ball\nend\n\nlocal sign=part(\"WelcomeSign\",Vector3.new(18,8,1),Vector3.new(0,73,-31),Color3.fromRGB(92,61,38),Enum.Material.WoodPlanks,main)\nlocal gui=Instance.new(\"SurfaceGui\")\ngui.Face=Enum.NormalId.Front\ngui.CanvasSize=Vector2.new(700,320)\ngui.Parent=sign\nlocal label=Instance.new(\"TextLabel\")\nlabel.Size=UDim2.fromScale(1,1)\nlabel.BackgroundTransparency=1\nlabel.Text=\"SKYBOUND\\nGRASSLANDS\\nYour journey begins here\"\nlabel.TextColor3=Color3.new(1,1,1)\nlabel.Font=Enum.Font.GothamBold\nlabel.TextScaled=true\nlabel.TextWrapped=true\nlabel.Parent=gui\n\nlocal function setupPlayer(player)\n local stats=player:FindFirstChild(\"leaderstats\") or Instance.new(\"Folder\")\n stats.Name=\"leaderstats\"\n stats.Parent=player\n local coins=stats:FindFirstChild(\"SkyCoins\") or Instance.new(\"IntValue\")\n coins.Name=\"SkyCoins\"\n coins.Value=0\n coins.Parent=stats\nend\n\nfor _,p in ipairs(Players:GetPlayers()) do setupPlayer(p) end\nPlayers.PlayerAdded:Connect(setupPlayer)\n\nprint(\"Skybound Build 1 loaded\")"
+      "class": "Folder",
+      "parent": "Workspace",
+      "name": "SkyboundMap"
     },
     {
       "action": "create",
-      "class": "LocalScript",
-      "parent": "StarterPlayer.StarterPlayerScripts",
-      "name": "SkyboundHUD",
-      "source": "local Players=game:GetService(\"Players\")\nlocal player=Players.LocalPlayer\n\nlocal old=player.PlayerGui:FindFirstChild(\"SkyboundUI\")\nif old then old:Destroy() end\n\nlocal gui=Instance.new(\"ScreenGui\")\ngui.Name=\"SkyboundUI\"\ngui.ResetOnSpawn=false\ngui.Parent=player.PlayerGui\n\nlocal title=Instance.new(\"TextLabel\")\ntitle.Size=UDim2.fromOffset(330,65)\ntitle.Position=UDim2.new(.5,-165,0,18)\ntitle.BackgroundTransparency=1\ntitle.Text=\"SKYBOUND\"\ntitle.TextColor3=Color3.fromRGB(255,220,70)\ntitle.TextStrokeTransparency=.35\ntitle.Font=Enum.Font.GothamBlack\ntitle.TextScaled=true\ntitle.Parent=gui\n\nlocal coins=Instance.new(\"TextLabel\")\ncoins.Size=UDim2.fromOffset(235,55)\ncoins.Position=UDim2.fromOffset(20,20)\ncoins.BackgroundColor3=Color3.fromRGB(28,42,68)\ncoins.BackgroundTransparency=.12\ncoins.TextColor3=Color3.new(1,1,1)\ncoins.Font=Enum.Font.GothamBold\ncoins.TextScaled=true\ncoins.Parent=gui\nInstance.new(\"UICorner\",coins).CornerRadius=UDim.new(0,14)\n\nlocal stroke=Instance.new(\"UIStroke\")\nstroke.Thickness=2\nstroke.Transparency=.35\nstroke.Color=Color3.fromRGB(110,220,255)\nstroke.Parent=coins\n\nlocal stats=player:WaitForChild(\"leaderstats\")\nlocal skyCoins=stats:WaitForChild(\"SkyCoins\")\nlocal function refresh()\n coins.Text=\"SKY COINS   \"..skyCoins.Value\nend\nskyCoins:GetPropertyChangedSignal(\"Value\"):Connect(refresh)\nrefresh()\n\nlocal subtitle=Instance.new(\"TextLabel\")\nsubtitle.Size=UDim2.fromOffset(420,38)\nsubtitle.Position=UDim2.new(.5,-210,1,-58)\nsubtitle.BackgroundTransparency=1\nsubtitle.Text=\"Explore • Collect • Ascend\"\nsubtitle.TextColor3=Color3.new(1,1,1)\nsubtitle.TextStrokeTransparency=.45\nsubtitle.Font=Enum.Font.GothamBold\nsubtitle.TextScaled=true\nsubtitle.Parent=gui"
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "Grasslands",
+      "properties": {
+        "Size": {
+          "x": 92,
+          "y": 8,
+          "z": 92
+        },
+        "Position": {
+          "x": 0,
+          "y": 55,
+          "z": 0
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 82,
+          "g": 170,
+          "b": 76
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "IslandRock",
+      "properties": {
+        "Size": {
+          "x": 82,
+          "y": 16,
+          "z": 82
+        },
+        "Position": {
+          "x": 0,
+          "y": 44,
+          "z": 0
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 92,
+          "g": 82,
+          "b": 78
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "SpawnLocation",
+      "parent": "Workspace.SkyboundMap",
+      "name": "SkySpawn",
+      "properties": {
+        "Size": {
+          "x": 10,
+          "y": 1,
+          "z": 10
+        },
+        "Position": {
+          "x": 0,
+          "y": 60,
+          "z": 12
+        },
+        "Anchored": true,
+        "Neutral": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 110,
+          "g": 220,
+          "b": 255
+        },
+        "Transparency": 0.15
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "Path",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 1,
+          "z": 34
+        },
+        "Position": {
+          "x": 0,
+          "y": 60,
+          "z": -12
+        },
+        "Anchored": true,
+        "Material": "Ground",
+        "Color": {
+          "r": 154,
+          "g": 121,
+          "b": 82
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "Island1",
+      "properties": {
+        "Size": {
+          "x": 42,
+          "y": 7,
+          "z": 42
+        },
+        "Position": {
+          "x": 70,
+          "y": 68,
+          "z": -25
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 82,
+          "g": 170,
+          "b": 76
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "Island2",
+      "properties": {
+        "Size": {
+          "x": 38,
+          "y": 7,
+          "z": 38
+        },
+        "Position": {
+          "x": -75,
+          "y": 78,
+          "z": -18
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 82,
+          "g": 170,
+          "b": 76
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "Island3",
+      "properties": {
+        "Size": {
+          "x": 32,
+          "y": 6,
+          "z": 32
+        },
+        "Position": {
+          "x": 48,
+          "y": 93,
+          "z": 62
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 82,
+          "g": 170,
+          "b": 76
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "Island4",
+      "properties": {
+        "Size": {
+          "x": 35,
+          "y": 6,
+          "z": 35
+        },
+        "Position": {
+          "x": -52,
+          "y": 102,
+          "z": 58
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 82,
+          "g": 170,
+          "b": 76
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "Island5",
+      "properties": {
+        "Size": {
+          "x": 40,
+          "y": 7,
+          "z": 40
+        },
+        "Position": {
+          "x": 0,
+          "y": 122,
+          "z": -82
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 82,
+          "g": 170,
+          "b": 76
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTrunk1",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 10,
+          "z": 3
+        },
+        "Position": {
+          "x": 32,
+          "y": 65,
+          "z": 8
+        },
+        "Anchored": true,
+        "Material": "Wood",
+        "Color": {
+          "r": 105,
+          "g": 72,
+          "b": 45
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTop1",
+      "properties": {
+        "Size": {
+          "x": 10,
+          "y": 10,
+          "z": 10
+        },
+        "Position": {
+          "x": 32,
+          "y": 72,
+          "z": 8
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 65,
+          "g": 155,
+          "b": 72
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTrunk2",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 10,
+          "z": 3
+        },
+        "Position": {
+          "x": -30,
+          "y": 65,
+          "z": 15
+        },
+        "Anchored": true,
+        "Material": "Wood",
+        "Color": {
+          "r": 105,
+          "g": 72,
+          "b": 45
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTop2",
+      "properties": {
+        "Size": {
+          "x": 10,
+          "y": 10,
+          "z": 10
+        },
+        "Position": {
+          "x": -30,
+          "y": 72,
+          "z": 15
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 65,
+          "g": 155,
+          "b": 72
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTrunk3",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 10,
+          "z": 3
+        },
+        "Position": {
+          "x": 26,
+          "y": 65,
+          "z": -29
+        },
+        "Anchored": true,
+        "Material": "Wood",
+        "Color": {
+          "r": 105,
+          "g": 72,
+          "b": 45
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTop3",
+      "properties": {
+        "Size": {
+          "x": 10,
+          "y": 10,
+          "z": 10
+        },
+        "Position": {
+          "x": 26,
+          "y": 72,
+          "z": -29
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 65,
+          "g": 155,
+          "b": 72
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTrunk4",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 10,
+          "z": 3
+        },
+        "Position": {
+          "x": -27,
+          "y": 65,
+          "z": -27
+        },
+        "Anchored": true,
+        "Material": "Wood",
+        "Color": {
+          "r": 105,
+          "g": 72,
+          "b": 45
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTop4",
+      "properties": {
+        "Size": {
+          "x": 10,
+          "y": 10,
+          "z": 10
+        },
+        "Position": {
+          "x": -27,
+          "y": 72,
+          "z": -27
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 65,
+          "g": 155,
+          "b": 72
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTrunk5",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 10,
+          "z": 3
+        },
+        "Position": {
+          "x": 39,
+          "y": 65,
+          "z": -15
+        },
+        "Anchored": true,
+        "Material": "Wood",
+        "Color": {
+          "r": 105,
+          "g": 72,
+          "b": 45
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTop5",
+      "properties": {
+        "Size": {
+          "x": 10,
+          "y": 10,
+          "z": 10
+        },
+        "Position": {
+          "x": 39,
+          "y": 72,
+          "z": -15
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 65,
+          "g": 155,
+          "b": 72
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTrunk6",
+      "properties": {
+        "Size": {
+          "x": 3,
+          "y": 10,
+          "z": 3
+        },
+        "Position": {
+          "x": -40,
+          "y": 65,
+          "z": -5
+        },
+        "Anchored": true,
+        "Material": "Wood",
+        "Color": {
+          "r": 105,
+          "g": 72,
+          "b": 45
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTop6",
+      "properties": {
+        "Size": {
+          "x": 10,
+          "y": 10,
+          "z": 10
+        },
+        "Position": {
+          "x": -40,
+          "y": 72,
+          "z": -5
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 65,
+          "g": 155,
+          "b": 72
+        }
+      }
     }
   ]
 }
