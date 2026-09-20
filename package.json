@@ -1,197 +1,25 @@
 {
-  "version": 29,
-  "name": "Waterfall Isles Expansion",
+  "version": 30,
+  "name": "Remove Sky Power Multipliers",
   "changes": [
     {
-      "action": "create",
-      "class": "Folder",
-      "parent": "Workspace.SkyboundMap",
-      "name": "WaterfallIsles"
+      "action": "delete",
+      "path": "ServerScriptService.SkyPowerOrbSystem"
     },
     {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "IslandTop",
-      "properties": {
-        "Size": {
-          "x": 70,
-          "y": 7,
-          "z": 65
-        },
-        "Position": {
-          "x": 140,
-          "y": 85,
-          "z": 0
-        },
-        "Anchored": true,
-        "Material": "Grass",
-        "Color": {
-          "r": 65,
-          "g": 175,
-          "b": 95
-        }
-      }
+      "action": "delete",
+      "path": "ServerScriptService.SkyPowerShrine"
     },
     {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "RockBase",
-      "properties": {
-        "Size": {
-          "x": 58,
-          "y": 18,
-          "z": 53
-        },
-        "Position": {
-          "x": 140,
-          "y": 72,
-          "z": 0
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 82,
-          "g": 88,
-          "b": 96
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "RockTip",
-      "properties": {
-        "Size": {
-          "x": 35,
-          "y": 20,
-          "z": 32
-        },
-        "Position": {
-          "x": 140,
-          "y": 53,
-          "z": 0
-        },
-        "Anchored": true,
-        "Material": "Slate",
-        "Color": {
-          "r": 72,
-          "g": 77,
-          "b": 84
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "Waterfall",
-      "properties": {
-        "Size": {
-          "x": 12,
-          "y": 35,
-          "z": 2
-        },
-        "Position": {
-          "x": 140,
-          "y": 68,
-          "z": -33
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Transparency": 0.3,
-        "Color": {
-          "r": 75,
-          "g": 195,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "Pond",
-      "properties": {
-        "Size": {
-          "x": 24,
-          "y": 1,
-          "z": 18
-        },
-        "Position": {
-          "x": 140,
-          "y": 89,
-          "z": -8
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Transparency": 0.35,
-        "Color": {
-          "r": 75,
-          "g": 195,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap",
-      "name": "WaterfallPortal",
-      "properties": {
-        "Size": {
-          "x": 12,
-          "y": 15,
-          "z": 2
-        },
-        "Position": {
-          "x": 0,
-          "y": 68,
-          "z": -50
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Transparency": 0.15,
-        "Color": {
-          "r": 70,
-          "g": 195,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.WaterfallPortal",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 3,
-        "Range": 20
-      }
-    },
-    {
-      "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.WaterfallPortal",
-      "name": "TravelPrompt",
-      "properties": {
-        "ActionText": "UNLOCK - 250M",
-        "ObjectText": "WATERFALL ISLES",
-        "HoldDuration": 0.6,
-        "MaxActivationDistance": 12
-      }
+      "action": "delete",
+      "path": "Workspace.SkyboundMap.GrasslandsDecor.CentralShrineCrystal.UpgradePrompt"
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "WaterfallPortalSystem",
-      "source": "local portal=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"WaterfallPortal\")\nlocal prompt=portal:WaitForChild(\"TravelPrompt\")\nlocal destination=workspace.SkyboundMap:WaitForChild(\"WaterfallIsles\"):WaitForChild(\"IslandTop\")\nprompt.Triggered:Connect(function(player)\n local stats=player:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n if not coins then return end\n if player:GetAttribute(\"WaterfallUnlocked\")~=true then\n  if coins.Value<250000000 then return end\n  coins.Value-=250000000;player:SetAttribute(\"WaterfallUnlocked\",true)\n end\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\")\n if root then root.CFrame=CFrame.new(destination.Position+Vector3.new(0,7,0)) end\nend)"
+      "name": "FixedOrbRewards",
+      "source": "local Players=game:GetService(\"Players\")\nlocal folder=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"SkyCoins\")\nlocal busy={}\nfor _,coin in ipairs(folder:GetChildren()) do\n if coin:IsA(\"BasePart\") then coin.Touched:Connect(function(hit)\n  local p=Players:GetPlayerFromCharacter(hit.Parent)\n  if not p or busy[coin] then return end\n  local stats=p:FindFirstChild(\"leaderstats\");local c=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not c then return end\n  busy[coin]=true\n  c.Value+=1000000\n  coin.Transparency=1;coin.CanTouch=false\n  local l=coin:FindFirstChildOfClass(\"PointLight\");if l then l.Enabled=false end\n  task.delay(7,function() if coin.Parent then coin.Transparency=0;coin.CanTouch=true;if l then l.Enabled=true end;busy[coin]=nil end end)\n end) end\nend"
     }
   ]
 }
