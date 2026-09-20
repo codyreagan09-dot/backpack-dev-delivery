@@ -1,82 +1,367 @@
 {
-  "version": 20,
-  "name": "Skybound Complete Reset",
+  "version": 21,
+  "name": "Fresh Skybound Grasslands Foundation",
   "changes": [
     {
-      "action": "delete",
-      "path": "Workspace.SkyboundMap"
+      "action": "create",
+      "class": "Folder",
+      "parent": "Workspace",
+      "name": "SkyboundMap"
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.SkyCoinSystem"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "GrasslandsTop",
+      "properties": {
+        "Size": {
+          "x": 110,
+          "y": 6,
+          "z": 110
+        },
+        "Position": {
+          "x": 0,
+          "y": 55,
+          "z": 0
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Color": {
+          "r": 78,
+          "g": 172,
+          "b": 78
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.SkyCoinSystem100M"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "GrasslandsRock",
+      "properties": {
+        "Size": {
+          "x": 96,
+          "y": 18,
+          "z": 96
+        },
+        "Position": {
+          "x": 0,
+          "y": 43,
+          "z": 0
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 93,
+          "g": 91,
+          "b": 88
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.WaterfallCoinSystem"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "GrasslandsRockLower",
+      "properties": {
+        "Size": {
+          "x": 72,
+          "y": 16,
+          "z": 72
+        },
+        "Position": {
+          "x": 0,
+          "y": 27,
+          "z": 0
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 82,
+          "g": 80,
+          "b": 78
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.WaterfallCoinSystem100M"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "GrasslandsRockTip",
+      "properties": {
+        "Size": {
+          "x": 42,
+          "y": 14,
+          "z": 42
+        },
+        "Position": {
+          "x": 0,
+          "y": 12,
+          "z": 0
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 72,
+          "g": 70,
+          "b": 69
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.SkyboundPetBoosts"
+      "action": "create",
+      "class": "SpawnLocation",
+      "parent": "Workspace.SkyboundMap",
+      "name": "SkySpawn",
+      "properties": {
+        "Size": {
+          "x": 10,
+          "y": 1,
+          "z": 10
+        },
+        "Position": {
+          "x": 0,
+          "y": 59,
+          "z": 30
+        },
+        "Anchored": true,
+        "Neutral": true,
+        "Material": "Neon",
+        "Color": {
+          "r": 110,
+          "g": 225,
+          "b": 255
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.SkyboundPetBoostsFixed"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "MainPath",
+      "properties": {
+        "Size": {
+          "x": 14,
+          "y": 1,
+          "z": 62
+        },
+        "Position": {
+          "x": 0,
+          "y": 59,
+          "z": -5
+        },
+        "Anchored": true,
+        "Material": "Ground",
+        "Color": {
+          "r": 153,
+          "g": 113,
+          "b": 74
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.SkyboundPetSystem"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTrunk1",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 12,
+          "z": 4
+        },
+        "Position": {
+          "x": -35,
+          "y": 65,
+          "z": 18
+        },
+        "Anchored": true,
+        "Material": "Wood",
+        "Color": {
+          "r": 105,
+          "g": 72,
+          "b": 43
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.GrasslandsEggGameplay"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTop1",
+      "properties": {
+        "Size": {
+          "x": 14,
+          "y": 14,
+          "z": 14
+        },
+        "Position": {
+          "x": -35,
+          "y": 75,
+          "z": 18
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Shape": "Ball",
+        "Color": {
+          "r": 55,
+          "g": 150,
+          "b": 70
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.WaterfallProgression"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTrunk2",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 12,
+          "z": 4
+        },
+        "Position": {
+          "x": 34,
+          "y": 65,
+          "z": 20
+        },
+        "Anchored": true,
+        "Material": "Wood",
+        "Color": {
+          "r": 105,
+          "g": 72,
+          "b": 43
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.WaterfallIslesPortal"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTop2",
+      "properties": {
+        "Size": {
+          "x": 14,
+          "y": 14,
+          "z": 14
+        },
+        "Position": {
+          "x": 34,
+          "y": 75,
+          "z": 20
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Shape": "Ball",
+        "Color": {
+          "r": 55,
+          "g": 150,
+          "b": 70
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.RemoveSkyboundUI"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTrunk3",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 12,
+          "z": 4
+        },
+        "Position": {
+          "x": -38,
+          "y": 65,
+          "z": -25
+        },
+        "Anchored": true,
+        "Material": "Wood",
+        "Color": {
+          "r": 105,
+          "g": 72,
+          "b": 43
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.SkyboundServer"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTop3",
+      "properties": {
+        "Size": {
+          "x": 14,
+          "y": 14,
+          "z": 14
+        },
+        "Position": {
+          "x": -38,
+          "y": 75,
+          "z": -25
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Shape": "Ball",
+        "Color": {
+          "r": 55,
+          "g": 150,
+          "b": 70
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.SkyboundMain"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTrunk4",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 12,
+          "z": 4
+        },
+        "Position": {
+          "x": 37,
+          "y": 65,
+          "z": -27
+        },
+        "Anchored": true,
+        "Material": "Wood",
+        "Color": {
+          "r": 105,
+          "g": 72,
+          "b": 43
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.SkyboundGame"
-    },
-    {
-      "action": "delete",
-      "path": "StarterPlayer.StarterPlayerScripts.SkyCurrencyUI"
-    },
-    {
-      "action": "delete",
-      "path": "StarterPlayer.StarterPlayerScripts.SkyboundHUD"
-    },
-    {
-      "action": "delete",
-      "path": "StarterPlayer.StarterPlayerScripts.SkyboundUI"
-    },
-    {
-      "action": "delete",
-      "path": "StarterPlayer.StarterPlayerScripts.SkyboundClient"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap",
+      "name": "TreeTop4",
+      "properties": {
+        "Size": {
+          "x": 14,
+          "y": 14,
+          "z": 14
+        },
+        "Position": {
+          "x": 37,
+          "y": 75,
+          "z": -27
+        },
+        "Anchored": true,
+        "Material": "Grass",
+        "Shape": "Ball",
+        "Color": {
+          "r": 55,
+          "g": 150,
+          "b": 70
+        }
+      }
     }
   ]
 }
