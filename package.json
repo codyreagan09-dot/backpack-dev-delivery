@@ -1,17 +1,13 @@
 {
-  "version": 48,
-  "name": "Island Reward Progression",
+  "version": 49,
+  "name": "Island Discovery HUD",
   "changes": [
     {
-      "action": "delete",
-      "path": "ServerScriptService.SkyboundOrbRewards"
-    },
-    {
       "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "SkyboundProgressionRewards",
-      "source": "local Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal areas={\n {name=\"Grasslands\",folder=map,orb=\"SkyCoins\",reward=1000000},\n {name=\"Waterfall\",folder=map.WaterfallIsles,orb=\"WaterfallCoins\",reward=2000000},\n {name=\"Desert\",folder=map.DesertTemple,orb=\"DesertCoins\",reward=4000000},\n {name=\"Frozen\",folder=map.FrozenPeaks,orb=\"FrozenCoins\",reward=8000000},\n {name=\"Volcano\",folder=map.VolcanoRealm,orb=\"Orbs\",reward=16000000},\n {name=\"Celestial\",folder=map.CelestialCity,orb=\"Orbs\",reward=32000000},\n {name=\"Void\",folder=map.VoidRealm,orb=\"Orbs\",reward=64000000}\n}\nlocal busy={}\nfor _,a in ipairs(areas) do\n local folder=a.folder:FindFirstChild(a.orb)\n if folder then for _,orb in ipairs(folder:GetChildren()) do\n  if orb:IsA(\"BasePart\") then orb.Touched:Connect(function(hit)\n   local p=Players:GetPlayerFromCharacter(hit.Parent);if not p or busy[orb] then return end\n   local c=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"SkyCoins\");if not c then return end\n   busy[orb]=true;local power=p:GetAttribute(\"PetPower\") or 0;c.Value+=a.reward+(power*math.floor(a.reward*.25))\n   orb.Transparency=1;orb.CanTouch=false;local l=orb:FindFirstChildOfClass(\"PointLight\");if l then l.Enabled=false end\n   task.delay(7,function() if orb.Parent then orb.Transparency=0;orb.CanTouch=true;if l then l.Enabled=true end;busy[orb]=nil end end)\n  end) end\n end end\nend"
+      "class": "LocalScript",
+      "parent": "StarterPlayer.StarterPlayerScripts",
+      "name": "SkyboundAreaHUD",
+      "source": "local Players=game:GetService(\"Players\")\nlocal p=Players.LocalPlayer\nlocal gui=Instance.new(\"ScreenGui\");gui.Name=\"SkyboundAreaHUD\";gui.ResetOnSpawn=false;gui.Parent=p:WaitForChild(\"PlayerGui\")\nlocal label=Instance.new(\"TextLabel\");label.Size=UDim2.fromOffset(340,50);label.Position=UDim2.new(.5,-170,0,70);label.BackgroundTransparency=.25;label.TextColor3=Color3.new(1,1,1);label.TextStrokeTransparency=.3;label.TextScaled=true;label.Font=Enum.Font.GothamBlack;label.Parent=gui\nlocal areas={{\"GRASSLANDS\",0,1000},{\"WATERFALL ISLES\",3000,1000},{\"DESERT TEMPLE\",6000,1000},{\"FROZEN PEAKS\",9000,1000},{\"VOLCANO REALM\",12000,1000},{\"CELESTIAL CITY\",15000,1000},{\"VOID REALM\",18000,1000}}\nlocal last=\"\"\nwhile task.wait(.35) do\n local root=p.Character and p.Character:FindFirstChild(\"HumanoidRootPart\")\n if root then\n  local best,bestd=\"GRASSLANDS\",math.huge\n  for _,a in ipairs(areas) do local d=math.abs(root.Position.Z-a[2]);if d<bestd then bestd=d;best=a[1] end end\n  if best~=last then\n   last=best;label.Text=best;label.TextTransparency=0;label.BackgroundTransparency=.25\n   task.delay(2.5,function() if last==best then for i=1,10 do label.TextTransparency=i/10;label.BackgroundTransparency=.25+(i/10)*.75;task.wait(.04) end end end)\n  end\n end\nend"
     }
   ]
 }
