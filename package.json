@@ -1,86 +1,236 @@
 {
-  "version": 40,
-  "name": "Desert Temple Egg and Pets",
+  "version": 41,
+  "name": "Frozen Peaks Expansion",
   "changes": [
     {
       "action": "create",
+      "class": "Folder",
+      "parent": "Workspace.SkyboundMap",
+      "name": "FrozenPeaks"
+    },
+    {
+      "action": "create",
       "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple",
-      "name": "DesertEgg",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "IslandTop",
       "properties": {
         "Size": {
-          "x": 10,
-          "y": 2,
-          "z": 10
+          "x": 85,
+          "y": 7,
+          "z": 80
         },
         "Position": {
-          "x": 26,
-          "y": 115,
-          "z": 6022
+          "x": 0,
+          "y": 140,
+          "z": 9000
         },
         "Anchored": true,
-        "Material": "Sandstone",
+        "Material": "Snow",
         "Color": {
-          "r": 180,
-          "g": 130,
-          "b": 70
+          "r": 230,
+          "g": 245,
+          "b": 255
         }
       }
     },
     {
       "action": "create",
       "class": "Part",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertEgg",
-      "name": "Egg",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "RockBase",
+      "properties": {
+        "Size": {
+          "x": 70,
+          "y": 22,
+          "z": 66
+        },
+        "Position": {
+          "x": 0,
+          "y": 125,
+          "z": 9000
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 100,
+          "g": 120,
+          "b": 140
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "RockTip",
+      "properties": {
+        "Size": {
+          "x": 42,
+          "y": 24,
+          "z": 40
+        },
+        "Position": {
+          "x": 0,
+          "y": 102,
+          "z": 9000
+        },
+        "Anchored": true,
+        "Material": "Slate",
+        "Color": {
+          "r": 80,
+          "g": 100,
+          "b": 120
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "IceCrystal1",
       "properties": {
         "Size": {
           "x": 5,
-          "y": 7,
+          "y": 16,
           "z": 5
         },
         "Position": {
-          "x": 26,
-          "y": 120,
-          "z": 6022
+          "x": -25,
+          "y": 152,
+          "z": 8980
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 0,
+          "z": 12
         },
         "Anchored": true,
-        "Material": "SmoothPlastic",
-        "Shape": "Ball",
+        "Material": "Neon",
+        "Transparency": 0.15,
         "Color": {
-          "r": 255,
-          "g": 202,
-          "b": 65
+          "r": 100,
+          "g": 220,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "IceCrystal2",
+      "properties": {
+        "Size": {
+          "x": 4,
+          "y": 12,
+          "z": 4
+        },
+        "Position": {
+          "x": -18,
+          "y": 150,
+          "z": 8984
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 0,
+          "z": -15
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Transparency": 0.15,
+        "Color": {
+          "r": 120,
+          "g": 230,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "IceCrystal3",
+      "properties": {
+        "Size": {
+          "x": 6,
+          "y": 18,
+          "z": 6
+        },
+        "Position": {
+          "x": 28,
+          "y": 153,
+          "z": 9015
+        },
+        "Orientation": {
+          "x": 0,
+          "y": 0,
+          "z": -10
+        },
+        "Anchored": true,
+        "Material": "Neon",
+        "Transparency": 0.15,
+        "Color": {
+          "r": 90,
+          "g": 205,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.DesertTemple",
+      "name": "FrozenPortal",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 15,
+          "z": 2
+        },
+        "Position": {
+          "x": 28,
+          "y": 122,
+          "z": 5970
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Transparency": 0.15,
+        "Color": {
+          "r": 120,
+          "g": 225,
+          "b": 255
         }
       }
     },
     {
       "action": "create",
       "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertEgg.Egg",
-      "name": "EggGlow",
+      "parent": "Workspace.SkyboundMap.DesertTemple.FrozenPortal",
+      "name": "Glow",
       "properties": {
         "Brightness": 3,
-        "Range": 15
+        "Range": 20
       }
     },
     {
       "action": "create",
       "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.DesertTemple.DesertEgg.Egg",
-      "name": "HatchPrompt",
+      "parent": "Workspace.SkyboundMap.DesertTemple.FrozenPortal",
+      "name": "TravelPrompt",
       "properties": {
-        "ActionText": "HATCH - 10 SKY COINS",
-        "ObjectText": "DESERT EGG",
-        "HoldDuration": 0.4,
-        "MaxActivationDistance": 10
+        "ActionText": "UNLOCK - 10 COINS",
+        "ObjectText": "FROZEN PEAKS",
+        "HoldDuration": 0.6,
+        "MaxActivationDistance": 12
       }
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "DesertEggSystem",
-      "source": "local egg=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"DesertTemple\"):WaitForChild(\"DesertEgg\"):WaitForChild(\"Egg\")\nlocal prompt=egg:WaitForChild(\"HatchPrompt\")\nlocal pets={{name=\"Sand Bunny\",chance=60,color=Color3.fromRGB(238,207,135)},{name=\"Dune Fox\",chance=30,color=Color3.fromRGB(224,151,67)},{name=\"Sun Lion\",chance=9,color=Color3.fromRGB(255,202,55)},{name=\"Pharaoh Dragon\",chance=1,color=Color3.fromRGB(150,90,255)}}\nlocal function roll() local r=math.random(1,100);local t=0;for _,p in ipairs(pets) do t+=p.chance;if r<=t then return p end end return pets[1] end\nlocal function show(player,pet)\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\");if not root then return end\n local old=workspace:FindFirstChild(player.Name..\"_EquippedPet\");if old then old:Destroy() end\n local oldAtt=root:FindFirstChild(\"PetFollowPoint\");if oldAtt then oldAtt:Destroy() end\n local part=Instance.new(\"Part\");part.Name=player.Name..\"_EquippedPet\";part.Shape=Enum.PartType.Ball;part.Size=Vector3.new(4,4,4);part.Color=pet.color;part.Material=Enum.Material.SmoothPlastic;part.CanCollide=false;part.Massless=true;part.CFrame=root.CFrame*CFrame.new(4,1,3);part.Parent=workspace\n local gui=Instance.new(\"BillboardGui\");gui.Size=UDim2.fromOffset(170,40);gui.StudsOffset=Vector3.new(0,3,0);gui.AlwaysOnTop=true;gui.Parent=part\n local label=Instance.new(\"TextLabel\");label.Size=UDim2.fromScale(1,1);label.BackgroundTransparency=1;label.Text=pet.name;label.TextColor3=Color3.new(1,1,1);label.TextStrokeTransparency=.25;label.Font=Enum.Font.GothamBold;label.TextScaled=true;label.Parent=gui\n local a=Instance.new(\"Attachment\");a.Name=\"PetFollowPoint\";a.Position=Vector3.new(4,1,3);a.Parent=root\n local b=Instance.new(\"Attachment\");b.Parent=part\n local align=Instance.new(\"AlignPosition\");align.Attachment0=b;align.Attachment1=a;align.MaxForce=50000;align.Responsiveness=12;align.Parent=part\nend\nprompt.Triggered:Connect(function(player)\n local stats=player:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\");if not coins or coins.Value<10 then return end\n coins.Value-=10;local pet=roll();local inv=player:FindFirstChild(\"Pets\") or Instance.new(\"Folder\");inv.Name=\"Pets\";inv.Parent=player\n local owned=Instance.new(\"StringValue\");owned.Name=pet.name;owned.Value=pet.name;owned.Parent=inv;show(player,pet)\n prompt.ObjectText=\"HATCHED: \"..pet.name;task.delay(2,function() if prompt.Parent then prompt.ObjectText=\"DESERT EGG\" end end)\nend)"
+      "name": "FrozenPortalSystem",
+      "source": "local portal=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"DesertTemple\"):WaitForChild(\"FrozenPortal\")\nlocal prompt=portal:WaitForChild(\"TravelPrompt\")\nlocal destination=workspace.SkyboundMap:WaitForChild(\"FrozenPeaks\"):WaitForChild(\"IslandTop\")\nprompt.Triggered:Connect(function(player)\n local stats=player:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n if not coins then return end\n if player:GetAttribute(\"FrozenUnlocked\")~=true then\n  if coins.Value<10 then return end\n  coins.Value-=10;player:SetAttribute(\"FrozenUnlocked\",true);prompt.ActionText=\"TRAVEL\"\n end\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\")\n if root then root.CFrame=CFrame.new(destination.Position+Vector3.new(0,7,0)) end\nend)"
     }
   ]
 }
