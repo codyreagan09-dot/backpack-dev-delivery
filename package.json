@@ -1,86 +1,62 @@
 {
-  "version": 35,
-  "name": "Waterfall Egg and Pets",
+  "version": 36,
+  "name": "Waterfall Return Portal",
   "changes": [
     {
       "action": "create",
       "class": "Part",
       "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "WaterfallEgg",
+      "name": "ReturnPortal",
       "properties": {
         "Size": {
-          "x": 10,
-          "y": 2,
-          "z": 10
+          "x": 12,
+          "y": 15,
+          "z": 2
         },
         "Position": {
-          "x": 22,
-          "y": 89,
-          "z": 3018
+          "x": -22,
+          "y": 97,
+          "z": 3022
         },
         "Anchored": true,
-        "Material": "Slate",
+        "CanCollide": false,
+        "Material": "Neon",
+        "Transparency": 0.15,
         "Color": {
-          "r": 75,
-          "g": 90,
-          "b": 105
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallEgg",
-      "name": "Egg",
-      "properties": {
-        "Size": {
-          "x": 5,
-          "y": 7,
-          "z": 5
-        },
-        "Position": {
-          "x": 22,
-          "y": 94,
-          "z": 3018
-        },
-        "Anchored": true,
-        "Material": "SmoothPlastic",
-        "Shape": "Ball",
-        "Color": {
-          "r": 90,
-          "g": 220,
-          "b": 255
+          "r": 120,
+          "g": 255,
+          "b": 210
         }
       }
     },
     {
       "action": "create",
       "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallEgg.Egg",
-      "name": "EggGlow",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.ReturnPortal",
+      "name": "Glow",
       "properties": {
         "Brightness": 3,
-        "Range": 15
+        "Range": 20
       }
     },
     {
       "action": "create",
       "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallEgg.Egg",
-      "name": "HatchPrompt",
+      "parent": "Workspace.SkyboundMap.WaterfallIsles.ReturnPortal",
+      "name": "TravelPrompt",
       "properties": {
-        "ActionText": "HATCH - 10 SKY COINS",
-        "ObjectText": "WATERFALL EGG",
+        "ActionText": "RETURN",
+        "ObjectText": "GRASSLANDS",
         "HoldDuration": 0.4,
-        "MaxActivationDistance": 10
+        "MaxActivationDistance": 12
       }
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "WaterfallEggSystem",
-      "source": "local egg=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"WaterfallIsles\"):WaitForChild(\"WaterfallEgg\"):WaitForChild(\"Egg\")\nlocal prompt=egg:WaitForChild(\"HatchPrompt\")\nlocal pets={{name=\"Bubble Bunny\",chance=60,color=Color3.fromRGB(120,230,255)},{name=\"River Fox\",chance=30,color=Color3.fromRGB(70,170,255)},{name=\"Aqua Cub\",chance=9,color=Color3.fromRGB(60,120,255)},{name=\"Tide Dragon\",chance=1,color=Color3.fromRGB(70,255,220)}}\nlocal function roll() local r=math.random(1,100);local t=0;for _,p in ipairs(pets) do t+=p.chance;if r<=t then return p end end return pets[1] end\nlocal function show(player,pet)\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\");if not root then return end\n local old=workspace:FindFirstChild(player.Name..\"_EquippedPet\");if old then old:Destroy() end\n local oldAtt=root:FindFirstChild(\"PetFollowPoint\");if oldAtt then oldAtt:Destroy() end\n local part=Instance.new(\"Part\");part.Name=player.Name..\"_EquippedPet\";part.Shape=Enum.PartType.Ball;part.Size=Vector3.new(3.8,3.8,3.8);part.Color=pet.color;part.Material=Enum.Material.SmoothPlastic;part.CanCollide=false;part.Massless=true;part.CFrame=root.CFrame*CFrame.new(4,1,3);part.Parent=workspace\n local gui=Instance.new(\"BillboardGui\");gui.Size=UDim2.fromOffset(160,40);gui.StudsOffset=Vector3.new(0,2.8,0);gui.AlwaysOnTop=true;gui.Parent=part\n local label=Instance.new(\"TextLabel\");label.Size=UDim2.fromScale(1,1);label.BackgroundTransparency=1;label.Text=pet.name;label.TextColor3=Color3.new(1,1,1);label.TextStrokeTransparency=.25;label.Font=Enum.Font.GothamBold;label.TextScaled=true;label.Parent=gui\n local a=Instance.new(\"Attachment\");a.Name=\"PetFollowPoint\";a.Position=Vector3.new(4,1,3);a.Parent=root\n local b=Instance.new(\"Attachment\");b.Parent=part\n local align=Instance.new(\"AlignPosition\");align.Attachment0=b;align.Attachment1=a;align.MaxForce=50000;align.Responsiveness=12;align.Parent=part\nend\nprompt.Triggered:Connect(function(player)\n local stats=player:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\");if not coins or coins.Value<10 then return end\n coins.Value-=10;local pet=roll();local inv=player:FindFirstChild(\"Pets\") or Instance.new(\"Folder\");inv.Name=\"Pets\";inv.Parent=player\n local owned=Instance.new(\"StringValue\");owned.Name=pet.name;owned.Value=pet.name;owned.Parent=inv;show(player,pet)\n prompt.ObjectText=\"HATCHED: \"..pet.name;task.delay(2,function() if prompt.Parent then prompt.ObjectText=\"WATERFALL EGG\" end end)\nend)"
+      "name": "WaterfallReturnPortalSystem",
+      "source": "local portal=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"WaterfallIsles\"):WaitForChild(\"ReturnPortal\")\nlocal prompt=portal:WaitForChild(\"TravelPrompt\")\nlocal spawn=workspace.SkyboundMap:WaitForChild(\"SkySpawn\")\nprompt.Triggered:Connect(function(player)\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\")\n if root then root.CFrame=CFrame.new(spawn.Position+Vector3.new(0,5,0)) end\nend)"
     }
   ]
 }
