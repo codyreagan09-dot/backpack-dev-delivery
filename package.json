@@ -1,17 +1,24 @@
 {
-  "version": 25,
-  "name": "Fix Hatched Pets Appearing",
+  "version": 26,
+  "name": "One Million Sky Coin Orbs",
   "changes": [
     {
       "action": "delete",
-      "path": "ServerScriptService.StarterEggSystem"
+      "path": "ServerScriptService.SkyboundCore"
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "StarterEggSystemFixed",
-      "source": "local egg=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"StarterEgg\"):WaitForChild(\"Egg\")\nlocal prompt=egg:WaitForChild(\"HatchPrompt\")\nlocal pets={\n {name=\"Cloud Bunny\",chance=60,color=Color3.fromRGB(235,245,255)},\n {name=\"Sky Fox\",chance=30,color=Color3.fromRGB(100,205,255)},\n {name=\"Sun Cub\",chance=9,color=Color3.fromRGB(255,205,70)},\n {name=\"Storm Dragon\",chance=1,color=Color3.fromRGB(150,95,255)}\n}\nlocal function roll()\n local r=math.random(1,100);local total=0\n for _,p in ipairs(pets) do total+=p.chance;if r<=total then return p end end\n return pets[1]\nend\nlocal function spawnPet(player,pet)\n local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\")\n if not root then return end\n local old=workspace:FindFirstChild(player.Name..\"_EquippedPet\");if old then old:Destroy() end\n local part=Instance.new(\"Part\");part.Name=player.Name..\"_EquippedPet\";part.Shape=Enum.PartType.Ball;part.Size=Vector3.new(3.5,3.5,3.5);part.Color=pet.color;part.Material=Enum.Material.SmoothPlastic;part.CanCollide=false;part.Massless=true;part.CFrame=root.CFrame*CFrame.new(4,1,3);part.Parent=workspace\n local gui=Instance.new(\"BillboardGui\");gui.Size=UDim2.fromOffset(160,40);gui.StudsOffset=Vector3.new(0,2.8,0);gui.AlwaysOnTop=true;gui.Parent=part\n local label=Instance.new(\"TextLabel\");label.Size=UDim2.fromScale(1,1);label.BackgroundTransparency=1;label.Text=pet.name;label.TextColor3=Color3.new(1,1,1);label.TextStrokeTransparency=.25;label.Font=Enum.Font.GothamBold;label.TextScaled=true;label.Parent=gui\n local rootAtt=Instance.new(\"Attachment\");rootAtt.Name=\"PetFollowPoint\";rootAtt.Position=Vector3.new(4,1,3);rootAtt.Parent=root\n local petAtt=Instance.new(\"Attachment\");petAtt.Parent=part\n local align=Instance.new(\"AlignPosition\");align.Attachment0=petAtt;align.Attachment1=rootAtt;align.MaxForce=50000;align.Responsiveness=12;align.RigidityEnabled=false;align.Parent=part\nend\nprompt.Triggered:Connect(function(player)\n local stats=player:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n if not coins or coins.Value<10 then return end\n coins.Value-=10\n local pet=roll()\n local inv=player:FindFirstChild(\"Pets\");if not inv then inv=Instance.new(\"Folder\");inv.Name=\"Pets\";inv.Parent=player end\n local owned=Instance.new(\"StringValue\");owned.Name=pet.name;owned.Value=pet.name;owned.Parent=inv\n spawnPet(player,pet)\n prompt.ObjectText=\"HATCHED: \"..pet.name\n task.delay(2,function() if prompt.Parent then prompt.ObjectText=\"STARTER EGG\" end end)\nend)"
+      "name": "SkyboundCoreMillion",
+      "source": "local Players=game:GetService(\"Players\")\nlocal function setup(p)\n local stats=p:FindFirstChild(\"leaderstats\") or Instance.new(\"Folder\");stats.Name=\"leaderstats\";stats.Parent=p\n local coins=stats:FindFirstChild(\"SkyCoins\") or Instance.new(\"IntValue\");coins.Name=\"SkyCoins\";coins.Parent=stats\nend\nPlayers.PlayerAdded:Connect(setup)\nfor _,p in ipairs(Players:GetPlayers()) do setup(p) end\n"
+    },
+    {
+      "action": "create",
+      "class": "Script",
+      "parent": "ServerScriptService",
+      "name": "MillionOrbSystem",
+      "source": "local Players=game:GetService(\"Players\")\nlocal folder=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"SkyCoins\")\nlocal busy={}\nfor _,coin in ipairs(folder:GetChildren()) do\n if coin:IsA(\"BasePart\") then\n  coin.Touched:Connect(function(hit)\n   local player=Players:GetPlayerFromCharacter(hit.Parent)\n   if not player or busy[coin] then return end\n   local stats=player:FindFirstChild(\"leaderstats\")\n   local c=stats and stats:FindFirstChild(\"SkyCoins\")\n   if not c then return end\n   busy[coin]=true\n   c.Value+=1000000\n   coin.Transparency=1\n   coin.CanTouch=false\n   local l=coin:FindFirstChildOfClass(\"PointLight\")\n   if l then l.Enabled=false end\n   task.delay(7,function()\n    if coin.Parent then\n     coin.Transparency=0\n     coin.CanTouch=true\n     if l then l.Enabled=true end\n     busy[coin]=nil\n    end\n   end)\n  end)\n end\nend"
     }
   ]
 }
