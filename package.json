@@ -1,25 +1,14 @@
 {
-  "version": 30,
-  "name": "Remove Sky Power Multipliers",
+  "version": 31,
+  "name": "Remove Grasslands Shrine",
   "changes": [
     {
       "action": "delete",
-      "path": "ServerScriptService.SkyPowerOrbSystem"
+      "path": "Workspace.SkyboundMap.GrasslandsDecor.CentralShrineCrystal"
     },
     {
       "action": "delete",
-      "path": "ServerScriptService.SkyPowerShrine"
-    },
-    {
-      "action": "delete",
-      "path": "Workspace.SkyboundMap.GrasslandsDecor.CentralShrineCrystal.UpgradePrompt"
-    },
-    {
-      "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "FixedOrbRewards",
-      "source": "local Players=game:GetService(\"Players\")\nlocal folder=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"SkyCoins\")\nlocal busy={}\nfor _,coin in ipairs(folder:GetChildren()) do\n if coin:IsA(\"BasePart\") then coin.Touched:Connect(function(hit)\n  local p=Players:GetPlayerFromCharacter(hit.Parent)\n  if not p or busy[coin] then return end\n  local stats=p:FindFirstChild(\"leaderstats\");local c=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not c then return end\n  busy[coin]=true\n  c.Value+=1000000\n  coin.Transparency=1;coin.CanTouch=false\n  local l=coin:FindFirstChildOfClass(\"PointLight\");if l then l.Enabled=false end\n  task.delay(7,function() if coin.Parent then coin.Transparency=0;coin.CanTouch=true;if l then l.Enabled=true end;busy[coin]=nil end end)\n end) end\nend"
+      "path": "Workspace.SkyboundMap.GrasslandsDecor.CentralShrineBase"
     }
   ]
 }
