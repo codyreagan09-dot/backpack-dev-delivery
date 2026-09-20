@@ -1,13 +1,12 @@
 {
-  "version": 5,
-  "name": "Left Side Upgrade Row",
+  "version": 6,
+  "name": "Turn Upgrade Stations Around",
   "changes": [
     {
-      "action": "create",
-      "class": "Script",
+      "action": "replaceScript",
       "parent": "ServerScriptService",
       "name": "UpgradeStationLayout",
-      "source": "local world=workspace:WaitForChild(\"MeteorGame\")\nlocal stations=world:WaitForChild(\"UpgradeStations\")\n\n-- Put all three stations in one evenly-spaced row on the LEFT side of the map.\nlocal positions={\n MiningPowerStation=Vector3.new(-55,4,-14),\n MiningSpeedStation=Vector3.new(-55,4,0),\n MiningLuckStation=Vector3.new(-55,4,14)\n}\n\nfor name,pos in pairs(positions) do\n local station=stations:WaitForChild(name)\n station.Position=pos\n station.Orientation=Vector3.new(0,90,0)\nend\n\nprint(\"Upgrade stations aligned evenly on the left\")"
+      "source": "local world=workspace:WaitForChild(\"MeteorGame\")\nlocal stations=world:WaitForChild(\"UpgradeStations\")\n\n-- Same evenly spaced left-side positions; only turn the boards around.\nlocal positions={\n MiningPowerStation=Vector3.new(-55,4,-14),\n MiningSpeedStation=Vector3.new(-55,4,0),\n MiningLuckStation=Vector3.new(-55,4,14)\n}\n\nfor name,pos in pairs(positions) do\n local station=stations:WaitForChild(name)\n station.Position=pos\n station.Orientation=Vector3.new(0,-90,0)\nend\n\nprint(\"Upgrade stations aligned evenly on the left and turned around\")"
     }
   ]
 }
