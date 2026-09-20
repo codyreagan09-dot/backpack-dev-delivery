@@ -1,13 +1,13 @@
 {
-  "version": 40,
-  "name": "Remove Left Expansion Land",
+  "version": 41,
+  "name": "Remove Only Small Left Chunk",
   "changes": [
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "RemoveWestExpansionLandV40",
-      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\n\n-- Remove any expansion land extending left/west of the starter island.\n-- Starter island west edge is approximately X = -27.\nlocal function removeLeftChunks(container)\n for _,obj in ipairs(container:GetDescendants()) do\n  if obj:IsA(\"BasePart\") and obj.Name~=\"StarterIsland\" and obj.Name~=\"IslandEarth\" then\n   local isExpansion = obj.Name:match(\"^L%d+_\") or obj.Name:find(\"Expansion\")\n   if isExpansion then\n    local leftEdge=obj.Position.X-(obj.Size.X/2)\n    if leftEdge < -27.5 then\n     obj:Destroy()\n    end\n   end\n  end\n end\nend\n\nlocal function clean()\n local directional=world:FindFirstChild(\"DirectionalExpansions\")\n if directional then removeLeftChunks(directional) end\n\n -- Also remove legacy expansion land on the left side from older builds.\n for _,obj in ipairs(world:GetChildren()) do\n  if obj:IsA(\"BasePart\") and obj.Name~=\"StarterIsland\" and obj.Name~=\"IslandEarth\" then\n   if obj.Name:find(\"Expansion\") and obj.Position.X < -27 then\n    obj:Destroy()\n   end\n  end\n end\nend\n\nclean()\nworld.DescendantAdded:Connect(function(obj)\n task.wait()\n if obj:IsA(\"BasePart\") then clean() end\nend)\n\nprint(\"West-side expansion land removed\")"
+      "name": "RemoveSmallLeftChunkV41",
+      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\n\n-- Remove ONLY the small legacy chunk directly to the left of the starter island.\n-- Do not remove normal north/east/south expansion land.\nlocal function removeLittleLeftChunk()\n for _,obj in ipairs(world:GetDescendants()) do\n  if obj:IsA(\"BasePart\") and obj.Name~=\"StarterIsland\" and obj.Name~=\"IslandEarth\" then\n   local x,z=obj.Position.X,obj.Position.Z\n   local sx,sz=obj.Size.X,obj.Size.Z\n\n   -- The unwanted piece shown beside the upgrade signs sits immediately west\n   -- of the starter island, centered near Z=0. Keep this intentionally narrow.\n   if x < -27 and x > -55 and math.abs(z) < 22 and sx <= 40 and sz <= 50 then\n    if obj.Name:find(\"Expansion\") or obj.Name:match(\"^L%d+_\") then\n     obj:Destroy()\n    end\n   end\n  end\n end\nend\n\nremoveLittleLeftChunk()\ntask.delay(1,removeLittleLeftChunk)\nprint(\"Removed only the small left-side island chunk\")"
     }
   ]
 }
