@@ -1,13 +1,13 @@
 {
-  "version": 41,
-  "name": "Remove Only Small Left Chunk",
+  "version": 42,
+  "name": "Seamless Island Land Blend",
   "changes": [
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "RemoveSmallLeftChunkV41",
-      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\n\n-- Remove ONLY the small legacy chunk directly to the left of the starter island.\n-- Do not remove normal north/east/south expansion land.\nlocal function removeLittleLeftChunk()\n for _,obj in ipairs(world:GetDescendants()) do\n  if obj:IsA(\"BasePart\") and obj.Name~=\"StarterIsland\" and obj.Name~=\"IslandEarth\" then\n   local x,z=obj.Position.X,obj.Position.Z\n   local sx,sz=obj.Size.X,obj.Size.Z\n\n   -- The unwanted piece shown beside the upgrade signs sits immediately west\n   -- of the starter island, centered near Z=0. Keep this intentionally narrow.\n   if x < -27 and x > -55 and math.abs(z) < 22 and sx <= 40 and sz <= 50 then\n    if obj.Name:find(\"Expansion\") or obj.Name:match(\"^L%d+_\") then\n     obj:Destroy()\n    end\n   end\n  end\n end\nend\n\nremoveLittleLeftChunk()\ntask.delay(1,removeLittleLeftChunk)\nprint(\"Removed only the small left-side island chunk\")"
+      "name": "SeamlessIslandBlendV42",
+      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\nlocal starter=world:WaitForChild(\"StarterIsland\")\n\n-- Make all connected expansion land visually match the starter island\n-- so seams between upgrades disappear as much as possible.\nlocal function blendPart(p)\n if not p:IsA(\"BasePart\") then return end\n if p.Name:match(\"^L%d+_\") or p.Name:find(\"Expansion\") then\n  p.Material=starter.Material\n  p.Color=starter.Color\n  p.Reflectance=starter.Reflectance\n  p.Transparency=starter.Transparency\n  -- Match the top surface height exactly.\n  local starterTop=starter.Position.Y+(starter.Size.Y/2)\n  p.Position=Vector3.new(p.Position.X,starterTop-(p.Size.Y/2),p.Position.Z)\n end\nend\n\nlocal function blendAll()\n local directional=world:FindFirstChild(\"DirectionalExpansions\")\n if directional then\n  for _,v in ipairs(directional:GetDescendants()) do blendPart(v) end\n end\n for _,v in ipairs(world:GetChildren()) do blendPart(v) end\nend\n\nblendAll()\nworld.DescendantAdded:Connect(function(v)\n task.wait()\n blendPart(v)\nend)\n\n-- Re-apply after expansion rise animations finish.\nwhile task.wait(1) do\n blendAll()\nend"
     }
   ]
 }
