@@ -1,315 +1,61 @@
 {
   "version": 32,
-  "name": "Waterfall Isles Orbs",
+  "name": "Hide Waterfall Isles Until Portal",
   "changes": [
     {
-      "action": "create",
-      "class": "Folder",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles",
-      "name": "WaterfallCoins"
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
-      "name": "WaterOrb1",
+      "action": "modify",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.IslandTop",
       "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
         "Position": {
-          "x": 120,
-          "y": 91,
-          "z": 20
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 80,
-          "g": 210,
-          "b": 255
+          "x": 0,
+          "y": 85,
+          "z": 3000
         }
       }
     },
     {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterOrb1",
-      "name": "Glow",
+      "action": "modify",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.RockBase",
       "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
-      "name": "WaterOrb2",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
         "Position": {
-          "x": 132,
-          "y": 91,
-          "z": 28
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 80,
-          "g": 210,
-          "b": 255
+          "x": 0,
+          "y": 72,
+          "z": 3000
         }
       }
     },
     {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterOrb2",
-      "name": "Glow",
+      "action": "modify",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.RockTip",
       "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
-      "name": "WaterOrb3",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
         "Position": {
-          "x": 148,
-          "y": 91,
-          "z": 25
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 80,
-          "g": 210,
-          "b": 255
+          "x": 0,
+          "y": 53,
+          "z": 3000
         }
       }
     },
     {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterOrb3",
-      "name": "Glow",
+      "action": "modify",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.Waterfall",
       "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
-      "name": "WaterOrb4",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
         "Position": {
-          "x": 158,
-          "y": 91,
-          "z": 14
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 80,
-          "g": 210,
-          "b": 255
+          "x": 0,
+          "y": 68,
+          "z": 2967
         }
       }
     },
     {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterOrb4",
-      "name": "Glow",
+      "action": "modify",
+      "path": "Workspace.SkyboundMap.WaterfallIsles.Pond",
       "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
-      "name": "WaterOrb5",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
         "Position": {
-          "x": 118,
-          "y": 91,
-          "z": -5
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 80,
-          "g": 210,
-          "b": 255
+          "x": 0,
+          "y": 89,
+          "z": 2992
         }
       }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterOrb5",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
-      "name": "WaterOrb6",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 128,
-          "y": 91,
-          "z": -20
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 80,
-          "g": 210,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterOrb6",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
-      "name": "WaterOrb7",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 151,
-          "y": 91,
-          "z": -22
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 80,
-          "g": 210,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterOrb7",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins",
-      "name": "WaterOrb8",
-      "properties": {
-        "Size": {
-          "x": 3,
-          "y": 3,
-          "z": 3
-        },
-        "Position": {
-          "x": 162,
-          "y": 91,
-          "z": -5
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Shape": "Ball",
-        "Color": {
-          "r": 80,
-          "g": 210,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.WaterfallIsles.WaterfallCoins.WaterOrb8",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 2,
-        "Range": 10
-      }
-    },
-    {
-      "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "WaterfallOrbSystem",
-      "source": "local Players=game:GetService(\"Players\")\nlocal folder=workspace:WaitForChild(\"SkyboundMap\"):WaitForChild(\"WaterfallIsles\"):WaitForChild(\"WaterfallCoins\")\nlocal busy={}\nfor _,orb in ipairs(folder:GetChildren()) do\n if orb:IsA(\"BasePart\") then\n  orb.Touched:Connect(function(hit)\n   local p=Players:GetPlayerFromCharacter(hit.Parent)\n   if not p or busy[orb] then return end\n   local stats=p:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\")\n   if not coins then return end\n   busy[orb]=true;coins.Value+=5000000\n   orb.Transparency=1;orb.CanTouch=false\n   local light=orb:FindFirstChildOfClass(\"PointLight\");if light then light.Enabled=false end\n   task.delay(8,function()\n    if orb.Parent then orb.Transparency=0;orb.CanTouch=true;if light then light.Enabled=true end;busy[orb]=nil end\n   end)\n  end)\n end\nend"
     }
   ]
 }
