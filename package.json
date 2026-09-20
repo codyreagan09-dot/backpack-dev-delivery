@@ -1,216 +1,24 @@
 {
-  "version": 46,
-  "name": "Complete Portal Travel Chain",
+  "version": 47,
+  "name": "Egg Hatch Polish and Pet Power HUD",
   "changes": [
     {
-      "action": "create",
-      "class": "Script",
-      "parent": "ServerScriptService",
-      "name": "LateRealmPortalSystem",
-      "source": "local map=workspace:WaitForChild(\"SkyboundMap\")\nlocal areas={\n {name=\"FrozenPeaks\",prev=\"DesertTemple\",portal=\"FrozenPortal\"},\n {name=\"VolcanoRealm\",prev=\"FrozenPeaks\",portal=\"VolcanoPortal\"},\n {name=\"CelestialCity\",prev=\"VolcanoRealm\",portal=\"CelestialPortal\"},\n {name=\"VoidRealm\",prev=\"CelestialCity\",portal=\"VoidPortal\"}\n}\nfor _,a in ipairs(areas) do\n local portal=map[a.prev]:WaitForChild(a.portal)\n local prompt=portal:WaitForChild(\"TravelPrompt\")\n prompt.Triggered:Connect(function(player)\n  local stats=player:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\");if not coins then return end\n  local key=a.name..\"Unlocked\"\n  if player:GetAttribute(key)~=true then\n   if coins.Value<10 then return end\n   coins.Value-=10;player:SetAttribute(key,true);prompt.ActionText=\"TRAVEL\"\n  end\n  local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\")\n  if root then root.CFrame=CFrame.new(map[a.name].IslandTop.Position+Vector3.new(0,7,0)) end\n end)\nend"
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks",
-      "name": "ReturnPortal",
-      "properties": {
-        "Size": {
-          "x": 12,
-          "y": 15,
-          "z": 2
-        },
-        "Position": {
-          "x": -30,
-          "y": 152,
-          "z": 9030
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Transparency": 0.15,
-        "Color": {
-          "r": 100,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks.ReturnPortal",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 3,
-        "Range": 20
-      }
-    },
-    {
-      "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.FrozenPeaks.ReturnPortal",
-      "name": "TravelPrompt",
-      "properties": {
-        "ActionText": "RETURN",
-        "ObjectText": "DESERT TEMPLE",
-        "HoldDuration": 0.4,
-        "MaxActivationDistance": 12
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm",
-      "name": "ReturnPortal",
-      "properties": {
-        "Size": {
-          "x": 12,
-          "y": 15,
-          "z": 2
-        },
-        "Position": {
-          "x": -30,
-          "y": 182,
-          "z": 12030
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Transparency": 0.15,
-        "Color": {
-          "r": 100,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.ReturnPortal",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 3,
-        "Range": 20
-      }
-    },
-    {
-      "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.VolcanoRealm.ReturnPortal",
-      "name": "TravelPrompt",
-      "properties": {
-        "ActionText": "RETURN",
-        "ObjectText": "FROZEN PEAKS",
-        "HoldDuration": 0.4,
-        "MaxActivationDistance": 12
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.CelestialCity",
-      "name": "ReturnPortal",
-      "properties": {
-        "Size": {
-          "x": 12,
-          "y": 15,
-          "z": 2
-        },
-        "Position": {
-          "x": -30,
-          "y": 212,
-          "z": 15030
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Transparency": 0.15,
-        "Color": {
-          "r": 100,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.CelestialCity.ReturnPortal",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 3,
-        "Range": 20
-      }
-    },
-    {
-      "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.CelestialCity.ReturnPortal",
-      "name": "TravelPrompt",
-      "properties": {
-        "ActionText": "RETURN",
-        "ObjectText": "VOLCANO REALM",
-        "HoldDuration": 0.4,
-        "MaxActivationDistance": 12
-      }
-    },
-    {
-      "action": "create",
-      "class": "Part",
-      "parent": "Workspace.SkyboundMap.VoidRealm",
-      "name": "ReturnPortal",
-      "properties": {
-        "Size": {
-          "x": 12,
-          "y": 15,
-          "z": 2
-        },
-        "Position": {
-          "x": -30,
-          "y": 242,
-          "z": 18030
-        },
-        "Anchored": true,
-        "CanCollide": false,
-        "Material": "Neon",
-        "Transparency": 0.15,
-        "Color": {
-          "r": 100,
-          "g": 220,
-          "b": 255
-        }
-      }
-    },
-    {
-      "action": "create",
-      "class": "PointLight",
-      "parent": "Workspace.SkyboundMap.VoidRealm.ReturnPortal",
-      "name": "Glow",
-      "properties": {
-        "Brightness": 3,
-        "Range": 20
-      }
-    },
-    {
-      "action": "create",
-      "class": "ProximityPrompt",
-      "parent": "Workspace.SkyboundMap.VoidRealm.ReturnPortal",
-      "name": "TravelPrompt",
-      "properties": {
-        "ActionText": "RETURN",
-        "ObjectText": "CELESTIAL CITY",
-        "HoldDuration": 0.4,
-        "MaxActivationDistance": 12
-      }
+      "action": "delete",
+      "path": "ServerScriptService.EggHatchEffects"
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "LateRealmReturnPortalSystem",
-      "source": "local map=workspace:WaitForChild(\"SkyboundMap\")\nlocal pairs={{\"FrozenPeaks\",\"DesertTemple\"},{\"VolcanoRealm\",\"FrozenPeaks\"},{\"CelestialCity\",\"VolcanoRealm\"},{\"VoidRealm\",\"CelestialCity\"}}\nfor _,x in ipairs(pairs) do\n local area,prev=x[1],x[2];local portal=map[area]:WaitForChild(\"ReturnPortal\");local prompt=portal:WaitForChild(\"TravelPrompt\")\n prompt.Triggered:Connect(function(p) local r=p.Character and p.Character:FindFirstChild(\"HumanoidRootPart\");if r then r.CFrame=CFrame.new(map[prev].IslandTop.Position+Vector3.new(0,7,0)) end end)\nend"
+      "name": "SkyboundHatchPolish",
+      "source": "local TweenService=game:GetService(\"TweenService\")\nlocal Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal function rarity(name)\n if name:find(\"Dragon\") then return \"LEGENDARY\" end\n if name:find(\"Cub\") or name:find(\"Lion\") then return \"EPIC\" end\n if name:find(\"Fox\") then return \"UNCOMMON\" end\n return \"COMMON\"\nend\nfor _,prompt in ipairs(map:GetDescendants()) do\n if prompt:IsA(\"ProximityPrompt\") and prompt.Name==\"HatchPrompt\" then\n  prompt.Triggered:Connect(function(player)\n   local egg=prompt.Parent;if not egg:IsA(\"BasePart\") then return end\n   local original=egg.CFrame\n   for i=1,3 do\n    TweenService:Create(egg,TweenInfo.new(.08),{CFrame=original*CFrame.Angles(0,0,math.rad(12))}):Play();task.wait(.08)\n    TweenService:Create(egg,TweenInfo.new(.08),{CFrame=original*CFrame.Angles(0,0,math.rad(-12))}):Play();task.wait(.08)\n   end\n   egg.CFrame=original\n   local gui=Instance.new(\"BillboardGui\");gui.Name=\"HatchFlash\";gui.Size=UDim2.fromOffset(250,80);gui.StudsOffset=Vector3.new(0,5,0);gui.AlwaysOnTop=true;gui.Parent=egg\n   local label=Instance.new(\"TextLabel\");label.Size=UDim2.fromScale(1,1);label.BackgroundTransparency=1;label.Text=\"✨ HATCHING... ✨\";label.TextScaled=true;label.Font=Enum.Font.GothamBlack;label.TextColor3=Color3.new(1,1,1);label.TextStrokeTransparency=.1;label.Parent=gui\n   task.delay(1,function() if gui.Parent then gui:Destroy() end end)\n  end)\n end\nend\nPlayers.PlayerAdded:Connect(function(p)\n p.ChildAdded:Connect(function(child)\n  if child.Name==\"Pets\" then\n   child.ChildAdded:Connect(function(v)\n    if not v:IsA(\"StringValue\") then return end\n    v:SetAttribute(\"Rarity\",rarity(v.Value))\n   end)\n  end\n end)\n local inv=p:FindFirstChild(\"Pets\")\n if inv then inv.ChildAdded:Connect(function(v) if v:IsA(\"StringValue\") then v:SetAttribute(\"Rarity\",rarity(v.Value)) end end) end\nend)"
+    },
+    {
+      "action": "create",
+      "class": "LocalScript",
+      "parent": "StarterPlayer.StarterPlayerScripts",
+      "name": "SkyboundPetPowerHUD",
+      "source": "local Players=game:GetService(\"Players\");local p=Players.LocalPlayer\nlocal gui=Instance.new(\"ScreenGui\");gui.Name=\"SkyboundStats\";gui.ResetOnSpawn=false;gui.Parent=p:WaitForChild(\"PlayerGui\")\nlocal box=Instance.new(\"TextLabel\");box.Size=UDim2.fromOffset(190,44);box.Position=UDim2.new(0.5,-95,0,18);box.BackgroundTransparency=.2;box.TextScaled=true;box.Font=Enum.Font.GothamBold;box.TextColor3=Color3.new(1,1,1);box.Parent=gui\nlocal function update() box.Text=\"⚡ PET POWER: \"..tostring(p:GetAttribute(\"PetPower\") or 0) end\np:GetAttributeChangedSignal(\"PetPower\"):Connect(update);update()"
     }
   ]
 }
