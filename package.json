@@ -1,13 +1,13 @@
 {
-  "version": 42,
-  "name": "Seamless Island Land Blend",
+  "version": 43,
+  "name": "Matching Island Color And Texture",
   "changes": [
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "SeamlessIslandBlendV42",
-      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\nlocal starter=world:WaitForChild(\"StarterIsland\")\n\n-- Make all connected expansion land visually match the starter island\n-- so seams between upgrades disappear as much as possible.\nlocal function blendPart(p)\n if not p:IsA(\"BasePart\") then return end\n if p.Name:match(\"^L%d+_\") or p.Name:find(\"Expansion\") then\n  p.Material=starter.Material\n  p.Color=starter.Color\n  p.Reflectance=starter.Reflectance\n  p.Transparency=starter.Transparency\n  -- Match the top surface height exactly.\n  local starterTop=starter.Position.Y+(starter.Size.Y/2)\n  p.Position=Vector3.new(p.Position.X,starterTop-(p.Size.Y/2),p.Position.Z)\n end\nend\n\nlocal function blendAll()\n local directional=world:FindFirstChild(\"DirectionalExpansions\")\n if directional then\n  for _,v in ipairs(directional:GetDescendants()) do blendPart(v) end\n end\n for _,v in ipairs(world:GetChildren()) do blendPart(v) end\nend\n\nblendAll()\nworld.DescendantAdded:Connect(function(v)\n task.wait()\n blendPart(v)\nend)\n\n-- Re-apply after expansion rise animations finish.\nwhile task.wait(1) do\n blendAll()\nend"
+      "name": "MatchingIslandVisualsV43",
+      "source": "local world=workspace:WaitForChild(\"GrowIslandWorld\")\nlocal starter=world:WaitForChild(\"StarterIsland\")\n\n-- Visual-only matching: do NOT move or resize any land.\n-- Expansion pieces keep their normal animation/position and simply use\n-- the exact same material and color as the starter island.\nlocal function matchVisuals(p)\n if not p:IsA(\"BasePart\") then return end\n if p.Name:match(\"^L%d+_\") or p.Name:find(\"Expansion\") then\n  p.Material=starter.Material\n  p.Color=starter.Color\n end\nend\n\nlocal function apply()\n local directional=world:FindFirstChild(\"DirectionalExpansions\")\n if directional then\n  for _,v in ipairs(directional:GetDescendants()) do matchVisuals(v) end\n end\n for _,v in ipairs(world:GetChildren()) do matchVisuals(v) end\nend\n\napply()\nworld.DescendantAdded:Connect(function(v)\n task.wait()\n matchVisuals(v)\nend)"
     }
   ]
 }
