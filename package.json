@@ -1,33 +1,216 @@
 {
-  "version": 45,
-  "name": "Pet Power Orb Bonuses",
+  "version": 46,
+  "name": "Complete Portal Travel Chain",
   "changes": [
     {
-      "action": "delete",
-      "path": "ServerScriptService.FixedOrbRewards"
+      "action": "create",
+      "class": "Script",
+      "parent": "ServerScriptService",
+      "name": "LateRealmPortalSystem",
+      "source": "local map=workspace:WaitForChild(\"SkyboundMap\")\nlocal areas={\n {name=\"FrozenPeaks\",prev=\"DesertTemple\",portal=\"FrozenPortal\"},\n {name=\"VolcanoRealm\",prev=\"FrozenPeaks\",portal=\"VolcanoPortal\"},\n {name=\"CelestialCity\",prev=\"VolcanoRealm\",portal=\"CelestialPortal\"},\n {name=\"VoidRealm\",prev=\"CelestialCity\",portal=\"VoidPortal\"}\n}\nfor _,a in ipairs(areas) do\n local portal=map[a.prev]:WaitForChild(a.portal)\n local prompt=portal:WaitForChild(\"TravelPrompt\")\n prompt.Triggered:Connect(function(player)\n  local stats=player:FindFirstChild(\"leaderstats\");local coins=stats and stats:FindFirstChild(\"SkyCoins\");if not coins then return end\n  local key=a.name..\"Unlocked\"\n  if player:GetAttribute(key)~=true then\n   if coins.Value<10 then return end\n   coins.Value-=10;player:SetAttribute(key,true);prompt.ActionText=\"TRAVEL\"\n  end\n  local root=player.Character and player.Character:FindFirstChild(\"HumanoidRootPart\")\n  if root then root.CFrame=CFrame.new(map[a.name].IslandTop.Position+Vector3.new(0,7,0)) end\n end)\nend"
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.WaterfallOrbSystem"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks",
+      "name": "ReturnPortal",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 15,
+          "z": 2
+        },
+        "Position": {
+          "x": -30,
+          "y": 152,
+          "z": 9030
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Transparency": 0.15,
+        "Color": {
+          "r": 100,
+          "g": 220,
+          "b": 255
+        }
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.DesertOrbSystem"
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.ReturnPortal",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 3,
+        "Range": 20
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.FrozenOrbSystem"
+      "action": "create",
+      "class": "ProximityPrompt",
+      "parent": "Workspace.SkyboundMap.FrozenPeaks.ReturnPortal",
+      "name": "TravelPrompt",
+      "properties": {
+        "ActionText": "RETURN",
+        "ObjectText": "DESERT TEMPLE",
+        "HoldDuration": 0.4,
+        "MaxActivationDistance": 12
+      }
     },
     {
-      "action": "delete",
-      "path": "ServerScriptService.FinalRealmsSystem"
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm",
+      "name": "ReturnPortal",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 15,
+          "z": 2
+        },
+        "Position": {
+          "x": -30,
+          "y": 182,
+          "z": 12030
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Transparency": 0.15,
+        "Color": {
+          "r": 100,
+          "g": 220,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm.ReturnPortal",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 3,
+        "Range": 20
+      }
+    },
+    {
+      "action": "create",
+      "class": "ProximityPrompt",
+      "parent": "Workspace.SkyboundMap.VolcanoRealm.ReturnPortal",
+      "name": "TravelPrompt",
+      "properties": {
+        "ActionText": "RETURN",
+        "ObjectText": "FROZEN PEAKS",
+        "HoldDuration": 0.4,
+        "MaxActivationDistance": 12
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.CelestialCity",
+      "name": "ReturnPortal",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 15,
+          "z": 2
+        },
+        "Position": {
+          "x": -30,
+          "y": 212,
+          "z": 15030
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Transparency": 0.15,
+        "Color": {
+          "r": 100,
+          "g": 220,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.CelestialCity.ReturnPortal",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 3,
+        "Range": 20
+      }
+    },
+    {
+      "action": "create",
+      "class": "ProximityPrompt",
+      "parent": "Workspace.SkyboundMap.CelestialCity.ReturnPortal",
+      "name": "TravelPrompt",
+      "properties": {
+        "ActionText": "RETURN",
+        "ObjectText": "VOLCANO REALM",
+        "HoldDuration": 0.4,
+        "MaxActivationDistance": 12
+      }
+    },
+    {
+      "action": "create",
+      "class": "Part",
+      "parent": "Workspace.SkyboundMap.VoidRealm",
+      "name": "ReturnPortal",
+      "properties": {
+        "Size": {
+          "x": 12,
+          "y": 15,
+          "z": 2
+        },
+        "Position": {
+          "x": -30,
+          "y": 242,
+          "z": 18030
+        },
+        "Anchored": true,
+        "CanCollide": false,
+        "Material": "Neon",
+        "Transparency": 0.15,
+        "Color": {
+          "r": 100,
+          "g": 220,
+          "b": 255
+        }
+      }
+    },
+    {
+      "action": "create",
+      "class": "PointLight",
+      "parent": "Workspace.SkyboundMap.VoidRealm.ReturnPortal",
+      "name": "Glow",
+      "properties": {
+        "Brightness": 3,
+        "Range": 20
+      }
+    },
+    {
+      "action": "create",
+      "class": "ProximityPrompt",
+      "parent": "Workspace.SkyboundMap.VoidRealm.ReturnPortal",
+      "name": "TravelPrompt",
+      "properties": {
+        "ActionText": "RETURN",
+        "ObjectText": "CELESTIAL CITY",
+        "HoldDuration": 0.4,
+        "MaxActivationDistance": 12
+      }
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "SkyboundOrbRewards",
-      "source": "local Players=game:GetService(\"Players\")\nlocal folders={\n workspace.SkyboundMap:FindFirstChild(\"SkyCoins\"),\n workspace.SkyboundMap.WaterfallIsles:FindFirstChild(\"WaterfallCoins\"),\n workspace.SkyboundMap.DesertTemple:FindFirstChild(\"DesertCoins\"),\n workspace.SkyboundMap.FrozenPeaks:FindFirstChild(\"FrozenCoins\"),\n workspace.SkyboundMap.VolcanoRealm:FindFirstChild(\"Orbs\"),\n workspace.SkyboundMap.CelestialCity:FindFirstChild(\"Orbs\"),\n workspace.SkyboundMap.VoidRealm:FindFirstChild(\"Orbs\")\n}\nlocal busy={}\nlocal function hook(orb)\n if not orb:IsA(\"BasePart\") then return end\n orb.Touched:Connect(function(hit)\n  local p=Players:GetPlayerFromCharacter(hit.Parent);if not p or busy[orb] then return end\n  local coins=p:FindFirstChild(\"leaderstats\") and p.leaderstats:FindFirstChild(\"SkyCoins\");if not coins then return end\n  busy[orb]=true\n  local power=p:GetAttribute(\"PetPower\") or 0\n  local reward=1000000+(power*250000)\n  coins.Value+=reward\n  orb.Transparency=1;orb.CanTouch=false\n  local l=orb:FindFirstChildOfClass(\"PointLight\");if l then l.Enabled=false end\n  task.delay(7,function() if orb.Parent then orb.Transparency=0;orb.CanTouch=true;if l then l.Enabled=true end;busy[orb]=nil end end)\n end)\nend\nfor _,folder in ipairs(folders) do if folder then for _,orb in ipairs(folder:GetChildren()) do hook(orb) end end end"
+      "name": "LateRealmReturnPortalSystem",
+      "source": "local map=workspace:WaitForChild(\"SkyboundMap\")\nlocal pairs={{\"FrozenPeaks\",\"DesertTemple\"},{\"VolcanoRealm\",\"FrozenPeaks\"},{\"CelestialCity\",\"VolcanoRealm\"},{\"VoidRealm\",\"CelestialCity\"}}\nfor _,x in ipairs(pairs) do\n local area,prev=x[1],x[2];local portal=map[area]:WaitForChild(\"ReturnPortal\");local prompt=portal:WaitForChild(\"TravelPrompt\")\n prompt.Triggered:Connect(function(p) local r=p.Character and p.Character:FindFirstChild(\"HumanoidRootPart\");if r then r.CFrame=CFrame.new(map[prev].IslandTop.Position+Vector3.new(0,7,0)) end end)\nend"
     }
   ]
 }
