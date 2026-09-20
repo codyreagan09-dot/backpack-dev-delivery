@@ -1,17 +1,17 @@
 {
-  "version": 18,
-  "name": "All Grasslands Coins Worth 100 Million",
+  "version": 19,
+  "name": "Restore Grasslands Coin Value",
   "changes": [
     {
       "action": "delete",
-      "path": "ServerScriptService.SkyCoinSystem"
+      "path": "ServerScriptService.SkyCoinSystem100M"
     },
     {
       "action": "create",
       "class": "Script",
       "parent": "ServerScriptService",
-      "name": "SkyCoinSystem100M",
-      "source": "local Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal folder=map:WaitForChild(\"SkyCoinPickups\")\nlocal busy={}\n\nlocal function hook(coin)\n coin.Touched:Connect(function(hit)\n  local player=Players:GetPlayerFromCharacter(hit.Parent)\n  if not player or busy[coin] then return end\n  local stats=player:FindFirstChild(\"leaderstats\")\n  local sky=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not sky then return end\n  busy[coin]=true\n  sky.Value+=100000000\n  coin.Transparency=1\n  coin.CanTouch=false\n  local light=coin:FindFirstChildOfClass(\"PointLight\")\n  if light then light.Enabled=false end\n  task.delay(8,function()\n   if coin.Parent then\n    coin.Transparency=0\n    coin.CanTouch=true\n    if light then light.Enabled=true end\n    busy[coin]=nil\n   end\n  end)\n end)\nend\n\nfor _,coin in ipairs(folder:GetChildren()) do\n if coin:IsA(\"BasePart\") then hook(coin) end\nend"
+      "name": "SkyCoinSystem",
+      "source": "local Players=game:GetService(\"Players\")\nlocal map=workspace:WaitForChild(\"SkyboundMap\")\nlocal folder=map:WaitForChild(\"SkyCoinPickups\")\nlocal busy={}\n\nlocal function hook(coin)\n coin.Touched:Connect(function(hit)\n  local player=Players:GetPlayerFromCharacter(hit.Parent)\n  if not player or busy[coin] then return end\n  local stats=player:FindFirstChild(\"leaderstats\")\n  local sky=stats and stats:FindFirstChild(\"SkyCoins\")\n  if not sky then return end\n  busy[coin]=true\n  sky.Value+=1\n  coin.Transparency=1\n  coin.CanTouch=false\n  local light=coin:FindFirstChildOfClass(\"PointLight\")\n  if light then light.Enabled=false end\n  task.delay(8,function()\n   if coin.Parent then\n    coin.Transparency=0\n    coin.CanTouch=true\n    if light then light.Enabled=true end\n    busy[coin]=nil\n   end\n  end)\n end)\nend\n\nfor _,coin in ipairs(folder:GetChildren()) do\n if coin:IsA(\"BasePart\") then hook(coin) end\nend"
     }
   ]
 }
